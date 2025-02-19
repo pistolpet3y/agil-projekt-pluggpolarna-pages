@@ -14,3 +14,6 @@
   <HelloWorld msg="Hello World!" />
   <CitiesList />
 </template>
+
+<style>
+</style>
