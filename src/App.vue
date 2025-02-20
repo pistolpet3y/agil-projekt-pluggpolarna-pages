@@ -198,7 +198,7 @@ footer {
   transition: transform 0.3s ease-in-out;
 }
 
-.social-icons:hover{
+.social-icons:hover {
   transform: scale(1.03);
 }
 </style>
