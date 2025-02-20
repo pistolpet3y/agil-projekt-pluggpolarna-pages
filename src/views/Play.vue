@@ -1,25 +1,26 @@
 <template>
     <div class="button-container">
         <div class="button-wrapper">
-            <button class="glos-quiz" @mouseover="playSound">Glosquiz!</button>
-            <p>Träna dina glosor på ett roligt sätt!</p>
+            <RouterLink to="/quiz">
+                <button class="glos-quiz" @mouseover="playSound">Glosquiz!</button>
+            </RouterLink>
+            <p class="orange">Träna dina glosor på ett roligt sätt!</p>
         </div>
         <div class="button-wrapper">
             <button class="mattemagi" @mouseover="playSound">Mattemagi!</button>
-            <p>Ett magiskt sätt att lära dig multiplikation!</p>
+            <p class="green">Ett magiskt sätt att lära dig multiplikation!</p>
         </div>
         <div class="button-wrapper">
             <button class="ordstriden" @mouseover="playSound">Ordstriden!</button>
-            <p>En spännande kamp för att bemästra stavning!</p>
+            <p class="blue">En spännande kamp för att bemästra stavning!</p>
         </div>
     </div>
 </template>
 
-<script>
-import { ref } from 'vue';
-import hoverSound from '@/assets/hover-sound.mp3';
+<script setup>
 
-// Funktion för att spela upp ljudet
+// Funktion för att spela upp hoverljud
+const hoverSound = '/hover-sound.mp3'
 const playSound = () => {
     const audio = new Audio(hoverSound);
     audio.play();
@@ -47,8 +48,24 @@ div {
 
 p {
     font-family: 'Bangers', sans-serif;
+    text-shadow:
+        -1px -1px 0 black,
+        1px -1px 0 black,
+        -1px 1px 0 black,
+        1px 1px 0 black;
 }
 
+.blue {
+    color: #4cb5f5;
+}
+
+.green {
+    color: #7dffcb;
+}
+
+.orange {
+    color: #f77f00;
+}
 
 .button-container {
     display: flex;
@@ -63,7 +80,8 @@ p {
 
 button {
     background-color: #f77f00;
-    color: white;
+
+    color: black;
     border: 3px solid black;
     padding: 10px 20px;
     font-size: 16px;
