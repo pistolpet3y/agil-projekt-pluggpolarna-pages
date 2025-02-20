@@ -8,8 +8,8 @@
         <ul>
           <!-- Vue Router länkar till huvudsidorna -->
           <li><router-link to="/">Hem</router-link></li>
-          <li><router-link to="/contact">Spel</router-link></li>
-          <li><router-link to="/contact">Quiz</router-link></li>
+          <li><router-link to="/play">Spel</router-link></li>
+          <li><router-link to="/quiz">Quiz</router-link></li>
         </ul>
       </nav>
     </header>
