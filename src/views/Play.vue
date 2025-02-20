@@ -30,21 +30,21 @@ const playSound = () => {
 <style scoped>
 @font-face {
   font-family: 'Baloo';
-  src: url('@/assets/fonts/Baloo.ttf') format('truetype');
+  src: url('/public/fonts/Baloo.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Bangers';
-  src: url('@/assets/fonts/Bangers.ttf') format('truetype');
+  src: url('/public/fonts/Bangers.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Kidprint';
-  src: url('@/assets/fonts/Kidprint.otf') format('opentype');
+  src: url('/public/fonts/Kidprint.OTF') format('opentype');
   font-weight: bold;
   font-style: normal;
 }

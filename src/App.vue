@@ -45,21 +45,22 @@ logo color: linear-gradient(to right, #ff6f61, #ffb645, #f7e300, #4cb5f5, #88d9b
 */
 @font-face {
   font-family: 'Baloo';
-  src: url('assets/fonts/Baloo.ttf') format('truetype');
+  src: url('/public/fonts/Baloo.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Bangers';
-  src: url('assets/fonts/Bangers.ttf') format('truetype');
+  src: url('/public/fonts/Bangers.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
+
 @font-face {
   font-family: 'Kidprint';
-  src: url('assets/fonts/Kidprint.otf') format('opentype');
+  src: url('/public/fonts/Kidprint.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
 }
@@ -184,7 +185,7 @@ footer {
   margin-top: 20px;
   border: 3px solid #4cb5f5;
   justify-content: space-evenly;
-  font-family: 'Kidprint MT Pro';
+  font-family: 'Kidprint';
   font-size: 1.4rem;
   text-align: center;
   letter-spacing: 0.15em;
