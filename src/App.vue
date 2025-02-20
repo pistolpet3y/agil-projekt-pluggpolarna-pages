@@ -1,19 +1,15 @@
-<script>
-  import CitiesList from "./components/CitiesList.vue";
-  import HelloWorld from "./components/HelloWorld.vue";
-
-  export default {
-    components: {
-      CitiesList,
-      HelloWorld
-    }
-  };
+<script setup>
+import GlosQuiz from './components/List.vue';
 </script>
 
 <template>
-  <HelloWorld msg="Hello World!" />
-  <CitiesList />
+  <div>
+    <GlosQuiz />
+  </div>
 </template>
 
 <style>
+body {
+  background-color: #f0ebe2;
+}
 </style>
