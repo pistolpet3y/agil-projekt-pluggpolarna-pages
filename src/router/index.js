@@ -5,12 +5,16 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import Play from '../views/Play.vue';
 import Quiz from '../views/Quiz.vue';
+import Parent from '../views/Parent.vue';
+import Results from '../views/Results.vue';
 
 // Definierar en array med rutter
 const routes = [
   { path: '/', component: Home },
+  { path: '/parent', component: Parent },
   { path: '/play', component: Play },
-  { path: '/quiz', component: Quiz }
+  { path: '/quiz', component: Quiz },
+  { path: '/results', component: Results },
 ];
 
 // Skapar en router-instans
