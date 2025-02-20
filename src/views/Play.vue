@@ -28,7 +28,26 @@ const playSound = () => {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Baloo+2:wght@400;700&display=swap');
+@font-face {
+  font-family: 'Baloo';
+  src: url('@/assets/fonts/Baloo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bangers';
+  src: url('@/assets/fonts/Bangers.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kidprint';
+  src: url('@/assets/fonts/Kidprint.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
 
 div {
     background-color: #f0ebe2
