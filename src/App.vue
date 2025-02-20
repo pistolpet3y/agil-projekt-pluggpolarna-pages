@@ -45,21 +45,21 @@ logo color: linear-gradient(to right, #ff6f61, #ffb645, #f7e300, #4cb5f5, #88d9b
 */
 @font-face {
   font-family: 'Baloo';
-  src: url('@/assets/fonts/Baloo.ttf') format('truetype');
+  src: url('assets/fonts/Baloo.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Bangers';
-  src: url('@/assets/fonts/Bangers.ttf') format('truetype');
+  src: url('assets/fonts/Bangers.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Kidprint';
-  src: url('@/assets/fonts/Kidprint.otf') format('opentype');
+  src: url('assets/fonts/Kidprint.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
 }
