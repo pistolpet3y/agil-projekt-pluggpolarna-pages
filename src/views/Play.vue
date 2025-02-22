@@ -28,30 +28,29 @@ const playSound = () => {
 </script>
 
 <style scoped>
+
+
 @font-face {
   font-family: 'Baloo';
-  src: url('/public/fonts/Baloo.ttf') format('truetype');
+  src: url('/fonts/Baloo.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Bangers';
-  src: url('/public/fonts/Bangers.ttf') format('truetype');
+  src: url('/fonts/Bangers.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Kidprint';
-  src: url('/public/fonts/Kidprint.OTF') format('opentype');
+  src: url('/fonts/Kidprint.OTF') format('opentype');
   font-weight: bold;
   font-style: normal;
 }
 
-div {
-    background-color: #f0ebe2
-}
 
 .glos-quiz {
     background-color: #f77f00;
@@ -90,7 +89,7 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    
 }
 
 .button-wrapper {
@@ -99,7 +98,6 @@ p {
 
 button {
     background-color: #f77f00;
-
     color: black;
     border: 3px solid black;
     padding: 10px 20px;

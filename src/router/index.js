@@ -23,5 +23,16 @@ const router = createRouter({
   routes // Tilldelar sidans rutter till vår router
 });
 
+//Koden nedan är för att byta bakgrundsbild på sidorna
+import { watch } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+
+watch(route, () => {
+  choosePic(); // Triggar om vid varje sidbyte
+});
+
+
 // Exporterar routern så att den kan användas i main.js
 export default router;

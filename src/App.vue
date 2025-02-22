@@ -2,7 +2,7 @@
   <!-- Rot-element för applikationen -->
   <div id="app">
     <header>
-      <h1><img src="/public/cover-photo.png" alt="Pluggpolarna Cover"></h1>
+      <div id="banner"><img src="/cover-photo.png" alt="Pluggpolarna Cover"></div>
       <!-- Navigationscontainer -->
       <nav class="navigation-list">
         <ul>
@@ -13,7 +13,7 @@
         </ul>
       </nav>
     </header>
-    <hr>
+    
 
     <!-- Här renderas de vyer som definieras av Vue Router med en "blur" övergång -->
     <transition name="blur" mode="out-in">
@@ -45,14 +45,14 @@ logo color: linear-gradient(to right, #ff6f61, #ffb645, #f7e300, #4cb5f5, #88d9b
 */
 @font-face {
   font-family: 'Baloo';
-  src: url('/public/fonts/Baloo.ttf') format('truetype');
+  src: url('/fonts/Baloo.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Bangers';
-  src: url('/public/fonts/Bangers.ttf') format('truetype');
+  src: url('/fonts/Bangers.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -60,7 +60,7 @@ logo color: linear-gradient(to right, #ff6f61, #ffb645, #f7e300, #4cb5f5, #88d9b
 
 @font-face {
   font-family: 'Kidprint';
-  src: url('/public/fonts/Kidprint.otf') format('opentype');
+  src: url('/fonts/Kidprint.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
 }
@@ -83,6 +83,13 @@ logo color: linear-gradient(to right, #ff6f61, #ffb645, #f7e300, #4cb5f5, #88d9b
   opacity: 1;
 }
 
+html {
+  height: 100%;
+  background: rgb(210,222,230);
+  background: linear-gradient(180deg, rgba(210,222,230,1) 0%, rgba(240,235,226,1) 100%);
+  min-height: 100vh;
+}
+
 body {
   width: 100%;
   max-width: 375px;
@@ -91,29 +98,23 @@ body {
   font-family: "Arial", "Helvetica", "sans-serif";
   font-size: 1.05rem;
   color: #111;
-  background: #f0ebe2;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
-h1 {
+
+#banner {
   display: block;
   margin: auto;
-  border: 4px solid #4cb5f5;
-  border-radius: 10px;
-  font-family: 'Bangers';
-  font-size: 2rem;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.4em;
 }
 
-h1 img {
+#banner img {
+  margin-top: 100px;
+  margin-bottom: 50px;
   width: 100%;
   vertical-align: bottom;
-  border-radius: 6px;
 }
 
 .navigation-list ul {
+  margin-bottom: 60px;
   display: flex;
   padding: 0;
   list-style-type: none;
@@ -123,16 +124,46 @@ h1 img {
 }
 
 .navigation-list li {
-  flex: 1;
-  margin: 0 1px;
-  border: 4px solid #4cb5f5;
-  background-color: #7dffcb;
-  border-radius: 20px;
-  transition: background-color 0.3s ease-in-out;
+    border: 1px solid   #000000;
+    background-color: #7dffcb ;
+    color: #ffff;
+    padding: 0px;
+    font-size: 20px;
+    width: 110px;
+    border-radius: 10px;
+    margin: auto;
+    position: relative;
+    /*box-shadow: 5px 5px 5px #a3ffe0;*/
+    transition: all 0.3s ease;
+}
+
+.navigation-list li::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 10px;
+  background-image: url('/underline.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.navigation-list li:hover::after {
+  opacity: 1;
 }
 
 .navigation-list li:hover {
-  background-color: #ff99cc;
+ box-shadow: 0px 2px 20px #4fcc9c;
+    top: 3px;
+}
+
+.navigation-list li:active {
+    box-shadow: none;
+    top: 5px;
 }
 
 .navigation-list li a {
@@ -142,20 +173,18 @@ h1 img {
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
-  color: #111;
+  color: #000000;
   transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
 }
 
-.navigation-list li a:hover {
-  color: #7dffcb;
-  text-shadow: 0px 0px 6px rgba(0, 0, 0, 1);
+/*.navigation-list li a:hover {
+  color: #ff99cc;
+  text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.397);
 }
+*/
 
 h2 {
   padding: 5px;
-  border: 3px solid #4cb5f5;
-  border-radius: 10px;
-  background-color: #7dffcb;
   color: #111;
   font-family: 'Baloo';
   font-size: 1.5rem;
@@ -182,16 +211,17 @@ p {
 
 footer {
   display: flex;
-  margin-top: 20px;
-  border: 3px solid #4cb5f5;
+  margin-top: 120px;
+  background-image: url('/footer.png');
+  background-size: contain;
+  background-position: center; 
+  background-repeat: no-repeat; 
   justify-content: space-evenly;
   font-family: 'Kidprint';
   font-size: 1.4rem;
   text-align: center;
   letter-spacing: 0.15em;
-  background-color: #fff;
   color: #111;
-  border-radius: 40px;
 }
 
 .social-icons {
@@ -202,4 +232,6 @@ footer {
 .social-icons:hover {
   transform: scale(1.03);
 }
+
+
 </style>
