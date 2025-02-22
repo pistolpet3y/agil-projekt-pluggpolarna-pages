@@ -1,29 +1,29 @@
 <template>
-    <div class="button-container">
-        <div class="button-wrapper">
-            <RouterLink to="/quiz">
-                <button class="glos-quiz" @mouseover="playSound">Glosquiz!</button>
-            </RouterLink>
-            <p class="orange">Träna dina glosor på ett roligt sätt!</p>
-        </div>
-        <div class="button-wrapper">
-            <button class="mattemagi" @mouseover="playSound">Mattemagi!</button>
-            <p class="green">Ett magiskt sätt att lära dig multiplikation!</p>
-        </div>
-        <div class="button-wrapper">
-            <button class="ordstriden" @mouseover="playSound">Ordstriden!</button>
-            <p class="blue">En spännande kamp för att bemästra stavning!</p>
-        </div>
+  <div class="button-container">
+    <div class="button-wrapper">
+      <router-link to="/quiz">
+        <button class="glosquiz" @mouseover="playSound">Glosquiz!</button>
+      </router-link>
+      <p class="green">Träna dina glosor på ett roligt sätt!</p>
     </div>
+    <div class="button-wrapper">
+      <button class="mattemagi" @mouseover="playSound">Mattemagi!</button>
+      <p class="blue">Ett magiskt sätt att lära dig multiplikation!</p>
+    </div>
+    <div class="button-wrapper">
+      <button class="ordstriden" @mouseover="playSound">Ordstriden!</button>
+      <p class="orange">En spännande kamp för att bemästra stavning!</p>
+    </div>
+  </div>
 </template>
 
 <script setup>
-
 // Funktion för att spela upp hoverljud
 const hoverSound = '/hover-sound.mp3'
+
 const playSound = () => {
-    const audio = new Audio(hoverSound);
-    audio.play();
+  const audio = new Audio(hoverSound);
+  audio.play();
 };
 </script>
 
@@ -65,24 +65,26 @@ const playSound = () => {
 }
 
 p {
-    font-family: 'Bangers', sans-serif;
-    text-shadow:
-        -1px -1px 0 black,
-        1px -1px 0 black,
-        -1px 1px 0 black,
-        1px 1px 0 black;
-}
-
-.blue {
-    color: #4cb5f5;
+  font-family: 'Bangers', sans-serif;
+  font-size: 1.05em;
+  text-shadow:
+    -1px -1px 0 #111,
+    1px -1px 0 #111,
+    -1px 1px 0 #111,
+    1px 1px 0 #111;
+  letter-spacing: 0.08em;
 }
 
 .green {
-    color: #7dffcb;
+  color: #7dffcb;
+}
+
+.blue {
+  color: #4cb5f5;
 }
 
 .orange {
-    color: #f77f00;
+  color: #f77f00;
 }
 
 .button-container {
@@ -93,7 +95,7 @@ p {
 }
 
 .button-wrapper {
-    text-align: center;
+  text-align: center;
 }
 
 button {
@@ -110,29 +112,29 @@ button {
 }
 
 button:hover {
-    background-color: #ff99cc;
-    animation: wiggle 0.5s ease-in-out infinite;
+  background-color: #ff99cc;
+  animation: wiggle 0.5s ease-in-out infinite;
 }
 
 @keyframes wiggle {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% {
+      transform: rotate(0deg);
+  }
 
-    25% {
-        transform: rotate(5deg);
-    }
+  25% {
+      transform: rotate(5deg);
+  }
 
-    50% {
-        transform: rotate(-5deg);
-    }
+  50% {
+      transform: rotate(-5deg);
+  }
 
-    75% {
-        transform: rotate(5deg);
-    }
+  75% {
+      transform: rotate(5deg);
+  }
 
-    100% {
-        transform: rotate(0deg);
-    }
+  100% {
+      transform: rotate(0deg);
+  }
 }
 </style>
