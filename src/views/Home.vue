@@ -5,7 +5,7 @@
 
     
     <div class="text-content">
-    <h2>Välkommen!</h2>
+      <h2>Välkommen!</h2>
       
       <p>Välkommen till Pluggpolarna - en lekfull och interaktiv plattform där barn utvecklar sina kunskaper i stavning, glosor och matematik genom roliga spel och utmaningar!</p>
       

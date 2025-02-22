@@ -14,12 +14,12 @@
       </nav>
     </header>
     
-
+    <main>
     <!-- Här renderas de vyer som definieras av Vue Router med en "blur" övergång -->
     <transition name="blur" mode="out-in">
       <router-view />
     </transition>
-
+</main>
     <footer>
       <div class="social-icons">
       </div>
@@ -83,21 +83,33 @@ logo color: linear-gradient(to right, #ff6f61, #ffb645, #f7e300, #4cb5f5, #88d9b
   opacity: 1;
 }
 
-html {
-  height: 100%;
-  background: rgb(210,222,230);
-  background: linear-gradient(180deg, rgba(210,222,230,1) 0%, rgba(240,235,226,1) 100%);
+#app {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
+
+main {
+  flex: 1;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 
 body {
   width: 100%;
   max-width: 375px;
   margin: 0 auto;
-  padding: 20px;
   font-family: "Arial", "Helvetica", "sans-serif";
   font-size: 1.05rem;
   color: #111;
+  background: linear-gradient(180deg, rgba(210,222,230,1) 0%, rgba(240,235,226,1) 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 
@@ -211,7 +223,6 @@ p {
 
 footer {
   display: flex;
-  margin-top: 120px;
   background-image: url('/footer.png');
   background-size: contain;
   background-position: center; 
