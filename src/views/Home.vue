@@ -22,7 +22,7 @@
 }
 
 .content-wrapper {
-  margin-top: 150px;
+  margin-top: 80px;
   position: relative; 
 }
 

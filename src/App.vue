@@ -14,12 +14,13 @@
       </nav>
     </header>
     
-    <main>
     <!-- Här renderas de vyer som definieras av Vue Router med en "blur" övergång -->
-    <transition name="blur" mode="out-in">
+    <main>
+      <transition name="blur" mode="out-in">
       <router-view />
-    </transition>
-</main>
+      </transition>
+    </main>
+
     <footer>
       <div class="social-icons">
       </div>
@@ -29,9 +30,9 @@
 </template>
 
 <script>
-export default {
-  name: 'App'
-};
+  export default {
+    name: 'App'
+  };
 </script>
 
 <style>
