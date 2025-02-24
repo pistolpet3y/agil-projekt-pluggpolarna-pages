@@ -2,9 +2,16 @@
   <!-- Rot-element för applikationen -->
   <div id="app">
     <header>
+
+
       <div id="banner"><img src="/cover-photo.png" alt="Pluggpolarna Cover"></div>
+      <div id="tagLine">
+        <p><span style="color: #4cb5f5;">Lär,</span> <span style="color: #f77f00">Lek</span> <span
+            style="color: #7dffcb;">och</span> <span style="color: #ff99cc;">Lyckas!</span>
+        </p>
+      </div>
       <!-- Navigationscontainer -->
-      <nav class="navigation-list">
+      <nav class=" navigation-list">
         <ul>
           <!-- Vue Router länkar till huvudsidorna -->
           <li><router-link to="/">Hem</router-link></li>
@@ -112,6 +119,21 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+#tagLine {
+  text-align: center;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  font-family: 'Bangers';
+  font-size: 1.5rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 40px;
+}
+
+#tagLine p {
+  text-shadow:
+    1px 1px 0 #111;
+}
 
 #banner {
   display: block;
@@ -119,8 +141,8 @@ body {
 }
 
 #banner img {
-  margin-top: 100px;
-  margin-bottom: 50px;
+  margin-top: 80px;
+  margin-bottom: 10px;
   width: 100%;
   vertical-align: bottom;
 }
