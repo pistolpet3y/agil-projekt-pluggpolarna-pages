@@ -266,6 +266,7 @@ const showResults = () => {
 
 p {
   text-align: center;
+  font-size: 1.05rem;
 }
 
 input {
