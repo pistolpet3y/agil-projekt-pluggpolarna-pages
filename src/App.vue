@@ -13,11 +13,11 @@
         </ul>
       </nav>
     </header>
-    
+
     <!-- Här renderas de vyer som definieras av Vue Router med en "blur" övergång -->
     <main>
       <transition name="blur" mode="out-in">
-      <router-view />
+        <router-view />
       </transition>
     </main>
 
@@ -30,9 +30,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'App'
-  };
+export default {
+  name: 'App'
+};
 </script>
 
 <style>
@@ -95,7 +95,8 @@ main {
 }
 
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
@@ -108,7 +109,7 @@ body {
   font-family: "Arial", "Helvetica", "sans-serif";
   font-size: 1.05rem;
   color: #111;
-  background: linear-gradient(180deg, rgba(210,222,230,1) 0%, rgba(240,235,226,1) 100%);
+  background: linear-gradient(180deg, rgba(210, 222, 230, 1) 0%, rgba(240, 235, 226, 1) 100%);
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -137,17 +138,17 @@ body {
 }
 
 .navigation-list li {
-    border: 1px solid   #000000;
-    background-color: #7dffcb ;
-    color: #ffff;
-    padding: 0px;
-    font-size: 20px;
-    width: 110px;
-    border-radius: 10px;
-    margin: auto;
-    position: relative;
-    /*box-shadow: 5px 5px 5px #a3ffe0;*/
-    transition: all 0.3s ease;
+  border: 1px solid #000000;
+  background-color: #7dffcb;
+  color: #ffff;
+  padding: 0px;
+  font-size: 20px;
+  width: 110px;
+  border-radius: 10px;
+  margin: auto;
+  position: relative;
+  /*box-shadow: 5px 5px 5px #a3ffe0;*/
+  transition: all 0.3s ease;
 }
 
 .navigation-list li::after {
@@ -170,13 +171,13 @@ body {
 }
 
 .navigation-list li:hover {
- box-shadow: 0px 2px 20px #4fcc9c;
-    top: 3px;
+  box-shadow: 0px 2px 20px #4fcc9c;
+  top: 3px;
 }
 
 .navigation-list li:active {
-    box-shadow: none;
-    top: 5px;
+  box-shadow: none;
+  top: 5px;
 }
 
 .navigation-list li a {
@@ -226,8 +227,8 @@ footer {
   display: flex;
   background-image: url('/footer.png');
   background-size: contain;
-  background-position: center; 
-  background-repeat: no-repeat; 
+  background-position: center;
+  background-repeat: no-repeat;
   justify-content: space-evenly;
   font-family: 'Kidprint';
   font-size: 1.4rem;
@@ -244,6 +245,4 @@ footer {
 .social-icons:hover {
   transform: scale(1.03);
 }
-
-
 </style>
