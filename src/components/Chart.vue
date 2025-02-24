@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineProps, onMounted } from 'vue'; // ref gör variabler, defineProps tillgängligör props, onMounted körs när komponentetn är klar. 
+import { ref, defineProps, onMounted } from 'vue'; // ref gör variabler, defineProps tillgängligör props, onMounted körs när komponentetn är klar.
 import Chart from 'chart.js/auto';
 
 const props = defineProps({
