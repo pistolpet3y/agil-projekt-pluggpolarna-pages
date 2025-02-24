@@ -290,7 +290,7 @@ footer p {
   display: flex;
   height: 10px;
   background: rgb(76, 181, 245);
-  background: linear-gradient(90deg, rgba(76, 181, 245, 1) 0%, rgba(247, 127, 0, 1) 35%, rgba(255, 153, 204, 1) 70%, rgba(125, 255, 203, 1) 100%);
+  background: linear-gradient(90deg, rgba(76, 181, 245, 1) 10%, rgba(247, 127, 0, 1) 28%, rgba(255, 153, 204, 1) 57%, rgba(125, 255, 203, 1) 94%);
 }
 
 .social-icons {
