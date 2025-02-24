@@ -2,7 +2,7 @@
   <!-- Rot-element för applikationen -->
   <div id="app">
     <header>
-      <svg viewBox="0 -10 375 70" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin-top: 50px;">
+      <svg viewBox="0 -10 375 70" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <defs>
           <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="#ff6f61" />
@@ -57,6 +57,7 @@
       </div>
       <p>&copy; 2025 Pluggpolarna</p>
     </footer>
+    <div class="footer-line"></div>
   </div>
 </template>
 
@@ -67,6 +68,11 @@ export default {
 </script>
 
 <style>
+svg {
+  margin-top: clamp(20px, 15vw, 170px);
+}
+
+
 /*
 #4cb5f5 – Sky Blue
 #f77f00 – Pumpkin Orange
@@ -79,7 +85,7 @@ textPath {
   font-size: 3.5rem;
   letter-spacing: 0.12em;
   text-shadow:
-  2px 2px 1px #111;
+    2px 2px 1px #111;
 }
 
 @font-face {
@@ -262,17 +268,29 @@ p {
 }
 
 footer {
-  display: flex;
   background-image: url('/footer.png');
-  background-size: contain;
   background-repeat: no-repeat;
-  justify-content: space-evenly;
   font-family: 'Kidprint';
-  font-size: 1.4rem;
+  width: 375px;
+  height: 103px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  font-size: 1.4rem;
+  padding-bottom: 10px;
   letter-spacing: 0.2em;
-  color: #111;
-  height: 60px;
+}
+
+footer p {
+  margin-top: 80px;
+}
+
+.footer-line {
+  display: flex;
+  height: 10px;
+  background: rgb(76, 181, 245);
+  background: linear-gradient(90deg, rgba(76, 181, 245, 1) 0%, rgba(247, 127, 0, 1) 35%, rgba(255, 153, 204, 1) 70%, rgba(125, 255, 203, 1) 100%);
 }
 
 .social-icons {
