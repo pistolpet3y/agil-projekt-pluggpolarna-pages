@@ -2,11 +2,28 @@
   <!-- Rot-element för applikationen -->
   <div id="app">
     <header>
-      <svg viewBox="0 -10 375 70" xmlns=" http://www.w3.org/2000/svg" style="margin-top: 50px;">
-        <path id="MyPath" fill="none" d="M 0 62.5 Q 187.5 0 375 62.5
-" pathLength="2" />
-        <text text-anchor="middle">
-          <textPath href="#MyPath" startOffset="1">
+      <svg viewBox="0 -10 375 70" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin-top: 50px;">
+        <defs>
+          <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ff6f61" />
+            <stop offset="9.09%" stop-color="#ffb645" />
+            <stop offset="18.18%" stop-color="#f7e300" />
+            <stop offset="27.27%" stop-color="#4cb5f5" />
+            <stop offset="36.36%" stop-color="#88d9b2" />
+            <stop offset="45.45%" stop-color="#9b7eec" />
+            <stop offset="54.54%" stop-color="#f77f00" />
+            <stop offset="63.63%" stop-color="#7dffcb" />
+            <stop offset="72.72%" stop-color="#c9c9ff" />
+            <stop offset="81.81%" stop-color="#ff99cc" />
+            <stop offset="90.90%" stop-color="#34d399" />
+            <stop offset="100%" stop-color="#f59e42" />
+          </linearGradient>
+        </defs>
+
+        <path id="MyPath" fill="none" d="M0 62.5 Q187.5 0 375 62.5" />
+
+        <text text-anchor="middle" fill="url(#logoGradient)" font-family="Bangers" font-size="3.5rem">
+          <textPath xlink:href="#MyPath" startOffset="50%">
             Pluggpolarna
           </textPath>
         </text>
@@ -55,16 +72,14 @@ export default {
 #f77f00 – Pumpkin Orange
 #7dffcb – Mint Green
 #ff99cc – Bubblegum Pink
-
-logo color: linear-gradient(to right, #ff6f61, #ffb645, #f7e300, #4cb5f5, #88d9b2, #9b7eec, #f77f00, #7dffcb, #c9c9ff, #ff99cc, #34d399, #f59e42);
 */
 
-/* Här kan du ändra färgen och sånt för Pluggpolarna texten */
 textPath {
-  fill: #FF9800;
   font-family: 'Bangers';
   font-size: 3.5rem;
   letter-spacing: 0.12em;
+  text-shadow:
+  2px 2px 1px #111;
 }
 
 @font-face {
@@ -135,6 +150,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
 #tagLine {
   text-align: center;
   display: flex;
@@ -148,9 +164,8 @@ body {
 
 #tagLine p {
   text-shadow:
-    1px 1px 0 #111;
+    1px 1px 1px #111;
 }
-
 
 .navigation-list ul {
   margin-bottom: 60px;
@@ -208,7 +223,6 @@ body {
   display: block;
   padding: 12px;
   font-weight: bold;
-  font-size: 25px;
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
@@ -251,11 +265,10 @@ footer {
   display: flex;
   background-image: url('/footer.png');
   background-size: contain;
-  background-position: center;
   background-repeat: no-repeat;
   justify-content: space-evenly;
   font-family: 'Kidprint';
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   text-align: center;
   letter-spacing: 0.2em;
   color: #111;
