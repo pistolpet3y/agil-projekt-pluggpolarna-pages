@@ -272,6 +272,7 @@ footer {
   text-align: center;
   letter-spacing: 0.2em;
   color: #111;
+  height: 60px;
 }
 
 .social-icons {
