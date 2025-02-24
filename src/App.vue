@@ -94,7 +94,6 @@ main {
   flex: 1;
 }
 
-
 html,
 body {
   margin: 0;
@@ -113,7 +112,6 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-
 
 #banner {
   display: block;
@@ -138,14 +136,13 @@ body {
 }
 
 .navigation-list li {
-  border: 1px solid #000000;
-  background-color: #7dffcb;
-  color: #ffff;
-  padding: 0px;
-  font-size: 20px;
   width: 110px;
-  border-radius: 10px;
   margin: auto;
+  border: 3px solid #111;
+  background-color: #7dffcb;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 10px;
   position: relative;
   /*box-shadow: 5px 5px 5px #a3ffe0;*/
   transition: all 0.3s ease;
@@ -163,7 +160,7 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .navigation-list li:hover::after {
@@ -171,8 +168,8 @@ body {
 }
 
 .navigation-list li:hover {
-  box-shadow: 0px 2px 20px #4fcc9c;
-  top: 3px;
+  box-shadow: 0px 0px 30px #f77f00;
+  top: 4px;
 }
 
 .navigation-list li:active {
@@ -184,24 +181,24 @@ body {
   display: block;
   padding: 12px;
   font-weight: bold;
+  font-size: 25px;
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
-  color: #000000;
+  color: #111;
   transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
 }
 
-/*.navigation-list li a:hover {
-  color: #ff99cc;
-  text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.397);
+.navigation-list li a:hover {
+  color: #f77f00;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 1);
 }
-*/
 
 h2 {
   padding: 5px;
   color: #111;
   font-family: 'Baloo';
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-style: italic;
   text-align: center;
   letter-spacing: 0.3em;
@@ -209,7 +206,7 @@ h2 {
 
 p {
   text-align: justify;
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.6);
   line-height: 1.8;
 }
 
@@ -231,9 +228,9 @@ footer {
   background-repeat: no-repeat;
   justify-content: space-evenly;
   font-family: 'Kidprint';
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   text-align: center;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   color: #111;
 }
 

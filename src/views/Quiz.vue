@@ -17,10 +17,6 @@
         placeholder="Skriv översättningen..."
         @keyup.enter="onEnterPress"
       />
-      <!-- Knapp för att kontrollera svaret/gå vidare, syns bara om feedback är tom -->
-      <button @click="checkAnswer" v-show="feedback === ''">
-        Ok!
-      </button>
       <!-- Visar feedback (rätt eller fel) om den finns -->
       <p v-if="feedback">{{ feedback }}</p>
       <!-- Om feedback finns och det inte är sista frågan visas knappen för nästa fråga -->
@@ -33,6 +29,10 @@
       </button>
       <!-- Om feedback inte finns visas knappen för att hoppa över frågan -->
       <button v-if="feedback === ''" @click="skipQuestion">Hoppa över</button>
+      <!-- Knapp för att kontrollera svaret/gå vidare, syns bara om feedback är tom -->
+      <button @click="checkAnswer" v-show="feedback === ''">
+        Ok!
+      </button>
     </div>
     <!-- Om quiz:et är avslutat visas resultatet -->
     <div v-else>
@@ -282,7 +282,7 @@ input {
 
 button {
   margin: 0 5px;
-  border: 2px solid #111;
+  border: 3px solid #111;
   padding: 10px 20px;
   background-color: #7dffcb;
   color: #111;
