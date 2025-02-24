@@ -2,9 +2,16 @@
   <!-- Rot-element för applikationen -->
   <div id="app">
     <header>
+      <svg viewBox="0 -10 375 70" xmlns=" http://www.w3.org/2000/svg" style="margin-top: 50px;">
+        <path id="MyPath" fill="none" d="M 0 62.5 Q 187.5 0 375 62.5
+" pathLength="2" />
+        <text text-anchor="middle">
+          <textPath href="#MyPath" startOffset="1">
+            Pluggpolarna
+          </textPath>
+        </text>
+      </svg>
 
-
-      <div id="banner"><img src="/cover-photo.png" alt="Pluggpolarna Cover"></div>
       <div id="tagLine">
         <p><span style="color: #4cb5f5;">Lär,</span> <span style="color: #f77f00">Lek</span> <span
             style="color: #7dffcb;">och</span> <span style="color: #ff99cc;">Lyckas!</span>
@@ -51,6 +58,15 @@ export default {
 
 logo color: linear-gradient(to right, #ff6f61, #ffb645, #f7e300, #4cb5f5, #88d9b2, #9b7eec, #f77f00, #7dffcb, #c9c9ff, #ff99cc, #34d399, #f59e42);
 */
+
+/* Här kan du ändra färgen och sånt för Pluggpolarna texten */
+textPath {
+  fill: #FF9800;
+  font-family: 'Bangers';
+  font-size: 3.5rem;
+  letter-spacing: 0.12em;
+}
+
 @font-face {
   font-family: 'Baloo';
   src: url('/fonts/Baloo.ttf') format('truetype');
@@ -135,17 +151,6 @@ body {
     1px 1px 0 #111;
 }
 
-#banner {
-  display: block;
-  margin: auto;
-}
-
-#banner img {
-  margin-top: 80px;
-  margin-bottom: 10px;
-  width: 100%;
-  vertical-align: bottom;
-}
 
 .navigation-list ul {
   margin-bottom: 60px;
