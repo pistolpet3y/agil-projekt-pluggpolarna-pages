@@ -57,7 +57,6 @@
       </div>
       <p>&copy; 2025 Pluggpolarna</p>
     </footer>
-    <hr>
   </div>
 </template>
 
@@ -126,6 +125,11 @@ textPath {
 #app {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 
 html,
@@ -259,7 +263,6 @@ p {
 
 footer {
   display: flex;
-  margin-top: 150px;
   background-image: url('/footer.png');
   background-size: contain;
   background-repeat: no-repeat;
