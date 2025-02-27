@@ -11,12 +11,7 @@
         <strong>{{ questions[currentIndex].svenska }}</strong>
       </p>
       <!-- Inmatningsfält för svar, binder svaret till userAnswer, @keyup.enter anropar funktionen onEnterPress -->
-      <input
-        v-model="userAnswer"
-        type="text"
-        placeholder="Skriv översättningen..."
-        @keyup.enter="onEnterPress"
-      />
+      <input v-model="userAnswer" type="text" placeholder="Skriv översättningen..." @keyup.enter="onEnterPress" />
       <!-- Knapp för att kontrollera svaret/gå vidare, syns bara om feedback är tom -->
       <button @click="checkAnswer" v-show="feedback === ''">
         Ok!
@@ -40,6 +35,7 @@
       <!-- Visar antalet rätt, knappar för att starta om och som leder till en mer detaljerad resultatvy -->
       <p>{{ score }} av {{ questions.length }} rätt!</p>
       <button @click="restartQuiz">Starta om</button>
+      <!-- Gå till Results.vue, tillagd av Julia -->
       <button @click="showResults">Resultat</button>
     </div>
   </div>
@@ -47,8 +43,21 @@
 
 <script setup>
 // Composition API
+
 // Importerar ref från Vue för att skapa reaktiva variabler
 import { ref } from 'vue';
+// Importera useRouter, tillagd av Julia 24 feb
+import { useRouter } from 'vue-router';
+// Importera quizStore, tillagd av Julia 24 feb
+import { useQuizStore } from '../stores/quizStore';
+
+
+// Använd router för att navigera till resultat-sidan, tillagd av Julia 24 feb
+const router = useRouter();
+const quizStore = useQuizStore();
+
+const correctAnswers = ref([]);  // tillagd av Julia 24 feb
+const errorWords = ref([]); // Tillagd av Julia 27 feb 
 
 // Ljudfiler för rätt/fel svar
 const correctAnswerAudio = new Audio('/audio/answer-correct.mp3');
@@ -204,6 +213,8 @@ const checkAnswer = () => {
   } else {
     feedback.value = `❌ Fel! Rätt svar är: ${questions.value[currentIndex.value].engelska}`;
     incorrectAnswerAudio.play();
+    // Tillagd av Julia 27 feb: Spara felaktiga ord
+    errorWords.value.push(questions.value[currentIndex.value].svenska);
   }
 };
 
@@ -236,9 +247,13 @@ const skipQuestion = () => {
     userAnswer.value = "";
     feedback.value = "";
     skipAnswerAudio.play();
+    // Tillagd av Julia 27 feb: Spara felaktiga ord
+    errorWords.value.push(questions.value[currentIndex.value].svenska);
   } else {
     quizFinished.value = true;
     skipAnswerAudio.play();
+    // Tillagd av Julia 27 feb: Spara felaktiga ord
+    errorWords.value.push(questions.value[currentIndex.value].svenska);
   }
 };
 
@@ -252,7 +267,8 @@ const restartQuiz = () => {
 
 // Leder till en mer detaljerad resultatvy
 const showResults = () => {
-  alert("Julias resultat sida ska öppnas i en ny vy")
+  quizStore.setQuizResults(score.value, errorWords.value);  // Uppdaterar store med resultaten, ändrad av Julia 24 feb
+  router.push('/results'); // Navigera till results-sidan, ändrad av Julia 24 feb
 };
 </script>
 
