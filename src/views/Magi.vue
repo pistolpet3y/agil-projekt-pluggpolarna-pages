@@ -13,7 +13,6 @@
 </template>
 
 <script setup>
-// Composition API
 // Importerar ref från Vue för att skapa reaktiva variabler
 import { ref } from 'vue';
 
