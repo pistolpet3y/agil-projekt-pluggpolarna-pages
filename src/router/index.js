@@ -7,6 +7,7 @@ import Play from '../views/Play.vue';
 import Quiz from '../views/Quiz.vue';
 import Parent from '../views/Parent.vue';
 import Results from '../views/Results.vue';
+import Magi from '../views/Magi.vue';
 
 // Definierar en array med rutter
 const routes = [
@@ -15,6 +16,7 @@ const routes = [
   { path: '/play', component: Play },
   { path: '/quiz', component: Quiz },
   { path: '/results', component: Results },
+  { path: '/magi', component: Magi },
 ];
 
 // Skapar en router-instans

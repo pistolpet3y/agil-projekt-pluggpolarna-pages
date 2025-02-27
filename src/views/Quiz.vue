@@ -11,12 +11,7 @@
         <strong>{{ questions[currentIndex].svenska }}</strong>
       </p>
       <!-- Inmatningsfält för svar, binder svaret till userAnswer, @keyup.enter anropar funktionen onEnterPress -->
-      <input
-        v-model="userAnswer"
-        type="text"
-        placeholder="Skriv översättningen..."
-        @keyup.enter="onEnterPress"
-      />
+      <input v-model="userAnswer" type="text" placeholder="Skriv översättningen..." @keyup.enter="onEnterPress" />
       <!-- Visar feedback (rätt eller fel) om den finns -->
       <p v-if="feedback">{{ feedback }}</p>
       <!-- Om feedback finns och det inte är sista frågan visas knappen för nästa fråga -->
@@ -260,7 +255,6 @@ const showResults = () => {
 .quiz-container {
   max-width: 100%;
   margin: 0 auto;
-  padding: 20px;
   text-align: center;
 }
 

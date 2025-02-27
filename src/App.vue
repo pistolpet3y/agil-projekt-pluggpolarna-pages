@@ -2,38 +2,7 @@
   <!-- Rot-element för applikationen -->
   <div id="app">
     <header>
-      <svg viewBox="0 -10 375 70" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <defs>
-          <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ff6f61" />
-            <stop offset="9.09%" stop-color="#ffb645" />
-            <stop offset="18.18%" stop-color="#f7e300" />
-            <stop offset="27.27%" stop-color="#4cb5f5" />
-            <stop offset="36.36%" stop-color="#88d9b2" />
-            <stop offset="45.45%" stop-color="#9b7eec" />
-            <stop offset="54.54%" stop-color="#f77f00" />
-            <stop offset="63.63%" stop-color="#7dffcb" />
-            <stop offset="72.72%" stop-color="#c9c9ff" />
-            <stop offset="81.81%" stop-color="#ff99cc" />
-            <stop offset="90.90%" stop-color="#34d399" />
-            <stop offset="100%" stop-color="#f59e42" />
-          </linearGradient>
-        </defs>
-
-        <path id="MyPath" fill="none" d="M0 62.5 Q187.5 0 375 62.5" />
-
-        <text text-anchor="middle" fill="url(#logoGradient)" font-family="Bangers" font-size="3.5rem">
-          <textPath xlink:href="#MyPath" startOffset="50%">
-            Pluggpolarna
-          </textPath>
-        </text>
-      </svg>
-
-      <div id="tagLine">
-        <p><span style="color: #4cb5f5;">Lär,</span> <span style="color: #f77f00">Lek</span> <span
-            style="color: #7dffcb;">och</span> <span style="color: #ff99cc;">Lyckas!</span>
-        </p>
-      </div>
+      <Header />
       <!-- Navigationscontainer -->
       <nav class=" navigation-list">
         <ul>
@@ -52,24 +21,27 @@
       </transition>
     </main>
 
-    <footer>
-      <div class="social-icons">
-      </div>
-      <p>&copy; 2025 Pluggpolarna</p>
-    </footer>
-    <div class="footer-line"></div>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Footer from './components/Footer.vue';
+import Header from './components/Header.vue';
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Footer,
+    Header
+  }
 };
 </script>
 
+
 <style>
 svg {
-  margin-top: clamp(20px, 15vw, 170px);
+  margin-top: clamp(20px, 15vw, 120px);
 }
 
 
@@ -79,14 +51,6 @@ svg {
 #7dffcb – Mint Green
 #ff99cc – Bubblegum Pink
 */
-
-textPath {
-  font-family: 'Bangers';
-  font-size: 3.5rem;
-  letter-spacing: 0.12em;
-  text-shadow:
-    2px 2px 1px #111;
-}
 
 @font-face {
   font-family: 'Baloo';
@@ -157,21 +121,6 @@ body {
   background-attachment: fixed;
 }
 
-#tagLine {
-  text-align: center;
-  display: flex;
-  margin: auto;
-  justify-content: center;
-  font-family: 'Bangers';
-  font-size: 1.5rem;
-  letter-spacing: 0.3em;
-  margin-bottom: 40px;
-}
-
-#tagLine p {
-  text-shadow:
-    1px 1px 1px #111;
-}
 
 .navigation-list ul {
   margin-bottom: 60px;
@@ -265,40 +214,5 @@ p {
 
 .text-link:hover {
   color: blue;
-}
-
-footer {
-  background-image: url('/footer.png');
-  background-repeat: no-repeat;
-  font-family: 'Kidprint';
-  width: 375px;
-  height: 103px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 1.4rem;
-  padding-bottom: 10px;
-  letter-spacing: 0.2em;
-}
-
-footer p {
-  margin-top: 80px;
-}
-
-.footer-line {
-  display: flex;
-  height: 10px;
-  background: rgb(76, 181, 245);
-  background: linear-gradient(90deg, rgba(76, 181, 245, 1) 10%, rgba(247, 127, 0, 1) 28%, rgba(255, 153, 204, 1) 57%, rgba(125, 255, 203, 1) 94%);
-}
-
-.social-icons {
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-}
-
-.social-icons:hover {
-  transform: scale(1.03);
 }
 </style>
