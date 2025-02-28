@@ -4,8 +4,8 @@
     <!-- Om quiz:et inte är avslutat visas innehållet -->
     <div v-if="!quizFinished">
       <!-- Renderar aktuell fråga, poäng och quizfrågan -->
-      <p>Fråga {{ currentIndex + 1 }} av {{ questions.length }}</p>
-      <p>Poäng: <strong>{{ score }}</strong></p>
+      <p class = "styled">Fråga {{ currentIndex + 1 }} av {{ questions.length }}</p>
+      <p class = "styled">Poäng: <strong>{{ score }}</strong></p>
       <p>
         Vad är det engelska ordet för:
         <strong>{{ questions[currentIndex].svenska }}</strong>
@@ -18,7 +18,7 @@
         @keyup.enter="onEnterPress"
       />
       <!-- Visar feedback (rätt eller fel) om den finns -->
-      <p v-if="feedback">{{ feedback }}</p>
+      <p v-if="feedback" v-html="feedback"></p>
       <!-- Om feedback finns och det inte är sista frågan visas knappen för nästa fråga -->
       <button v-if="feedback !== '' && currentIndex < questions.length - 1" @click="nextQuestion">
         Nästa fråga
@@ -50,10 +50,13 @@
 // Importerar ref från Vue för att skapa reaktiva variabler
 import { ref } from 'vue';
 
-// Ljudfiler för rätt/fel svar
-const correctAnswerAudio = new Audio('/audio/answer-correct.mp3');
-const incorrectAnswerAudio = new Audio('/audio/answer-incorrect.mp3');
-const skipAnswerAudio = new Audio('/audio/answer-skip.mp3');
+// Ljudfiler för olika knappar och händelser
+const correctAnswerAudio = new Audio('/audio/quiz-correct-answer.mp3');
+const incorrectAnswerAudio = new Audio('/audio/quiz-incorrect-answer.mp3');
+const skipQuestionAudio = new Audio('/audio/quiz-skip-question.mp3');
+const nextQuestionAudio = new Audio('/audio/click.mp3')
+const startQuizAudio = new Audio('/audio/start-quiz.mp3');
+const showResultsAudio = new Audio('/audio/show-results.mp3');
 
 // Definierar en array med 100 glosor
 const vocabularyList = [
@@ -202,7 +205,7 @@ const checkAnswer = () => {
     score.value++;
     correctAnswerAudio.play();
   } else {
-    feedback.value = `❌ Fel! Rätt svar är: ${questions.value[currentIndex.value].engelska}`;
+    feedback.value = `❌ Fel! Rätt svar är: <strong>${questions.value[currentIndex.value].engelska}</strong>`;
     incorrectAnswerAudio.play();
   }
 };
@@ -213,6 +216,7 @@ const onEnterPress = () => {
     checkAnswer();
   } else {
     nextQuestion();
+    nextQuestionAudio.play();
   }
 };
 
@@ -223,6 +227,7 @@ const nextQuestion = () => {
     currentIndex.value++;
     userAnswer.value = "";
     feedback.value = "";
+    nextQuestionAudio.play();
     // Om det är sista frågan, avsluta quiz:et
   } else {
     quizFinished.value = true;
@@ -235,10 +240,10 @@ const skipQuestion = () => {
     currentIndex.value++;
     userAnswer.value = "";
     feedback.value = "";
-    skipAnswerAudio.play();
+    skipQuestionAudio.play();
   } else {
     quizFinished.value = true;
-    skipAnswerAudio.play();
+    skipQuestionAudio.play();
   }
 };
 
@@ -248,11 +253,13 @@ const finishQuiz = () => {
 
 const restartQuiz = () => {
   startQuiz();
+  startQuizAudio.play();
 };
 
 // Leder till en mer detaljerad resultatvy
 const showResults = () => {
   alert("Julias resultat sida ska öppnas i en ny vy")
+  showResultsAudio.play();
 };
 </script>
 
@@ -267,6 +274,18 @@ const showResults = () => {
 p {
   text-align: center;
   font-size: 1.05rem;
+}
+
+.styled {
+  font-family: 'Bangers', sans-serif;
+  font-size: 1.35em;
+  color: #7dffcb;
+  text-shadow:
+    -1px -1px 0 #111,
+    1px -1px 0 #111,
+    -1px 1px 0 #111,
+    1px 1px 0 #111;
+  letter-spacing: 0.15em;
 }
 
 input {
