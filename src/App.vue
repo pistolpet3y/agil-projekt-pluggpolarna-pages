@@ -108,7 +108,6 @@ body {
   padding: 0;
 }
 
-
 body {
   width: 100%;
   max-width: 375px;
@@ -116,11 +115,15 @@ body {
   font-family: "Arial", "Helvetica", "sans-serif";
   font-size: 1.05rem;
   color: #111;
-  background: linear-gradient(180deg, rgba(210, 222, 230, 1) 0%, rgba(240, 235, 226, 1) 100%);
+  background: linear-gradient(
+    to bottom,
+    lightblue 0%,
+    lightblue 66%,
+    #FFF8E1 100%
+  );
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-
 
 .navigation-list ul {
   margin-bottom: 60px;
