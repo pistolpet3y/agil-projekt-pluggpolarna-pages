@@ -8,6 +8,7 @@ import Quiz from '../views/Quiz.vue';
 import Ordstriden from '../views/Ordstriden.vue';
 import Parent from '../views/Parent.vue';
 import Results from '../views/Results.vue';
+import Magi from '../views/Magi.vue';
 
 // Definierar en array med rutter
 const routes = [
@@ -17,6 +18,7 @@ const routes = [
   { path: '/quiz', component: Quiz },
   { path: '/ordstriden', component: Ordstriden },
   { path: '/results', component: Results },
+  { path: '/magi', component: Magi },
 ];
 
 // Skapar en router-instans

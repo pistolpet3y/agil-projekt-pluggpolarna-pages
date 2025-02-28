@@ -7,7 +7,9 @@
       <p class="green">Träna dina glosor på ett roligt sätt!</p>
     </div>
     <div class="button-wrapper">
-      <button class="mattemagi" @mouseover="playHoverAudio" @click="playStartMathAudio">Mattemagi!</button>
+      <router-link to="/magi">
+        <button class="mattemagi" @mouseover="playHoverAudio" @click="playStartMathAudio">Mattemagi!</button>
+      </router-link>
       <p class="blue">Ett magiskt sätt att lära dig multiplikation!</p>
     </div>
     <div class="button-wrapper">
@@ -92,7 +94,7 @@ p {
 }
 
 .button-container {
-  margin-top: 50px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -121,23 +123,23 @@ button:hover {
 
 @keyframes wiggle {
   0% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
 
   25% {
-      transform: rotate(5deg);
+    transform: rotate(5deg);
   }
 
   50% {
-      transform: rotate(-5deg);
+    transform: rotate(-5deg);
   }
 
   75% {
-      transform: rotate(5deg);
+    transform: rotate(5deg);
   }
 
   100% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
 }
 </style>
