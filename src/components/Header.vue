@@ -71,8 +71,9 @@ textPath {
 }
 
 #tagLine p {
-  text-shadow:
-    1px 1px 1px #111;
+  color: white;
+  -webkit-text-stroke: 1px #111;
+  text-shadow: 1px 1px 1px #111;
   text-align: justify;
   line-height: 1.8;
 }

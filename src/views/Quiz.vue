@@ -57,7 +57,7 @@ const router = useRouter();
 const quizStore = useQuizStore();
 
 const correctAnswers = ref([]);  // tillagd av Julia 24 feb
-const errorWords = ref([]); // Tillagd av Julia 27 feb 
+const errorWords = ref([]); // Tillagd av Julia 27 feb
 
 // Ljudfiler för olika knappar och händelser
 const correctAnswerAudio = new Audio('/audio/quiz-correct-answer.mp3');
