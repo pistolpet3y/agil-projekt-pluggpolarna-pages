@@ -26,7 +26,6 @@ onMounted(() => {
     showStars(); // Kör funktionen för stjärnorna
   } else if (quizStore.correctAnswers >= 7) {
     mediumScore.value = true;
-
   } else {
     lowerScore.value = true;
 

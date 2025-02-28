@@ -2,27 +2,50 @@
   <div class="button-container">
     <div class="button-wrapper">
       <router-link to="/quiz">
-        <button class="glosquiz" @mouseover="playSound">Glosquiz!</button>
+        <button class="glosquiz" @mouseover="playHoverAudio" @click="playStartQuizAudio">Glosquiz!</button>
       </router-link>
       <p class="green">Träna dina glosor på ett roligt sätt!</p>
     </div>
     <div class="button-wrapper">
-      <button class="mattemagi" @mouseover="playSound">Mattemagi!</button>
+      <router-link to="/magi">
+        <button class="mattemagi" @mouseover="playHoverAudio" @click="playStartMathAudio">Mattemagi!</button>
+      </router-link>
       <p class="blue">Ett magiskt sätt att lära dig multiplikation!</p>
     </div>
     <div class="button-wrapper">
-      <button class="ordstriden" @mouseover="playSound">Ordstriden!</button>
+      <router-link to="/ordstriden">
+        <button class="ordstriden" @mouseover="playHoverAudio" @click="playStartBattleAudio">Ordstriden!</button>
+      </router-link>
       <p class="orange">En spännande kamp för att bemästra stavning!</p>
     </div>
   </div>
 </template>
 
 <script setup>
-// Funktion för att spela upp hoverljud
-const hoverSound = '/hover-sound.mp3'
+// Ljudfiler för olika knappar och händelser
+const hoverAudio = '/audio/click.mp3'
+const startQuizAudio = '/audio/start-quiz.mp3';
+const startMathAudio = '/audio/start-math.mp3';
+const startBattleAudio = '/audio/start-battle.mp3';
 
-const playSound = () => {
-  const audio = new Audio(hoverSound);
+// Funktioner för att spela upp ljud
+const playHoverAudio = () => {
+  const audio = new Audio(hoverAudio);
+  audio.play();
+};
+
+const playStartQuizAudio = () => {
+  const audio = new Audio(startQuizAudio);
+  audio.play();
+};
+
+const playStartMathAudio = () => {
+  const audio = new Audio(startMathAudio);
+  audio.play();
+};
+
+const playStartBattleAudio = () => {
+  const audio = new Audio(startBattleAudio);
   audio.play();
 };
 </script>
@@ -71,7 +94,7 @@ p {
 }
 
 .button-container {
-  margin-top: 50px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,23 +123,23 @@ button:hover {
 
 @keyframes wiggle {
   0% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
 
   25% {
-      transform: rotate(5deg);
+    transform: rotate(5deg);
   }
 
   50% {
-      transform: rotate(-5deg);
+    transform: rotate(-5deg);
   }
 
   75% {
-      transform: rotate(5deg);
+    transform: rotate(5deg);
   }
 
   100% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
 }
 </style>

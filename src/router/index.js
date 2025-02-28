@@ -5,8 +5,10 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import Play from '../views/Play.vue';
 import Quiz from '../views/Quiz.vue';
+import Ordstriden from '../views/Ordstriden.vue';
 import Parent from '../views/Parent.vue';
 import Results from '../views/Results.vue';
+import Magi from '../views/Magi.vue';
 
 // Definierar en array med rutter
 const routes = [
@@ -14,7 +16,9 @@ const routes = [
   { path: '/parent', component: Parent },
   { path: '/play', component: Play },
   { path: '/quiz', component: Quiz },
+  { path: '/ordstriden', component: Ordstriden },
   { path: '/results', component: Results },
+  { path: '/magi', component: Magi },
 ];
 
 // Skapar en router-instans
