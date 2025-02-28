@@ -2,9 +2,40 @@
   <!-- Rot-element för applikationen -->
   <div id="app">
     <header>
-      <div id="banner"><img src="/cover-photo.png" alt="Pluggpolarna Cover"></div>
+      <svg viewBox="0 -10 375 70" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+          <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ff6f61" />
+            <stop offset="9.09%" stop-color="#ffb645" />
+            <stop offset="18.18%" stop-color="#f7e300" />
+            <stop offset="27.27%" stop-color="#4cb5f5" />
+            <stop offset="36.36%" stop-color="#88d9b2" />
+            <stop offset="45.45%" stop-color="#9b7eec" />
+            <stop offset="54.54%" stop-color="#f77f00" />
+            <stop offset="63.63%" stop-color="#7dffcb" />
+            <stop offset="72.72%" stop-color="#c9c9ff" />
+            <stop offset="81.81%" stop-color="#ff99cc" />
+            <stop offset="90.90%" stop-color="#34d399" />
+            <stop offset="100%" stop-color="#f59e42" />
+          </linearGradient>
+        </defs>
+
+        <path id="MyPath" fill="none" d="M0 62.5 Q187.5 0 375 62.5" />
+
+        <text text-anchor="middle" fill="url(#logoGradient)" font-family="Bangers" font-size="3.5rem">
+          <textPath xlink:href="#MyPath" startOffset="50%">
+            Pluggpolarna
+          </textPath>
+        </text>
+      </svg>
+
+      <div id="tagLine">
+        <p><span style="color: #4cb5f5;">Lär,</span> <span style="color: #f77f00">Lek</span> <span
+            style="color: #7dffcb;">och</span> <span style="color: #ff99cc;">Lyckas!</span>
+        </p>
+      </div>
       <!-- Navigationscontainer -->
-      <nav class="navigation-list">
+      <nav class=" navigation-list">
         <ul>
           <!-- Vue Router länkar till huvudsidorna -->
           <li><router-link to="/">Hem</router-link></li>
@@ -26,6 +57,7 @@
       </div>
       <p>&copy; 2025 Pluggpolarna</p>
     </footer>
+    <div class="footer-line"></div>
   </div>
 </template>
 
@@ -36,14 +68,26 @@ export default {
 </script>
 
 <style>
+svg {
+  margin-top: clamp(20px, 15vw, 170px);
+}
+
+
 /*
 #4cb5f5 – Sky Blue
 #f77f00 – Pumpkin Orange
 #7dffcb – Mint Green
 #ff99cc – Bubblegum Pink
-
-logo color: linear-gradient(to right, #ff6f61, #ffb645, #f7e300, #4cb5f5, #88d9b2, #9b7eec, #f77f00, #7dffcb, #c9c9ff, #ff99cc, #34d399, #f59e42);
 */
+
+textPath {
+  font-family: 'Bangers';
+  font-size: 3.5rem;
+  letter-spacing: 0.12em;
+  text-shadow:
+    2px 2px 1px #111;
+}
+
 @font-face {
   font-family: 'Baloo';
   src: url('/fonts/Baloo.ttf') format('truetype');
@@ -94,7 +138,6 @@ main {
   flex: 1;
 }
 
-
 html,
 body {
   margin: 0;
@@ -114,17 +157,20 @@ body {
   background-attachment: fixed;
 }
 
-
-#banner {
-  display: block;
+#tagLine {
+  text-align: center;
+  display: flex;
   margin: auto;
+  justify-content: center;
+  font-family: 'Bangers';
+  font-size: 1.5rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 40px;
 }
 
-#banner img {
-  margin-top: 100px;
-  margin-bottom: 50px;
-  width: 100%;
-  vertical-align: bottom;
+#tagLine p {
+  text-shadow:
+    1px 1px 1px #111;
 }
 
 .navigation-list ul {
@@ -138,14 +184,13 @@ body {
 }
 
 .navigation-list li {
-  border: 1px solid #000000;
-  background-color: #7dffcb;
-  color: #ffff;
-  padding: 0px;
-  font-size: 20px;
   width: 110px;
-  border-radius: 10px;
   margin: auto;
+  border: 3px solid #111;
+  background-color: #7dffcb;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 10px;
   position: relative;
   /*box-shadow: 5px 5px 5px #a3ffe0;*/
   transition: all 0.3s ease;
@@ -163,7 +208,7 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .navigation-list li:hover::after {
@@ -171,8 +216,8 @@ body {
 }
 
 .navigation-list li:hover {
-  box-shadow: 0px 2px 20px #4fcc9c;
-  top: 3px;
+  box-shadow: 0px 0px 30px #f77f00;
+  top: 4px;
 }
 
 .navigation-list li:active {
@@ -187,21 +232,20 @@ body {
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
-  color: #000000;
+  color: #111;
   transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
 }
 
-/*.navigation-list li a:hover {
-  color: #ff99cc;
-  text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.397);
+.navigation-list li a:hover {
+  color: #f77f00;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 1);
 }
-*/
 
 h2 {
   padding: 5px;
   color: #111;
   font-family: 'Baloo';
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-style: italic;
   text-align: center;
   letter-spacing: 0.3em;
@@ -209,7 +253,7 @@ h2 {
 
 p {
   text-align: justify;
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.6);
   line-height: 1.8;
 }
 
@@ -224,17 +268,29 @@ p {
 }
 
 footer {
-  display: flex;
   background-image: url('/footer.png');
-  background-size: contain;
-  background-position: center;
   background-repeat: no-repeat;
-  justify-content: space-evenly;
   font-family: 'Kidprint';
-  font-size: 1.4rem;
+  width: 375px;
+  height: 103px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  letter-spacing: 0.15em;
-  color: #111;
+  font-size: 1.4rem;
+  padding-bottom: 10px;
+  letter-spacing: 0.2em;
+}
+
+footer p {
+  margin-top: 80px;
+}
+
+.footer-line {
+  display: flex;
+  height: 10px;
+  background: rgb(76, 181, 245);
+  background: linear-gradient(90deg, rgba(76, 181, 245, 1) 10%, rgba(247, 127, 0, 1) 28%, rgba(255, 153, 204, 1) 57%, rgba(125, 255, 203, 1) 94%);
 }
 
 .social-icons {

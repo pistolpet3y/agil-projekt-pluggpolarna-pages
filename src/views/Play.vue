@@ -28,22 +28,6 @@ const playSound = () => {
 </script>
 
 <style scoped>
-
-
-@font-face {
-  font-family: 'Baloo';
-  src: url('/fonts/Baloo.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Bangers';
-  src: url('/fonts/Bangers.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 @font-face {
   font-family: 'Kidprint';
   src: url('/fonts/Kidprint.OTF') format('opentype');
@@ -51,22 +35,21 @@ const playSound = () => {
   font-style: normal;
 }
 
-
-.glos-quiz {
-    background-color: #f77f00;
-}
-
-.ordstriden {
-    background-color: #4cb5f5
+.glosquiz {
+  background-color: #7dffcb;
 }
 
 .mattemagi {
-    background-color: #7dffcb
+  background-color: #4cb5f5;
+}
+
+.ordstriden {
+  background-color: #f77f00;
 }
 
 p {
   font-family: 'Bangers', sans-serif;
-  font-size: 1.05em;
+  font-size: 1.08em;
   text-shadow:
     -1px -1px 0 #111,
     1px -1px 0 #111,
@@ -89,10 +72,9 @@ p {
 
 .button-container {
   margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .button-wrapper {
@@ -100,16 +82,15 @@ p {
 }
 
 button {
-    background-color: #f77f00;
-    color: black;
-    border: 3px solid black;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-family: 'Bangers', sans-serif;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-    /* Smidig hover-effekt */
+  border: 3px solid #111;
+  padding: 10px 20px;
+  color: #111;
+  font-size: 1.2em;
+  font-family: 'Bangers', sans-serif;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
