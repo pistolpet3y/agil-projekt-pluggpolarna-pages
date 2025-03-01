@@ -7,9 +7,15 @@
       <nav class=" navigation-list">
         <ul>
           <!-- Vue Router länkar till huvudsidorna -->
-          <li><router-link to="/">Hem</router-link></li>
-          <li><router-link to="/play">Spel</router-link></li>
-          <li><router-link to="/quiz">Quiz</router-link></li>
+          <li @mouseover="playNavBarHoverAudio" @click="playNavBarClickAudio">
+            <router-link to="/">Hem</router-link>
+          </li>
+          <li @mouseover="playNavBarHoverAudio" @click="playNavBarClickAudio">
+            <router-link to="/play">Spel</router-link>
+          </li>
+          <li @mouseover="playNavBarHoverAudio" @click="playNavBarClickAudio">
+            <router-link to="/quiz">Quiz</router-link>
+          </li>
         </ul>
       </nav>
     </header>
@@ -25,16 +31,19 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Footer from './components/Footer.vue';
 import Header from './components/Header.vue';
 
-export default {
-  name: 'App',
-  components: {
-    Footer,
-    Header
-  }
+const navBarHoverAudio = new Audio('/audio/nav-bar-hover.mp3');
+const navBarClickAudio = new Audio('/audio/nav-bar-click.mp3');
+
+function playNavBarHoverAudio() {
+  navBarHoverAudio.play();
+};
+
+function playNavBarClickAudio() {
+  navBarClickAudio.play();
 };
 </script>
 

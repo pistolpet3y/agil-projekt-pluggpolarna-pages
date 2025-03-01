@@ -126,6 +126,9 @@ const userAnswer = ref("");
 const feedback = ref("");
 const gameOver = ref(false);
 
+// Skapar en variabel för att hålla koll på vilka ord som inte använts än
+const unusedWords = ref(vocabularyList);
+
 // Funktion för att blanda om bokstäverna i ett ord
 const scramble = (word) => {
   // Delar upp ordet i en array, blandar slumpmässigt och slår ihop igen
@@ -140,9 +143,20 @@ const scramble = (word) => {
 
 // Funktion för att starta en ny runda
 const newRound = () => {
-  // Välj ett slumpmässigt ord från vocabularyList och skapa ett blandat ord
-  currentWord.value = vocabularyList[Math.floor(Math.random() * vocabularyList.length)];
+  // Om det inte finns några ord kvar i unusedWords, återställ listan
+  if (unusedWords.value.length === 0) {
+    unusedWords.value = [...vocabularyList]; // Spread används för att skapa en kopia av listan
+  }
+  // Välj ett slumpmässigt ord från listan och blanda om det
+  const randomIndex = Math.floor(Math.random() * unusedWords.value.length);
+  currentWord.value = unusedWords.value[randomIndex];
+
+  // Ta bort ordet från unusedWords så att den inte kan användas igen
+  unusedWords.value.splice(randomIndex, 1);
+
+  // Skapa ett scramble:at ord för spelaren att gissa
   scrambledWord.value = scramble(currentWord.value);
+
   // Rensa spelarens tidigare svar och feedback
   userAnswer.value = "";
   feedback.value = "";
@@ -206,6 +220,7 @@ const restartGame = () => {
   gameOver.value = false;
   feedback.value = "";
   userAnswer.value = "";
+  unusedWords.value = [...vocabularyList];
   newRound();
   startBattleAudio.play();
 };
