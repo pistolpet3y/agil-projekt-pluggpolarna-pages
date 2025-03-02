@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue';
 import Chart from '../components/Chart.vue';
 // Importera quizStore
 import { useQuizStore } from '../stores/quizStore';
-
+import confetti from 'canvas-confetti';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
@@ -23,6 +23,12 @@ const lowerScore = ref(false);
 // Funktion för att visa stjärnor (när 10/10 är korrekt)
 const showStars = () => {
   console.log('Grattis! Du fick 10 rätt, här är dina stjärnor! ✨');
+  // Confetti för perfekt resultat
+  confetti({
+    particleCount: 300,
+    spread: 360,
+    origin: { y: 0.5 }
+  })
 };
 
 onMounted(() => {

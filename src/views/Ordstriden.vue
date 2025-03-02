@@ -17,6 +17,7 @@
       <!-- Inmatningsfält för svar, binder svaret till userAnswer, @keyup.enter anropar funktionen onEnterPress -->
       <input
         v-model="userAnswer"
+        :class="inputClass"
         @keyup.enter="onEnterPress"
         placeholder="Skriv ditt svar här..."
       />
@@ -33,9 +34,12 @@
 
     <!-- Om spelet är över visas innehållet -->
     <div v-else>
-      <h3>Game Over!</h3>
+      <h3 v-if="playerHP === 100">Flawless Victory!</h3>
+      <h3 v-else-if="playerHP > 0">Victory!</h3>
+      <h3 v-else>Game Over!</h3>
       <!-- Meddelande för vinst/förlust och knapp för att starta om spelet -->
       <p v-if="playerHP <= 0">😢 Du förlorade!<br>💪 Ge inte upp och försök igen!</p>
+      <p v-else-if="playerHP === 100">👑 Felfri seger!<br>🥳 Den onda trollen Lurifax är totalt krossad!</p>
       <p v-else>👑 Du vann!<br>🥳 Den onda trollen Lurifax är besegrad!</p>
       <button @click="restartGame">Spela igen!</button>
     </div>
@@ -45,7 +49,8 @@
 <script setup>
 // Composition API
 // Importerar ref från Vue för att skapa reaktiva variabler
-import { ref } from 'vue';
+import confetti from 'canvas-confetti';
+import { ref, computed, watch } from 'vue';
 
 // Ljudfiler för olika knappar och händelser
 const correctAnswerAudio = new Audio('/audio/battle-correct-answer.mp3');
@@ -183,6 +188,14 @@ const submitAnswer = () => {
   }
 };
 
+// Skapar en computed property för att bestämma vilken klass som ska användas för input-fältet när man får feedback
+const inputClass = computed(() => {
+  if (!feedback.value) return '';
+  if (feedback.value.startsWith('✅')) return 'correct-input';
+  if (feedback.value.startsWith('❌') || feedback.value.startsWith('😞')) return 'incorrect-input';
+  return '';
+});
+
 // Funktion som kontrollerar vad som händer när man trycker på Enter
 const onEnterPress = () => {
   if (feedback.value === '') {
@@ -211,6 +224,17 @@ const nextRound = () => {
     nextRoundAudio.play();
   }
 };
+
+// Lyssna på gameOver och spela konfetti om spelet är över och spelaren har 100 HP
+watch(gameOver, (value) => {
+  if (value && playerHP.value === 100) {
+    confetti({
+      particleCount: 300,
+      spread: 360,
+      origin: { y: 0.5 }
+    });
+  }
+});
 
 // Funktion för att starta om spelet
 const restartGame = () => {
@@ -279,6 +303,26 @@ input {
   font-size: 1.1rem;
   background-color: #fff;
   border-radius: 5px;
+}
+
+.correct-input {
+  border: 2px solid #7dffcb;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 1);
+  color: #7dffcb;
+  text-shadow:
+    -1px -1px 0 #111,
+    1px -1px 0 #111,
+    -1px 1px 0 #111,
+    1px 1px 0 #111;
+}
+
+.incorrect-input {
+  border: 2px solid #F5505D;
+  color: #F5505D;
+}
+
+input:focus {
+  outline: none;
 }
 
 button {
