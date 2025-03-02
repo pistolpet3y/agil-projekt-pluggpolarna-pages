@@ -212,6 +212,16 @@ h2 {
   letter-spacing: 0.3em;
 }
 
+h3 {
+  padding: 5px;
+  color: #111;
+  font-family: 'Kidprint';
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 0.3em;
+}
+
 p {
   text-align: justify;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.6);

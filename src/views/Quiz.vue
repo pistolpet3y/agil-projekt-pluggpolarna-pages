@@ -31,7 +31,7 @@
     </div>
     <!-- Om quiz:et är avslutat visas resultatet -->
     <div v-else>
-      <h3>Ditt resultat</h3>
+      <h3>Ditt Resultat</h3>
       <!-- Visar antalet rätt, knappar för att starta om och som leder till en mer detaljerad resultatvy -->
       <p>{{ score }} av {{ questions.length }} rätt!</p>
       <button @click="restartQuiz">Starta om</button>
@@ -199,6 +199,7 @@ const startQuiz = () => {
   feedback.value = "";
   score.value = 0;
   quizFinished.value = false;
+  errorWords.value = [];
 };
 
 // Anropar funktionen för att starta quiz:et så fort sidan laddas
@@ -247,18 +248,16 @@ const nextQuestion = () => {
 
 // Funktion för att hoppa över frågan
 const skipQuestion = () => {
+  errorWords.value.push(questions.value[currentIndex.value].svenska);
+
   if (currentIndex.value < questions.value.length - 1) {
     currentIndex.value++;
     userAnswer.value = "";
     feedback.value = "";
     skipQuestionAudio.play();
-    // Tillagd av Julia 27 feb: Spara felaktiga ord
-    errorWords.value.push(questions.value[currentIndex.value].svenska);
   } else {
     quizFinished.value = true;
     skipQuestionAudio.play();
-    // Tillagd av Julia 27 feb: Spara felaktiga ord
-    errorWords.value.push(questions.value[currentIndex.value].svenska);
   }
 };
 
