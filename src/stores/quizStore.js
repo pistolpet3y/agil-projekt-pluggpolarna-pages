@@ -13,5 +13,9 @@ export const useQuizStore = defineStore('quiz', {
       this.correctAnswers = correctAnswers;
       this.errorWords = errorWords;
     },
+    startQuiz() {
+      this.correctAnswers = 0;
+      this.errorWords = [];
+    },
   },
 });

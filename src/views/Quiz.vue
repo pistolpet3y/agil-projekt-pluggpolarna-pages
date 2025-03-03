@@ -11,7 +11,7 @@
         <strong>{{ questions[currentIndex].svenska }}</strong>
       </p>
       <!-- Inmatningsfält för svar, binder svaret till userAnswer, @keyup.enter anropar funktionen onEnterPress -->
-      <input v-model="userAnswer" type="text" placeholder="Skriv översättningen..." @keyup.enter="onEnterPress" />
+      <input v-model="userAnswer" :class="inputClass" type="text" placeholder="Skriv översättningen..." @keyup.enter="onEnterPress" />
       <!-- Visar feedback (rätt eller fel) om den finns -->
       <p v-if="feedback" v-html="feedback"></p>
       <!-- Om feedback finns och det inte är sista frågan visas knappen för nästa fråga -->
@@ -31,7 +31,7 @@
     </div>
     <!-- Om quiz:et är avslutat visas resultatet -->
     <div v-else>
-      <h3>Ditt resultat</h3>
+      <h3>Ditt Resultat</h3>
       <!-- Visar antalet rätt, knappar för att starta om och som leder till en mer detaljerad resultatvy -->
       <p>{{ score }} av {{ questions.length }} rätt!</p>
       <button @click="restartQuiz">Starta om</button>
@@ -45,7 +45,7 @@
 // Composition API
 
 // Importerar ref från Vue för att skapa reaktiva variabler
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 // Importera useRouter, tillagd av Julia 24 feb
 import { useRouter } from 'vue-router';
 // Importera quizStore, tillagd av Julia 24 feb
@@ -78,7 +78,7 @@ const vocabularyList = [
   { svenska: 'Skola', engelska: 'School' },
   { svenska: 'Hus', engelska: 'House' },
   { svenska: 'Bil', engelska: 'Car' },
-  { svenska: 'Cykel', engelska: 'Bike' },
+  { svenska: 'Cykel', engelska: ['Bike', 'Bicycle'] },
   { svenska: 'Äpple', engelska: 'Apple' },
   { svenska: 'Bord', engelska: 'Table' },
   { svenska: 'Stol', engelska: 'Chair' },
@@ -103,7 +103,7 @@ const vocabularyList = [
   { svenska: 'Sjunga', engelska: 'Sing' },
   { svenska: 'Dansa', engelska: 'Dance' },
   { svenska: 'Gå', engelska: 'Walk' },
-  { svenska: 'Ropa', engelska: 'Shout' },
+  { svenska: 'Ropa', engelska: ['Shout', 'Yell'] },
   { svenska: 'Sitta', engelska: 'Sit' },
   { svenska: 'Stå', engelska: 'Stand' },
   { svenska: 'Leka', engelska: 'Play' },
@@ -112,16 +112,16 @@ const vocabularyList = [
   { svenska: 'Lyssna', engelska: 'Listen' },
   { svenska: 'Titta', engelska: 'Look' },
   // Vanliga adjektiv
-  { svenska: 'Glad', engelska: 'Happy' },
+  { svenska: 'Glad', engelska: ['Happy', 'Glad'] },
   { svenska: 'Ledsen', engelska: 'Sad' },
   { svenska: 'Stor', engelska: 'Big' },
-  { svenska: 'Liten', engelska: 'Small' },
+  { svenska: 'Liten', engelska: ['Small', 'Little'] },
   { svenska: 'Snabb', engelska: 'Fast' },
   { svenska: 'Långsam', engelska: 'Slow' },
-  { svenska: 'Varm', engelska: 'Hot' },
+  { svenska: 'Varm', engelska: ['Warm', 'Hot'] },
   { svenska: 'Kall', engelska: 'Cold' },
   { svenska: 'Tung', engelska: 'Heavy' },
-  { svenska: 'Lätt', engelska: 'Light' },
+  { svenska: 'Lätt', engelska: ['Light', 'Easy'] },
   { svenska: 'Fin', engelska: 'Pretty' },
   { svenska: 'Ful', engelska: 'Ugly' },
   { svenska: 'Snäll', engelska: 'Kind' },
@@ -199,6 +199,7 @@ const startQuiz = () => {
   feedback.value = "";
   score.value = 0;
   quizFinished.value = false;
+  errorWords.value = [];
 };
 
 // Anropar funktionen för att starta quiz:et så fort sidan laddas
@@ -206,10 +207,23 @@ startQuiz();
 
 // Funktion som kontrollerar användarens svar och ger rätt feedback
 const checkAnswer = () => {
-  if (
-    userAnswer.value.trim().toLowerCase() ===
-    questions.value[currentIndex.value].engelska.toLowerCase()
-  ) {
+  // Användarens svar, trimmar bort onödiga mellanslag och gör om till små bokstäver
+  const userInput = userAnswer.value.trim().toLowerCase();
+  const currentEntry = questions.value[currentIndex.value];
+
+  let isCorrect = false;
+
+  // Om det engelska ordet är en array, kolla om användarens svar finns i arrayen
+  if (Array.isArray(currentEntry.engelska)) {
+    isCorrect = currentEntry.engelska
+      .map((word) => word.toLowerCase())
+      .includes(userInput);
+  } else {
+    isCorrect = userInput === currentEntry.engelska.toLowerCase();
+  }
+
+  // Uppdatera poäng och feedback beroende på om svaret är rätt eller fel
+  if (isCorrect) {
     feedback.value = "✅ Rätt! Bra jobbat :)";
     score.value++;
     correctAnswerAudio.play();
@@ -217,9 +231,15 @@ const checkAnswer = () => {
     feedback.value = `❌ Fel! Rätt svar är: <strong>${questions.value[currentIndex.value].engelska}</strong>`;
     incorrectAnswerAudio.play();
     // Tillagd av Julia 27 feb: Spara felaktiga ord
-    errorWords.value.push(questions.value[currentIndex.value].svenska);
+    errorWords.value.push(currentEntry.svenska);
   }
 };
+
+// Skapar en computed property för att bestämma vilken klass som ska användas för input-fältet när man får feedback
+const inputClass = computed(() => {
+  if (!feedback.value) return '';
+  return feedback.value.startsWith('✅') ? 'correct-input' : 'incorrect-input';
+});
 
 // Funktion som kontrollerar vad som händer när man trycker på Enter
 const onEnterPress = () => {
@@ -247,18 +267,16 @@ const nextQuestion = () => {
 
 // Funktion för att hoppa över frågan
 const skipQuestion = () => {
+  errorWords.value.push(questions.value[currentIndex.value].svenska);
+
   if (currentIndex.value < questions.value.length - 1) {
     currentIndex.value++;
     userAnswer.value = "";
     feedback.value = "";
     skipQuestionAudio.play();
-    // Tillagd av Julia 27 feb: Spara felaktiga ord
-    errorWords.value.push(questions.value[currentIndex.value].svenska);
   } else {
     quizFinished.value = true;
     skipQuestionAudio.play();
-    // Tillagd av Julia 27 feb: Spara felaktiga ord
-    errorWords.value.push(questions.value[currentIndex.value].svenska);
   }
 };
 
@@ -313,6 +331,26 @@ input {
   font-size: 1.1rem;
   background-color: #fff;
   border-radius: 5px;
+}
+
+.correct-input {
+  border: 2px solid #7dffcb;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 1);
+  color: #7dffcb;
+  text-shadow:
+    -1px -1px 0 #111,
+    1px -1px 0 #111,
+    -1px 1px 0 #111,
+    1px 1px 0 #111;
+}
+
+.incorrect-input {
+  border: 2px solid #F5505D;
+  color: #F5505D;
+}
+
+input:focus {
+  outline: none;
 }
 
 button {

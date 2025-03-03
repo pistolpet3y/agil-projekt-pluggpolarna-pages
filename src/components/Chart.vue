@@ -28,7 +28,9 @@ onMounted(() => {
         {
           label: 'Ditt resultat',
           data: [props.correctAnswers, 10 - props.correctAnswers],
-          backgroundColor: ['#A4FFA7', '#F5505D'],
+          backgroundColor: ['#7dffcb', '#F5505D'], // #A4FFA7
+          borderColor: '#111',
+          borderWidth: 1,
         },
       ],
     },
@@ -51,8 +53,9 @@ onMounted(() => {
 
 <style scoped>
 canvas {
-  max-width: 200px;
-  max-height: 200px;
+  width: 100%;
+  max-width: 300px;
+  max-height: 300px;
   margin: auto;
 }
 </style>
