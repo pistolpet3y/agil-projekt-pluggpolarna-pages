@@ -9,10 +9,10 @@
         <p class="green">Lägg till egna och redigera dina egna glosor</p>
       </div>
       <div class="button-wrapper">
-        <router-link to='/results'>
-          <button class="button-blue" @mouseover="playHoverAudio" @click="playStartMathAudio">Resultat</button>
+        <router-link to='/kontakt'>
+          <button class="button-blue" @mouseover="playHoverAudio" @click="playStartMathAudio">Kontakt</button>
         </router-link>
-        <p class="blue">Få en översikt av dina reultat!</p>
+        <p class="blue">Har du frågor?</p>
       </div>
       <div class="button-wrapper">
         <router-link to='/om-oss'>
@@ -44,7 +44,6 @@ const playHoverAudio = () => {
   font-weight: bold;
   font-style: normal;
 }
-
 
 p {
   font-family: 'Bangers', sans-serif;

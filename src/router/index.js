@@ -10,6 +10,7 @@ import Parent from '../views/Parent.vue';
 import Results from '../views/Results.vue';
 import Magi from '../views/Magi.vue';
 import Konto from '../views/Konto.vue';
+import Kontakt from '../views/Kontakt.vue';
 import OmOss from '../views/OmOss.vue';
 
 // Definierar en array med rutter
@@ -22,13 +23,17 @@ const routes = [
   { path: '/results', component: Results },
   { path: '/magi', component: Magi },
   { path: '/konto', component: Konto },
+  { path: '/kontakt', component: Kontakt },
   { path: '/om-oss', component: OmOss }
 ];
 
 // Skapar en router-instans
 const router = createRouter({
   history: createWebHistory(),
-  routes // Tilldelar sidans rutter till vår router
+  routes, // Tilldelar sidans rutter till vår router
+  scrollBehavior() {
+    return { top: 0 }; // Scrollar upp till toppen av sidan vid sidbyte
+  }
 });
 
 //Koden nedan är för att byta bakgrundsbild på sidorna

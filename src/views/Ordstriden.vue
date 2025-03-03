@@ -22,9 +22,6 @@
       </div>
     </div>
 
-
-
-
     <!-- Om spelet inte är över visas innehållet -->
     <div id="input-container">
       <div v-if="!gameOver">
@@ -364,10 +361,11 @@ input {
   width: 80%;
   display: block;
   margin: 20px auto;
-  border: 2px solid #111;
+  border: 3px solid #111;
   padding: 10px;
   font-family: "Arial", "Helvetica", "sans-serif";
   font-size: 1.1rem;
+  letter-spacing: 0.15em;
   background-color: #fff;
   border-radius: 5px;
 }
@@ -377,8 +375,8 @@ input {
 }
 
 .correct-input {
-  border: 2px solid #7dffcb;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 1);
+  border: 3px solid #7dffcb;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
   color: #7dffcb;
   text-shadow:
     -1px -1px 0 #111,
@@ -388,7 +386,7 @@ input {
 }
 
 .incorrect-input {
-  border: 2px solid #F5505D;
+  border: 3px solid #F5505D;
   color: #F5505D;
 }
 

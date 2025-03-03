@@ -8,7 +8,7 @@
       <p class="styled">Poäng: <strong>{{ score }}</strong></p>
       <p>
         Vad är det engelska ordet för:
-        <strong class="textHighlight">{{ questions[currentIndex].svenska }}</strong>
+        <strong>{{ questions[currentIndex].svenska }}</strong>
       </p>
       <!-- Inmatningsfält för svar, binder svaret till userAnswer, @keyup.enter anropar funktionen onEnterPress -->
       <input v-model="userAnswer" :class="inputClass" type="text" placeholder="Skriv översättningen..." @keyup.enter="onEnterPress" />
@@ -33,7 +33,8 @@
     <div v-else>
       <h3>Ditt Resultat</h3>
       <!-- Visar antalet rätt, knappar för att starta om och som leder till en mer detaljerad resultatvy -->
-      <p>{{ score }} av {{ questions.length }} rätt!</p>
+      <p v-if="score === questions.length"><strong>{{ score }}</strong> av <strong>{{ questions.length }}</strong> rätt!<br>Du är en äkta glosexpert! 🧠</p>
+      <p v-else><strong>{{ score }}</strong> av <strong>{{ questions.length }}</strong> rätt!</p>
       <button @click="restartQuiz">Starta om</button>
       <!-- Gå till Results.vue, tillagd av Julia -->
       <button @click="showResults">Resultat</button>
@@ -224,11 +225,11 @@ const checkAnswer = () => {
 
   // Uppdatera poäng och feedback beroende på om svaret är rätt eller fel
   if (isCorrect) {
-    feedback.value = "✅ Rätt! Bra jobbat :)";
+    feedback.value = "✅ Rätt! Bra jobbat! :)";
     score.value++;
     correctAnswerAudio.play();
   } else {
-    feedback.value = `❌ Fel! Rätt svar är: <strong>${questions.value[currentIndex.value].engelska}</strong>`;
+    feedback.value = `❌ Fel! Rätt svar var: <strong>${questions.value[currentIndex.value].engelska}</strong>`;
     incorrectAnswerAudio.play();
     // Tillagd av Julia 27 feb: Spara felaktiga ord
     errorWords.value.push(currentEntry.svenska);
@@ -321,30 +322,22 @@ p {
   letter-spacing: 0.15em;
 }
 
-.textHighlight {
-  color: #f77f00;
-  text-shadow:
-    -1px -1px 0 #111,
-    1px -1px 0 #111,
-    -1px 1px 0 #111,
-    1px 1px 0 #111;
-}
-
 input {
   width: 80%;
   display: block;
   margin: 20px auto;
-  border: 2px solid #111;
+  border: 3px solid #111;
   padding: 10px;
   font-family: "Arial", "Helvetica", "sans-serif";
   font-size: 1.1rem;
+  letter-spacing: 0.15em;
   background-color: #fff;
   border-radius: 5px;
 }
 
 .correct-input {
-  border: 2px solid #7dffcb;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 1);
+  border: 3px solid #7dffcb;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
   color: #7dffcb;
   text-shadow:
     -1px -1px 0 #111,
@@ -354,7 +347,7 @@ input {
 }
 
 .incorrect-input {
-  border: 2px solid #F5505D;
+  border: 3px solid #F5505D;
   color: #F5505D;
 }
 
