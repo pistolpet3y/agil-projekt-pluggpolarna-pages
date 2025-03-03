@@ -39,7 +39,6 @@ function handleClick() {
   right: 10px;
   z-index: 1;
   width: 100px;
-  cursor: pointer;
 }
 
 #basketball {

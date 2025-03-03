@@ -202,12 +202,17 @@ body {
 
 h2 {
   padding: 5px;
-  color: #111;
+  color: #FFF8E1;
   font-family: 'Baloo';
   font-size: 1.8rem;
   font-style: italic;
   text-align: center;
   letter-spacing: 0.3em;
+  text-shadow:
+    3px 3px 1px #111,
+    -1px 1px 1px #111,
+    1px -1px 1px #111,
+    -1px -1px 1px #111;
 }
 
 h3 {
