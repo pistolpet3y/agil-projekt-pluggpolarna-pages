@@ -4,8 +4,8 @@
     <form @submit.prevent>
       <label for="name">Ditt namn:</label>
       <input id="name" name="name" type="text" placeholder="Namn">
-      <label for="email">Ditt e-mail:</label>
-      <input id="email" name="email" type="email" placeholder="E-mail">
+      <label for="email">Din e-post:</label>
+      <input id="email" name="email" type="email" placeholder="E-post">
       <label for="message">Ditt meddelande:</label>
       <textarea
         id="message"
