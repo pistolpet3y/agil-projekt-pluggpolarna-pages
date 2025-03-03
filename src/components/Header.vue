@@ -81,12 +81,14 @@ textPath {
 #cloud {
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 #cloud img {
   position: absolute;
-  width: 867px;
-  top: -0px;
+  width: 1035px;
+  top: -190px;
+  transform: translateX(-80px);
   z-index: -1;
 }
 </style>

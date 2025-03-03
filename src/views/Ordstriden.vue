@@ -11,15 +11,26 @@
         <p class="styled">Lurifax<br>HP: {{ opponentHP }}</p>
       </div>
     </div>
+    <div class="character-container">
+      <div class="image-container hero-container">
+        <img src="/p-f2.png" alt="hjälte1" class="hero-img" />
+        <div class="shadow"></div> <!-- Skugga under hjältebilden -->
+      </div>
+      <div class="image-container monster-container">
+        <img src="/p-k2.png" alt="monster" class="monster-img" />
+        <div class="shadow"></div> <!-- Skugga under monsterbilden -->
+      </div>
+    </div>
+
+
+
+
     <!-- Om spelet inte är över visas innehållet -->
+    <div id="input-container">
     <div v-if="!gameOver">
       <p>Gissa ordet: <strong>{{ scrambledWord }}</strong></p>
       <!-- Inmatningsfält för svar, binder svaret till userAnswer, @keyup.enter anropar funktionen onEnterPress -->
-      <input
-        v-model="userAnswer"
-        @keyup.enter="onEnterPress"
-        placeholder="Skriv ditt svar här..."
-      />
+        <input v-model="userAnswer" @keyup.enter="onEnterPress" placeholder="Skriv ditt svar här..." />
       <!-- Knappar för att ge upp/skicka svar visas om feedback inte syns -->
       <button v-if="!feedback" @click="surrenderRound">Ge upp</button>
       <button v-if="!feedback" @click="submitAnswer">Attack!</button>
@@ -39,6 +50,7 @@
       <p v-else>👑 Du vann!<br>🥳 Den onda trollen Lurifax är besegrad!</p>
       <button @click="restartGame">Spela igen!</button>
     </div>
+  </div>
   </div>
 </template>
 
@@ -215,10 +227,14 @@ newRound();
 </script>
 
 <style scoped>
+h2 {
+  text-align: center;
+  margin-bottom: -10px;
+}
+
 .ordstriden-container {
   max-width: 100%;
   margin: 0 auto;
-  padding: 20px;
   text-align: center;
 }
 
@@ -243,16 +259,67 @@ p {
   display: flex;
   justify-content: space-around;
   margin: 5px;
+  padding-bottom: 30px;
+  gap: 170px;
 }
 
 .player-health-status .player,
 .player-health-status .opponent {
-  padding: 10px;
+  padding: -41px;
   border-radius: 10px;
   width: 40%;
   font-family: 'Bangers', sans-serif;
   font-size: 1.2em;
 }
+
+.player-health-status p {
+  line-height: 1.2;
+}
+
+.character-container {
+  position: relative;
+  width: 100%;
+}
+
+.image-container {
+  position: absolute;
+  /* Se till att varje container kan hantera skuggan */
+}
+
+.hero-img {
+  width: 180px;
+  height: auto;
+  position: relative;
+  margin-left: -30px;
+  margin-top: -50px;
+}
+
+.monster-img {
+  width: 165px;
+  height: auto;
+  position: relative;
+  margin-left: 220px;
+  margin-top: -80px;
+}
+
+/* Skuggan ska följa varje bild utan att flytta något annat */
+.shadow {
+  position: absolute;
+  width: 100px;
+  /* Justera storleken så den matchar bilden */
+  height: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  bottom: -8px;
+  /* Flytta skuggan lite längre ner */
+  left: 102%;
+  transform: translateX(-140%);
+  /* Ser till att skuggan ligger centrerad */
+  filter: blur(10px);
+  z-index: -1;
+  /* Lägger skuggan bakom bilden */
+}
+
 
 input {
   width: 80%;
@@ -264,6 +331,10 @@ input {
   font-size: 1.1rem;
   background-color: #fff;
   border-radius: 5px;
+}
+
+#input-container {
+  padding-top: 160px;
 }
 
 button {

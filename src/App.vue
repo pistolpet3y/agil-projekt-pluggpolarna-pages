@@ -115,12 +115,10 @@ body {
   font-family: "Arial", "Helvetica", "sans-serif";
   font-size: 1.05rem;
   color: #111;
-  background: linear-gradient(
-    to bottom,
+  background: linear-gradient(to bottom,
     lightblue 0%,
     lightblue 66%,
-    #FFF8E1 100%
-  );
+      #FFF8E1 100%);
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -195,12 +193,17 @@ body {
 
 h2 {
   padding: 5px;
-  color: #111;
+  color: #FFF8E1;
   font-family: 'Baloo';
   font-size: 1.8rem;
   font-style: italic;
   text-align: center;
   letter-spacing: 0.3em;
+  text-shadow:
+    3px 3px 1px #111,
+    -1px 1px 1px #111,
+    1px -1px 1px #111,
+    -1px -1px 1px #111;
 }
 
 p {

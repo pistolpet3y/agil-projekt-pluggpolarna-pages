@@ -8,7 +8,7 @@
       <p class="styled">Poäng: <strong>{{ score }}</strong></p>
       <p>
         Vad är det engelska ordet för:
-        <strong>{{ questions[currentIndex].svenska }}</strong>
+        <strong class="textHighlight">{{ questions[currentIndex].svenska }}</strong>
       </p>
       <!-- Inmatningsfält för svar, binder svaret till userAnswer, @keyup.enter anropar funktionen onEnterPress -->
       <input v-model="userAnswer" type="text" placeholder="Skriv översättningen..." @keyup.enter="onEnterPress" />
@@ -301,6 +301,15 @@ p {
     -1px 1px 0 #111,
     1px 1px 0 #111;
   letter-spacing: 0.15em;
+}
+
+.textHighlight {
+  color: #f77f00;
+  text-shadow:
+    -1px -1px 0 #111,
+    1px -1px 0 #111,
+    -1px 1px 0 #111,
+    1px 1px 0 #111;
 }
 
 input {
