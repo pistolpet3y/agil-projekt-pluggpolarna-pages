@@ -4,7 +4,7 @@
     <header>
       <Header />
       <!-- Navigationscontainer -->
-      <nav class=" navigation-list">
+      <nav class="navigation-list">
         <ul>
           <!-- Vue Router länkar till huvudsidorna -->
           <li><router-link to="/">Hem</router-link></li>
@@ -115,12 +115,10 @@ body {
   font-family: "Arial", "Helvetica", "sans-serif";
   font-size: 1.05rem;
   color: #111;
-  background: linear-gradient(
-    to bottom,
-    lightblue 0%,
-    lightblue 66%,
-    #FFF8E1 100%
-  );
+  background: linear-gradient(to bottom,
+      lightblue 0%,
+      lightblue 66%,
+      #FFF8E1 100%);
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
