@@ -15,12 +15,8 @@
     <div v-if="!gameOver">
       <p>Gissa ordet: <strong>{{ scrambledWord }}</strong></p>
       <!-- Inmatningsfält för svar, binder svaret till userAnswer, @keyup.enter anropar funktionen onEnterPress -->
-      <input
-        v-model="userAnswer"
-        :class="inputClass"
-        @keyup.enter="onEnterPress"
-        placeholder="Skriv ditt svar här..."
-      />
+      <input v-model="userAnswer" :class="inputClass" @keyup.enter="onEnterPress"
+        placeholder="Skriv ditt svar här..." />
       <!-- Knappar för att ge upp/skicka svar visas om feedback inte syns -->
       <button v-if="!feedback" @click="surrenderRound">Ge upp</button>
       <button v-if="!feedback" @click="submitAnswer">Attack!</button>
@@ -61,61 +57,61 @@ const startBattleAudio = new Audio('/audio/start-battle.mp3');
 
 // Definierar en array med 50 ord för spelet
 const vocabularyList = [
-// Djur
-"Katt",
-"Hund",
-"Björn",
-"Räv",
-"Örn",
-"Häst",
-"Får",
-"Säl",
-"Varg",
-"Uggla",
-// Frukt & Grönsaker
-"Äpple",
-"Banan",
-"Apelsin",
-"Morot",
-"Tomat",
-"Päron",
-"Paprika",
-"Vindruva",
-"Potatis",
-"Melon",
-// Klädesplagg
-"Tröja",
-"Byxa",
-"Skjorta",
-"Mössa",
-"Handske",
-"Strumpa",
-"Kappa",
-"Klänning",
-"Sko",
-"Jacka",
-// Fordon
-"Bil",
-"Tåg",
-"Cykel",
-"Båt",
-"Motorcykel",
-"Lastbil",
-"Helikopter",
-"Raket",
-"Buss",
-"Moped",
-// Saker i hemmet
-"Bord",
-"Stol",
-"Säng",
-"Fönster",
-"Soffa",
-"Dator",
-"Gardin",
-"Lampa",
-"Klocka",
-"Spegel"
+  // Djur
+  "Katt",
+  "Hund",
+  "Björn",
+  "Räv",
+  "Örn",
+  "Häst",
+  "Får",
+  "Säl",
+  "Varg",
+  "Uggla",
+  // Frukt & Grönsaker
+  "Äpple",
+  "Banan",
+  "Apelsin",
+  "Morot",
+  "Tomat",
+  "Päron",
+  "Paprika",
+  "Vindruva",
+  "Potatis",
+  "Melon",
+  // Klädesplagg
+  "Tröja",
+  "Byxa",
+  "Skjorta",
+  "Mössa",
+  "Handske",
+  "Strumpa",
+  "Kappa",
+  "Klänning",
+  "Sko",
+  "Jacka",
+  // Fordon
+  "Bil",
+  "Tåg",
+  "Cykel",
+  "Båt",
+  "Motorcykel",
+  "Lastbil",
+  "Helikopter",
+  "Raket",
+  "Buss",
+  "Moped",
+  // Saker i hemmet
+  "Bord",
+  "Stol",
+  "Säng",
+  "Fönster",
+  "Soffa",
+  "Dator",
+  "Gardin",
+  "Lampa",
+  "Klocka",
+  "Spegel"
 ];
 
 // Variabler för att hantera spelarens och motståndarens HP samt skada (vid rätt/fel svar)

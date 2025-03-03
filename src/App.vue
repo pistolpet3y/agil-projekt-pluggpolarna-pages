@@ -14,7 +14,7 @@
             <router-link to="/play">Spel</router-link>
           </li>
           <li @mouseover="playNavBarHoverAudio" @click="playNavBarClickAudio">
-            <router-link to="/quiz">Quiz</router-link>
+            <router-link to="/konto">Konto</router-link>
           </li>
         </ul>
       </nav>

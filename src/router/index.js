@@ -9,6 +9,8 @@ import Ordstriden from '../views/Ordstriden.vue';
 import Parent from '../views/Parent.vue';
 import Results from '../views/Results.vue';
 import Magi from '../views/Magi.vue';
+import Konto from '../views/Konto.vue';
+import OmOss from '../views/OmOss.vue';
 
 // Definierar en array med rutter
 const routes = [
@@ -19,6 +21,8 @@ const routes = [
   { path: '/ordstriden', component: Ordstriden },
   { path: '/results', component: Results },
   { path: '/magi', component: Magi },
+  { path: '/konto', component: Konto },
+  { path: '/om-oss', component: OmOss }
 ];
 
 // Skapar en router-instans
