@@ -4,12 +4,18 @@
     <header>
       <Header />
       <!-- Navigationscontainer -->
-      <nav class=" navigation-list">
+      <nav class="navigation-list">
         <ul>
           <!-- Vue Router länkar till huvudsidorna -->
-          <li><router-link to="/">Hem</router-link></li>
-          <li><router-link to="/play">Spel</router-link></li>
-          <li><router-link to="/quiz">Quiz</router-link></li>
+          <li @mouseover="playNavBarHoverAudio" @click="playNavBarClickAudio">
+            <router-link to="/">Hem</router-link>
+          </li>
+          <li @mouseover="playNavBarHoverAudio" @click="playNavBarClickAudio">
+            <router-link to="/play">Spel</router-link>
+          </li>
+          <li @mouseover="playNavBarHoverAudio" @click="playNavBarClickAudio">
+            <router-link to="/quiz">Quiz</router-link>
+          </li>
         </ul>
       </nav>
     </header>
@@ -25,16 +31,19 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Footer from './components/Footer.vue';
 import Header from './components/Header.vue';
 
-export default {
-  name: 'App',
-  components: {
-    Footer,
-    Header
-  }
+const navBarHoverAudio = new Audio('/audio/nav-bar-hover.mp3');
+const navBarClickAudio = new Audio('/audio/nav-bar-click.mp3');
+
+function playNavBarHoverAudio() {
+  navBarHoverAudio.play();
+};
+
+function playNavBarClickAudio() {
+  navBarClickAudio.play();
 };
 </script>
 
@@ -116,8 +125,8 @@ body {
   font-size: 1.05rem;
   color: #111;
   background: linear-gradient(to bottom,
-    lightblue 0%,
-    lightblue 66%,
+      lightblue 0%,
+      lightblue 66%,
       #FFF8E1 100%);
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -204,6 +213,16 @@ h2 {
     -1px 1px 1px #111,
     1px -1px 1px #111,
     -1px -1px 1px #111;
+}
+
+h3 {
+  padding: 5px;
+  color: #111;
+  font-family: 'Kidprint';
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 0.3em;
 }
 
 p {
