@@ -2,10 +2,11 @@
   <div class="no-blur">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <div class="ordstriden-container">
+      <InfoButton color="orange" infoContent="Ordstriden förklaring" />
       <h2>Ordstriden</h2>
+
       <!-- Container för att visa HP-status -->
       <div class="player-health-status">
-        <!-- Renderar spelare/motståndare och deras HP-status -->
         <div class="player">
           <p class="styled">Hjälte<br>HP: {{ playerHP }}</p>
         </div>
@@ -13,73 +14,45 @@
           <p class="styled">Lurifax<br>HP: {{ opponentHP }}</p>
         </div>
       </div>
+
+      <!-- Karaktärscontainer -->
       <div class="character-container">
         <div class="image-container hero-container">
           <img src="/p-f2.png" alt="hjälte1" class="hero-img" />
-          <div class="shadow"></div> <!-- Skugga under hjältebilden -->
+          <div class="shadow"></div>
         </div>
         <div class="image-container monster-container">
           <img src="/lurifax.png" alt="monster" class="monster-img" />
-          <div class="shadow"></div> <!-- Skugga under monsterbilden -->
+          <div class="shadow"></div>
         </div>
       </div>
-      <div class="ordstriden-container">
-        <InfoButton color="orange" infoContent="Ordstriden förklaring" />
-        <h2>Ordstriden</h2>
-        <!-- Container för att visa HP-status -->
-        <div class="player-health-status">
-          <!-- Renderar spelare/motståndare och deras HP-status -->
-          <div class="player">
-            <p class="styled">Hjälte<br>HP: {{ playerHP }}</p>
-          </div>
-          <div class="opponent">
-            <p class="styled">Lurifax<br>HP: {{ opponentHP }}</p>
-          </div>
-        </div>
-        <div class="character-container">
-          <div class="image-container hero-container">
-            <img src="/p-f2.png" alt="hjälte1" class="hero-img" />
-            <div class="shadow"></div> <!-- Skugga under hjältebilden -->
-          </div>
-          <div class="image-container monster-container">
-            <img src="/p-k2.png" alt="monster" class="monster-img" />
-            <div class="shadow"></div> <!-- Skugga under monsterbilden -->
-          </div>
+
+      <!-- Spelinnehåll -->
+      <div id="input-container">
+        <div v-if="!gameOver">
+          <p>Gissa ordet: <strong>{{ scrambledWord }}</strong></p>
+          <input v-model="userAnswer" :class="inputClass" @keyup.enter="onEnterPress"
+            placeholder="Skriv ditt svar här..." />
+          <button v-if="!feedback" @click="surrenderRound">Ge upp</button>
+          <button v-if="!feedback" @click="submitAnswer">Attack!</button>
+          <p v-if="feedback" v-html="feedback"></p>
+          <button v-if="feedback" @click="nextRound">Nästa runda</button>
         </div>
 
-        <!-- Om spelet inte är över visas innehållet -->
-        <div id="input-container">
-          <div v-if="!gameOver">
-            <p>Gissa ordet: <strong>{{ scrambledWord }}</strong></p>
-            <!-- Inmatningsfält för svar, binder svaret till userAnswer, @keyup.enter anropar funktionen onEnterPress -->
-            <input v-model="userAnswer" :class="inputClass" @keyup.enter="onEnterPress"
-              placeholder="Skriv ditt svar här..." />
-            <!-- Knappar för att ge upp/skicka svar visas om feedback inte syns -->
-            <button v-if="!feedback" @click="surrenderRound">Ge upp</button>
-            <button v-if="!feedback" @click="submitAnswer">Attack!</button>
-
-            <!-- Visar feedback (rätt eller fel) om den finns -->
-            <p v-if="feedback" v-html="feedback"></p>
-
-            <!-- Knapp för nästa runda visas om feedback syns -->
-            <button v-if="feedback" @click="nextRound">Nästa runda</button>
-          </div>
-
-          <!-- Om spelet är över visas innehållet -->
-          <div v-else>
-            <h3 v-if="playerHP === 100">Flawless Victory!</h3>
-            <h3 v-else-if="playerHP > 0">Victory!</h3>
-            <h3 v-else>Game Over!</h3>
-            <!-- Meddelande för vinst/förlust och knapp för att starta om spelet -->
-            <p v-if="playerHP <= 0">😢 Du förlorade!<br>💪 Ge inte upp och försök igen!</p>
-            <p v-else-if="playerHP === 100">👑 Felfri seger!<br>🥳 Den onda trollen Lurifax är totalt krossad!</p>
-            <p v-else>👑 Du vann!<br>🥳 Den onda trollen Lurifax är besegrad!</p>
-            <button @click="restartGame">Spela igen!</button>
-          </div>
+        <div v-else>
+          <h3 v-if="playerHP === 100">Flawless Victory!</h3>
+          <h3 v-else-if="playerHP > 0">Victory!</h3>
+          <h3 v-else>Game Over!</h3>
+          <p v-if="playerHP <= 0">😢 Du förlorade!<br>💪 Ge inte upp och försök igen!</p>
+          <p v-else-if="playerHP === 100">👑 Felfri seger!<br>🥳 Den onda trollen Lurifax är totalt krossad!</p>
+          <p v-else>👑 Du vann!<br>🥳 Den onda trollen Lurifax är besegrad!</p>
+          <button @click="restartGame">Spela igen!</button>
         </div>
       </div>
     </div>
+  </div>
 </template>
+
 
 <script setup>
 // Composition API
