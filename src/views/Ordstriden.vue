@@ -2,8 +2,12 @@
   <div class="no-blur">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <div class="ordstriden-container">
-      <InfoButton color="orange" infoContent="Ordstriden förklaring" />
-      <h2>Ordstriden</h2>
+      <div class="header-container">
+        <h2>Ordstriden</h2>
+        <InfoButton color="orange" infoContent="Ordstriden förklaring" id="info" />
+        <div id="info-shadow"></div>
+      </div>
+
 
       <!-- Container för att visa HP-status -->
       <div class="player-health-status">
@@ -263,9 +267,39 @@ newRound();
 </script>
 
 <style scoped>
+.header-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 h2 {
+  margin: 0 auto;
+  text-align: center;
   text-align: center;
   margin-bottom: -10px;
+}
+
+#info {
+  position: absolute;
+  right: 30px;
+  transform: translateY(-20%);
+  display: inline-block;
+}
+
+#info-shadow {
+  position: absolute;
+  width: 30px;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  bottom: 9px;
+  left: 94.5%;
+  transform: translateX(-130%);
+  filter: blur(4px);
+  z-index: -1;
 }
 
 .ordstriden-container {
@@ -409,6 +443,46 @@ button:hover {
 
 @media only screen and (max-width: 480px) {
 
+  .header-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  h2 {
+    margin: 0 auto;
+    text-align: center;
+    text-align: center;
+  }
+
+  #info {
+    position: absolute;
+    right: 60px;
+    transform: translateY(-80%);
+    display: inline-block;
+
+  }
+
+  #info img {
+    width: 100%;
+    height: 100%;
+  }
+
+  #info-shadow {
+    position: absolute;
+    width: 18px;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    bottom: 29px;
+    left: 85.4%;
+    transform: translateX(-135%);
+    filter: blur(2.5px);
+    z-index: -1;
+  }
+
   .no-blur .blur-enter-active,
   .no-blur .blur-leave-active {
     transition: none !important;
@@ -423,7 +497,7 @@ button:hover {
   h2 {
     font-size: 1.5rem;
     padding-top: 0px;
-    margin-top: -14px !important;
+    margin-top: -15px !important;
     margin-bottom: 10px;
   }
 

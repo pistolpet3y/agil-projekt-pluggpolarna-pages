@@ -78,7 +78,6 @@ footer p {
   width: 375px;
   height: 10px;
   z-index: 1;
-  /* ligger över .footer-span */
   background: linear-gradient(90deg, rgba(76, 181, 245, 1) 10%, rgba(247, 127, 0, 1) 28%, rgba(255, 153, 204, 1) 57%, rgba(125, 255, 203, 1) 94%);
 }
 
@@ -87,10 +86,16 @@ footer p {
   left: 0;
   bottom: 0;
   width: 100vw;
-  /* sträcker sig över hela viewporten */
   height: 10px;
   z-index: -1;
-  /* ligger bakom .footer-line */
   background: linear-gradient(90deg, rgba(76, 181, 245, 1) 50%, rgba(125, 255, 203, 1) 50%);
+}
+
+@media screen and (max-width: 480px) {
+
+  footer {
+    bottom: 7px;
+  }
+
 }
 </style>

@@ -49,14 +49,16 @@ const modalClass = computed(() => `modal modal-${props.color}`);
 
 <style scoped>
 .info-button {
-  width: 50px;
-  height: 50px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
   padding: 0;
   border: none;
   background: none;
   border-radius: 50%;
   cursor: pointer;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .info-button img {
@@ -97,5 +99,12 @@ const modalClass = computed(() => `modal modal-${props.color}`);
   right: 8px;
   font-size: 1.8em;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 480px) {
+  .info-button {
+    width: 22px;
+    height: 22px;
+  }
 }
 </style>
