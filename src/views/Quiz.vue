@@ -1,5 +1,9 @@
 <template>
   <div class="quiz-container">
+    <InfoButton
+      color="green"
+      infoContent="Glosquiz förklaring"
+    />
     <h2>Glosquiz</h2>
     <!-- Om quiz:et inte är avslutat visas innehållet -->
     <div v-if="!quizFinished">
@@ -51,6 +55,8 @@ import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 // Importera quizStore, tillagd av Julia 24 feb
 import { useQuizStore } from '../stores/quizStore';
+
+import InfoButton from '../components/InfoButton.vue';
 
 
 // Använd router för att navigera till resultat-sidan, tillagd av Julia 24 feb

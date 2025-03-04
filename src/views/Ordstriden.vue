@@ -1,5 +1,9 @@
 <template>
   <div class="ordstriden-container">
+    <InfoButton
+      color="orange"
+      infoContent="Ordstriden förklaring"
+    />
     <h2>Ordstriden</h2>
     <!-- Container för att visa HP-status -->
     <div class="player-health-status">
@@ -60,6 +64,7 @@
 // Importerar ref från Vue för att skapa reaktiva variabler
 import confetti from 'canvas-confetti';
 import { ref, computed, watch } from 'vue';
+import InfoButton from '../components/InfoButton.vue';
 
 // Ljudfiler för olika knappar och händelser
 const correctAnswerAudio = new Audio('/audio/battle-correct-answer.mp3');
