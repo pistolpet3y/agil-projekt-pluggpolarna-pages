@@ -14,30 +14,6 @@
   </div>
 </template>
 
-<style>
-.text-content {
-  flex: 1;
-  text-align: left;
-  margin-left: 40px;
-  margin-right: 10px;
-}
-
-.content-wrapper {
-  margin-top: 80px;
-  position: relative;
-}
-
-.character-image {
-  z-index: 10;
-  margin-top: 40px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-</style>
-
-
-
 <script setup>
 
 /* script för att slumpa fram en bild */
@@ -73,3 +49,26 @@ watch(route, () => {
 
 
 </script>
+
+
+<style>
+.text-content {
+  flex: 1;
+  text-align: left;
+  margin-left: 40px;
+  margin-right: 10px;
+}
+
+.content-wrapper {
+  margin-top: 80px;
+  position: relative;
+}
+
+.character-image {
+  z-index: 10;
+  margin-top: 40px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+</style>

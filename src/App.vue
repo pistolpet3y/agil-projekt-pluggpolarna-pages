@@ -2,6 +2,7 @@
   <!-- Rot-element för applikationen -->
   <div id="app">
     <header>
+      <!---->
       <Header />
       <!-- Navigationscontainer -->
       <nav class="navigation-list">
@@ -26,7 +27,7 @@
         <router-view />
       </transition>
     </main>
-
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <Footer />
   </div>
 </template>
@@ -239,5 +240,52 @@ p {
 
 .text-link:hover {
   color: blue;
+}
+
+@media only screen and (max-width: 480px) {
+  .character-image {
+    display: none;
+  }
+
+  .navigation-list li a {
+    padding: 10px;
+  }
+
+  .navigation-list ul {
+    display: flex;
+    justify-content: center;
+    gap: 1px;
+  }
+
+  .navigation-list li {
+    width: 100px;
+    margin: 0 4px;
+  }
+
+
+  #app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-span {
+    display: hidden;
+  }
+
+  .footer-line {
+    display: flex;
+  }
+
+  .text-content {
+    flex: 1;
+    text-align: left;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+  }
+
+  .content-wrapper {
+    margin-top: 20px !important;
+  }
 }
 </style>

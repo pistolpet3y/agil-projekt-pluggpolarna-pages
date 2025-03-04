@@ -82,6 +82,7 @@ textPath {
   display: flex;
   justify-content: center;
   position: relative;
+  width: 100%;
 }
 
 #cloud img {
@@ -90,5 +91,44 @@ textPath {
   top: -190px;
   transform: translateX(-80px);
   z-index: -1;
+}
+
+@media only screen and (max-width: 480px) {
+  textPath {
+    font-size: 3.2rem;
+    letter-spacing: 0.10em;
+  }
+
+
+  #tagLine {
+    font-size: 1.4rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 0px;
+    padding: 0 10px;
+  }
+
+  #cloud {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 700px;
+    height: 250px;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  #cloud img {
+    width: 700px;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: -125px;
+  }
+
+  header {
+    padding: 10px 0;
+    text-align: center;
+  }
 }
 </style>

@@ -1,55 +1,58 @@
 <template>
-  <div class="ordstriden-container">
-    <h2>Ordstriden</h2>
-    <!-- Container för att visa HP-status -->
-    <div class="player-health-status">
-      <!-- Renderar spelare/motståndare och deras HP-status -->
-      <div class="player">
-        <p class="styled">Hjälte<br>HP: {{ playerHP }}</p>
+  <div class="no-blur">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <div class="ordstriden-container">
+      <h2>Ordstriden</h2>
+      <!-- Container för att visa HP-status -->
+      <div class="player-health-status">
+        <!-- Renderar spelare/motståndare och deras HP-status -->
+        <div class="player">
+          <p class="styled">Hjälte<br>HP: {{ playerHP }}</p>
+        </div>
+        <div class="opponent">
+          <p class="styled">Lurifax<br>HP: {{ opponentHP }}</p>
+        </div>
       </div>
-      <div class="opponent">
-        <p class="styled">Lurifax<br>HP: {{ opponentHP }}</p>
-      </div>
-    </div>
-    <div class="character-container">
-      <div class="image-container hero-container">
-        <img src="/p-f2.png" alt="hjälte1" class="hero-img" />
-        <div class="shadow"></div> <!-- Skugga under hjältebilden -->
-      </div>
-      <div class="image-container monster-container">
-        <img src="/p-k2.png" alt="monster" class="monster-img" />
-        <div class="shadow"></div> <!-- Skugga under monsterbilden -->
-      </div>
-    </div>
-
-    <!-- Om spelet inte är över visas innehållet -->
-    <div id="input-container">
-      <div v-if="!gameOver">
-        <p>Gissa ordet: <strong>{{ scrambledWord }}</strong></p>
-        <!-- Inmatningsfält för svar, binder svaret till userAnswer, @keyup.enter anropar funktionen onEnterPress -->
-        <input v-model="userAnswer" :class="inputClass" @keyup.enter="onEnterPress"
-          placeholder="Skriv ditt svar här..." />
-        <!-- Knappar för att ge upp/skicka svar visas om feedback inte syns -->
-        <button v-if="!feedback" @click="surrenderRound">Ge upp</button>
-        <button v-if="!feedback" @click="submitAnswer">Attack!</button>
-
-        <!-- Visar feedback (rätt eller fel) om den finns -->
-        <p v-if="feedback" v-html="feedback"></p>
-
-        <!-- Knapp för nästa runda visas om feedback syns -->
-        <button v-if="feedback" @click="nextRound">Nästa runda</button>
+      <div class="character-container">
+        <div class="image-container hero-container">
+          <img src="/p-f2.png" alt="hjälte1" class="hero-img" />
+          <div class="shadow"></div> <!-- Skugga under hjältebilden -->
+        </div>
+        <div class="image-container monster-container">
+          <img src="/lurifax.png" alt="monster" class="monster-img" />
+          <div class="shadow"></div> <!-- Skugga under monsterbilden -->
+        </div>
       </div>
 
-      <!-- Om spelet är över visas innehållet -->
-      <div v-else>
-        <h3 v-if="playerHP === 100">Flawless Victory!</h3>
-        <h3 v-else-if="playerHP > 0">Victory!</h3>
-        <h3 v-else>Game Over!</h3>
-        <!-- Meddelande för vinst/förlust och knapp för att starta om spelet -->
-        <p v-if="playerHP <= 0">😢 Du förlorade!<br>💪 Ge inte upp och försök igen!</p>
-        <p v-else-if="playerHP === 100">👑 Felfri seger!<br>🥳 Den onda trollen Lurifax är totalt krossad!</p>
-        <p v-else>👑 Du vann!<br>🥳 Den onda trollen Lurifax är besegrad!</p>
-        <button @click="restartGame">Spela igen!</button>
+      <!-- Om spelet inte är över visas innehållet -->
+      <div id="input-container">
+        <div v-if="!gameOver">
+          <p>Gissa ordet: <strong>{{ scrambledWord }}</strong></p>
+          <!-- Inmatningsfält för svar, binder svaret till userAnswer, @keyup.enter anropar funktionen onEnterPress -->
+          <input v-model="userAnswer" :class="inputClass" @keyup.enter="onEnterPress"
+            placeholder="Skriv ditt svar här..." />
+          <!-- Knappar för att ge upp/skicka svar visas om feedback inte syns -->
+          <button v-if="!feedback" @click="surrenderRound">Ge upp</button>
+          <button v-if="!feedback" @click="submitAnswer">Attack!</button>
+
+          <!-- Visar feedback (rätt eller fel) om den finns -->
+          <p v-if="feedback" v-html="feedback"></p>
+
+          <!-- Knapp för nästa runda visas om feedback syns -->
+          <button v-if="feedback" @click="nextRound">Nästa runda</button>
+        </div>
+
+        <!-- Om spelet är över visas innehållet -->
+        <div v-else>
+          <h3 v-if="playerHP === 100">Flawless Victory!</h3>
+          <h3 v-else-if="playerHP > 0">Victory!</h3>
+          <h3 v-else>Game Over!</h3>
+          <!-- Meddelande för vinst/förlust och knapp för att starta om spelet -->
+          <p v-if="playerHP <= 0">😢 Du förlorade!<br>💪 Ge inte upp och försök igen!</p>
+          <p v-else-if="playerHP === 100">👑 Felfri seger!<br>🥳 Den onda trollen Lurifax är totalt krossad!</p>
+          <p v-else>👑 Du vann!<br>🥳 Den onda trollen Lurifax är besegrad!</p>
+          <button @click="restartGame">Spela igen!</button>
+        </div>
       </div>
     </div>
   </div>
@@ -319,14 +322,13 @@ p {
 
 .image-container {
   position: absolute;
-  /* Se till att varje container kan hantera skuggan */
 }
 
 .hero-img {
   width: 180px;
   height: auto;
   position: relative;
-  margin-left: -30px;
+  margin-left: -40px;
   margin-top: -50px;
 }
 
@@ -334,26 +336,22 @@ p {
   width: 165px;
   height: auto;
   position: relative;
-  margin-left: 220px;
-  margin-top: -80px;
+  margin-left: 241px;
+  margin-top: -0px;
 }
 
-/* Skuggan ska följa varje bild utan att flytta något annat */
+
 .shadow {
   position: absolute;
   width: 100px;
-  /* Justera storleken så den matchar bilden */
   height: 15px;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 50%;
   bottom: -8px;
-  /* Flytta skuggan lite längre ner */
   left: 102%;
   transform: translateX(-140%);
-  /* Ser till att skuggan ligger centrerad */
   filter: blur(10px);
   z-index: -1;
-  /* Lägger skuggan bakom bilden */
 }
 
 
@@ -410,5 +408,80 @@ button {
 
 button:hover {
   background-color: #ff99cc;
+}
+
+@media only screen and (max-width: 480px) {
+
+  .no-blur .blur-enter-active,
+  .no-blur .blur-leave-active {
+    transition: none !important;
+  }
+
+  .no-blur .blur-enter-from,
+  .no-blur .blur-leave-to {
+    filter: none !important;
+    opacity: 1;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    padding-top: 0px;
+    margin-top: -14px !important;
+    margin-bottom: 10px;
+  }
+
+  .hero-img {
+    width: 110px;
+    margin-left: 20px;
+    margin-top: -30px;
+  }
+
+  .monster-img {
+    width: 100px;
+    margin-left: 240px;
+    padding-top: 18px;
+    margin-top: -10px;
+  }
+
+  .player-health-status {
+    gap: 50px;
+  }
+
+  .player-health-status .player,
+  .player-health-status .opponent {
+    font-size: 1em;
+    width: 30%;
+  }
+
+  .character-container {
+    width: 100%;
+    margin-top: -20px;
+    margin-bottom: -33px !important;
+  }
+
+  .image-container {
+    position: absolute;
+  }
+
+  .shadow {
+    width: 50px;
+    height: 10px;
+    bottom: -5px;
+    left: 105%;
+    transform: translateX(-185%);
+  }
+
+  input {
+    width: 75%;
+  }
+
+  button {
+    padding: 8px 13px;
+  }
+
+  p {
+    font-size: 1.1rem !important;
+    margin-top: 0 !important;
+  }
 }
 </style>

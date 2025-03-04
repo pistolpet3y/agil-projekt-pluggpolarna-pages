@@ -1,35 +1,44 @@
 <template>
-  <img ref="basketball" src="/ball.png" alt="Basketboll" id="basketball" />
-  <img ref="dino" src="/dino.png" alt="Dino" id="dino" @click="handleClick" />
+  <img v-if="isVisible" ref="basketball" src="/ball.png" alt="Basketboll" id="basketball" />
+  <img v-if="isVisible" ref="dino" src="/dino.png" alt="Dino" id="dino" @click="handleClick" />
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const basketball = ref(null);
 const clickCount = ref(0);
 const targetClicks = 3;
+const isVisible = ref(window.innerWidth > 480);
 
 function handleClick() {
   // Kontrollera att det verkligen är ett klick
   if (basketball.value) {
     clickCount.value++;
 
-    // Ta bort tidigare animationer
     basketball.value.classList.remove('bounce', 'drop');
-    // Tvinga fram en reflow så att animationen kan starta om
     void basketball.value.offsetWidth;
 
-    // Bestäm vilken animation som ska köras
     if (clickCount.value < targetClicks) {
       basketball.value.classList.add('bounce');
     } else {
       basketball.value.classList.add('drop');
-      // Återställ räknaren för att animationen ska kunna upprepas
       clickCount.value = 0;
     }
   }
 }
+
+const handleResize = () => {
+  isVisible.value = window.innerWidth > 480;
+};
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize);
+});
 </script>
 
 <style scoped>
@@ -141,6 +150,14 @@ function handleClick() {
 
   100% {
     transform: translateY(0);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+
+  #dino,
+  #basketball {
+    display: none !important;
   }
 }
 </style>
