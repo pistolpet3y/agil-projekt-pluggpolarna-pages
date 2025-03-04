@@ -1,5 +1,9 @@
 <template>
   <div class="mattemagi-container">
+    <InfoButton
+      color="blue"
+      infoContent="Mattemagi förklaring"
+    />
     <h2>Mattemagi</h2>
     <div v-if="!gameOver">
       <p class="styled">Uppgift {{ questionCount + 1 }} av {{ totalQuestions }}</p>
@@ -26,6 +30,7 @@
 // Importerar ref från Vue för att skapa reaktiva variabler
 import { ref, watch } from 'vue';
 import confetti from 'canvas-confetti';
+import InfoButton from '../components/InfoButton.vue';
 
 const tableSize = ref(10);
 const question = ref({ a: 0, b: 0 });
