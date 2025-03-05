@@ -7,18 +7,24 @@
       <!-- Navigationscontainer -->
       <nav class="navigation-list">
         <ul>
-          <!-- Vue Router länkar till huvudsidorna -->
           <li @mouseover="playNavBarHoverAudio" @click="playNavBarClickAudio">
-            <router-link to="/">Hem</router-link>
+            <router-link to="/" class="button">Hem</router-link>
+            <div id="blue-mark"></div>
           </li>
+
           <li @mouseover="playNavBarHoverAudio" @click="playNavBarClickAudio">
-            <router-link to="/play">Spel</router-link>
+            <router-link to="/play" class="button">Spel</router-link>
+            <div id="orange-mark"></div>
           </li>
+
           <li @mouseover="playNavBarHoverAudio" @click="playNavBarClickAudio">
-            <router-link to="/konto">Konto</router-link>
+            <router-link to="/konto" class="button">Info</router-link>
+            <div id="pink-mark"></div>
           </li>
+
         </ul>
       </nav>
+
     </header>
 
     <!-- Här renderas de vyer som definieras av Vue Router med en "blur" övergång -->
@@ -53,7 +59,6 @@ function playNavBarClickAudio() {
 svg {
   margin-top: clamp(20px, 15vw, 120px);
 }
-
 
 /*
 #4cb5f5 – Sky Blue
@@ -133,74 +138,6 @@ body {
   background-attachment: fixed;
 }
 
-.navigation-list ul {
-  margin-bottom: 60px;
-  display: flex;
-  padding: 0;
-  list-style-type: none;
-  font-family: 'Bangers';
-  font-size: 1.25em;
-  letter-spacing: 0.3em;
-}
-
-.navigation-list li {
-  width: 110px;
-  margin: auto;
-  border: 3px solid #111;
-  background-color: #7dffcb;
-  color: #fff;
-  font-size: 20px;
-  border-radius: 10px;
-  position: relative;
-  /*box-shadow: 5px 5px 5px #a3ffe0;*/
-  transition: all 0.3s ease;
-}
-
-.navigation-list li::after {
-  content: "";
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 10px;
-  background-image: url('/underline.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-}
-
-.navigation-list li:hover::after {
-  opacity: 1;
-}
-
-.navigation-list li:hover {
-  box-shadow: 0px 0px 30px #f77f00;
-  top: 4px;
-}
-
-.navigation-list li:active {
-  box-shadow: none;
-  top: 5px;
-}
-
-.navigation-list li a {
-  display: block;
-  padding: 12px;
-  font-weight: bold;
-  text-align: center;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: #111;
-  transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
-}
-
-.navigation-list li a:hover {
-  color: #f77f00;
-  text-shadow: 2px 2px 1px rgba(0, 0, 0, 1);
-}
-
 h2 {
   padding: 5px;
   color: #FFF8E1;
@@ -242,19 +179,161 @@ p {
   color: blue;
 }
 
+.navigation-list li:nth-child(1) .button {
+  background-color: #4cb5f5;
+}
+
+.navigation-list li:hover #blue-mark {
+  display: block;
+}
+
+.navigation-list li:nth-child(2) .button {
+  background-color: #f77f00;
+}
+
+.navigation-list li:nth-child(3) .button {
+  background-color: #ff99cc;
+}
+
+.navigation-list {
+  position: relative;
+}
+
+.navigation-list li {
+  position: relative;
+  list-style: none;
+}
+
+#blue-mark,
+#orange-mark,
+#pink-mark {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 83px;
+  height: 11px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: none;
+}
+
+.navigation-list li:hover #blue-mark {
+  display: block;
+  background-image: url('/blue-line.png');
+}
+
+.navigation-list li:hover #orange-mark {
+  display: block;
+  background-image: url('/orange-line.png');
+}
+
+.navigation-list li:hover #pink-mark {
+  display: block;
+  background-image: url('/pink-line.png');
+}
+
+ul li:nth-child(1) {
+  transform: rotate(-2deg);
+  transition: transform 0.2s ease-in-out;
+}
+
+ul li:nth-child(1):hover {
+  transform: rotate(-4deg);
+}
+
+ul li:nth-child(3) {
+  transform: rotate(2deg);
+}
+
+ul li:nth-child(3):hover {
+  transform: rotate(4deg);
+  transition: transform 0.2s ease-in-out;
+}
+
+.button {
+  border: 0 solid #E5E7EB;
+  box-sizing: border-box;
+  color: #000000;
+  padding: 7px 20px;
+  display: flex;
+  font-family: bangers, Arial, Helvetica, sans-serif;
+  font-size: 1.9rem;
+  justify-content: center;
+  text-align: center;
+  min-width: 100px;
+  min-height: 45px;
+  cursor: pointer;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button:focus {
+  outline: 0;
+}
+
+.button:after {
+  content: '';
+  position: absolute;
+  border: 1px solid #000000;
+  bottom: 4px;
+  left: 4px;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+  box-shadow: 2px -2px 1px #111,
+    -1px 1px 1px #111,
+    1px -1px 1px #111,
+    -1px -1px 1px #111;
+}
+
+.button:hover:after {
+  bottom: 2px;
+  left: 2px;
+}
+
+.navigation-list li .button:hover {
+  background-color: #7dffcb;
+}
+
+.navigation-list li .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  max-width: 200px;
+  text-decoration: none;
+}
+
+.navigation-list ul {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.navigation-list li {
+  list-style: none;
+}
+
+
 @media only screen and (max-width: 480px) {
+
   .character-image {
     display: none;
   }
 
   .navigation-list li a {
-    padding: 10px;
+    padding: 7px;
+    font-size: 1.5rem;
   }
 
   .navigation-list ul {
     display: flex;
     justify-content: center;
-    gap: 1px;
+    gap: 6px;
   }
 
   .navigation-list li {
