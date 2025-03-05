@@ -1,13 +1,13 @@
 <template>
   <div class="button-container">
     <div class="button-wrapper">
-      <router-link to="/quiz">
+      <router-link to="/glosquiz">
         <button class="glosquiz" @mouseover="playHoverAudio" @click="playStartQuizAudio">Glosquiz!</button>
       </router-link>
       <p class="green">Träna dina glosor på ett roligt sätt!</p>
     </div>
     <div class="button-wrapper">
-      <router-link to="/magi">
+      <router-link to="/mattemagi">
         <button class="mattemagi" @mouseover="playHoverAudio" @click="playStartMathAudio">Mattemagi!</button>
       </router-link>
       <p class="blue">Ett magiskt sätt att lära dig multiplikation!</p>
@@ -107,6 +107,7 @@ p {
 button {
   border: 3px solid #111;
   padding: 10px 20px;
+  width: 150px;
   color: #111;
   font-size: 1.2em;
   font-family: 'Bangers', sans-serif;
