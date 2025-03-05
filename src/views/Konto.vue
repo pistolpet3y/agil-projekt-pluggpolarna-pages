@@ -3,10 +3,10 @@
     <div class="button-container">
       <div class="button-wrapper">
         <router-link to="/parent">
-          <button class="button-green" @mouseover="playHoverAudio" @click="playStartQuizAudio">Hantera egna
+          <button class="button-green" @mouseover="playHoverAudio" @click="playStartQuizAudio">Egna
             glosor</button>
         </router-link>
-        <p class="green">Lägg till egna och redigera dina egna glosor</p>
+        <p class="green">Redigera dina egna glosor</p>
       </div>
       <div class="button-wrapper">
         <router-link to='/kontakt'>

@@ -1,22 +1,31 @@
 <template>
   <div class="mattemagi-container">
-    <h2>Mattemagi</h2>
-    <InfoButton color="blue" :infoContent="`Välkommen till Mattemagi, där din mattehjärna får briljera!<br><br>I detta spel ska du lösa spännande multiplikationsproblem. Varje rätt svar ger dig poäng och tar dig ett steg närmare till att bli en riktig mattemagiker.<br><br>Utmana dig själv, ha kul med siffror och visa vad du går för! Lycka till! 🧙‍♂️✨`" id="info" />
+    <div class="header-container">
+      <h2>Mattemagi</h2>
+      <InfoButton color="blue"
+        :infoContent="`Välkommen till Mattemagi, där din mattehjärna får briljera!<br><br>I detta spel ska du lösa spännande multiplikationsproblem. Varje rätt svar ger dig poäng och tar dig ett steg närmare till att bli en riktig mattemagiker.<br><br>Utmana dig själv, ha kul med siffror och visa vad du går för! Lycka till! 🧙‍♂️✨`"
+        id="info" />
+    </div>
     <div v-if="!gameOver">
       <p class="styled">Uppgift {{ questionCount + 1 }} av {{ totalQuestions }}</p>
       <p class="styled">Poäng: {{ score }}</p>
       <p>Beräkna: <strong>{{ question.a }} x {{ question.b }}</strong></p>
       <div class="options">
-        <button v-for="(option, index) in options" :key="index" :class="{ selected: selectedOption === option }" :disabled="selectedOption !== null" @click="checkAnswer(option)">
+        <button v-for="(option, index) in options" :key="index" :class="{ selected: selectedOption === option }"
+          :disabled="selectedOption !== null" @click="checkAnswer(option)">
           {{ option }}
         </button>
       </div>
-      <p v-if="feedback" class="feedback" v-html="feedback"></p>
-      <button @click="nextQuestion">Nästa fråga</button>
+      <div class="feedback-container">
+        <p v-if="feedback" class="feedback" v-html="feedback"></p>
+      </div>
+
+      <button @click="nextQuestion" id="next-question">Nästa fråga</button>
     </div>
     <div v-else>
       <h3>Ditt Resultat</h3>
-      <p v-if="score === totalQuestions"><strong>{{ score }}</strong> av <strong>{{ totalQuestions }}</strong> rätt!<br>Du är en äkta mattemagiker! 🧙‍♂️</p>
+      <p v-if="score === totalQuestions"><strong>{{ score }}</strong> av <strong>{{ totalQuestions }}</strong>
+        rätt!<br>Du är en äkta mattemagiker! 🧙‍♂️</p>
       <p v-else><strong>{{ score }}</strong> av <strong>{{ totalQuestions }}</strong> rätt!</p>
       <button @click="restartGame">Spela igen!</button>
     </div>
@@ -99,7 +108,7 @@ function nextQuestion() {
 }
 
 // Confetti för perfekt resultat
-watch (gameOver, (value) => {
+watch(gameOver, (value) => {
   if (value && score.value === totalQuestions.value) {
     confetti({
       particleCount: 300,
@@ -123,6 +132,14 @@ newQuestion();
 </script>
 
 <style scoped>
+.header-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .mattemagi-container {
   max-width: 100%;
   margin: 0 auto;
@@ -197,5 +214,73 @@ button {
 
 button:hover {
   background-color: #ff99cc;
+}
+
+@media only screen and (max-width: 480px) {
+  .header-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  #info {
+    position: absolute;
+    right: 65px;
+    transform: translateY(-70%);
+    display: inline-block;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-top: -15px !important;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.1rem !important;
+    margin-top: 4px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .mattemagi-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 0;
+  }
+
+  .feedback-container {
+    min-height: 35px;
+    /* Se till att den alltid tar plats */
+  }
+
+  button {
+    margin: 10px 3px;
+    border: 3px solid #111;
+    padding: 8px 13px;
+    font-size: 1.1em;
+    margin-bottom: -5px;
+  }
+
+  #next-question {
+    margin-top: 20px;
+  }
+
+  .options button {
+    width: 80px;
+    height: 80px;
+    font-size: 1.8em;
+    border-radius: 8px;
+  }
+
+  .options {
+    grid-template-columns: repeat(3, 80px);
+    grid-auto-rows: 80px;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
 }
 </style>
