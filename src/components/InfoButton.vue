@@ -73,6 +73,7 @@ const modalClass = computed(() => `modal modal-${props.color}`);
   cursor: pointer;
   overflow: hidden;
   flex-shrink: 0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
 }
 
 .info-button img {

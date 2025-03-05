@@ -1,10 +1,7 @@
 <template>
   <div class="mattemagi-container">
-    <InfoButton
-      color="blue"
-      infoContent="Mattemagi förklaring"
-    />
     <h2>Mattemagi</h2>
+    <InfoButton color="blue" :infoContent="`Välkommen till Mattemagi, där din mattehjärna får briljera!<br><br>I detta spel ska du lösa spännande multiplikationsproblem. Varje rätt svar ger dig poäng och tar dig ett steg närmare till att bli en riktig mattemagiker.<br><br>Utmana dig själv, ha kul med siffror och visa vad du går för! Lycka till! 🧙‍♂️✨`" id="info" />
     <div v-if="!gameOver">
       <p class="styled">Uppgift {{ questionCount + 1 }} av {{ totalQuestions }}</p>
       <p class="styled">Poäng: {{ score }}</p>

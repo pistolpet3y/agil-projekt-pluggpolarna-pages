@@ -1,10 +1,7 @@
 <template>
   <div class="quiz-container">
-    <InfoButton
-      color="green"
-      infoContent="Glosquiz förklaring"
-    />
     <h2>Glosquiz</h2>
+    <InfoButton color="green" :infoContent="`Välkommen till vårt Glosquiz där du får öva på att skriva engelska ord.<br><br>Varje rätt svar ger dig poäng och visar hur duktig du är på engelska!<br><br>Tänk efter, skriv in din översättning och ha kul medan du lär dig nya ord! Lycka till! 🙌`" id="info" />
     <!-- Om quiz:et inte är avslutat visas innehållet -->
     <div v-if="!quizFinished">
       <!-- Renderar aktuell fråga, poäng och quizfrågan -->
