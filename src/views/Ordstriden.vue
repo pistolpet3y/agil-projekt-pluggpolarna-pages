@@ -4,7 +4,7 @@
     <div class="ordstriden-container">
       <div class="header-container">
         <h2>Ordstriden</h2>
-        <InfoButton color="orange" infoContent="Ordstriden förklaring" id="info" />
+        <InfoButton color="orange" :infoContent="`I det här spelet hjälper du till att besegra det busiga trollet Lurifax. Din uppgift är att pussla ihop bokstäver och klura ut ordet. Varje gång du lyckas, tappar trollet lite av sin kraft.<br><br>Så samla modet, använd din klurighet och hjälp oss att besegra Lurifax! Lycka till! 🙌`" id="info" />
         <div id="info-shadow"></div>
       </div>
 

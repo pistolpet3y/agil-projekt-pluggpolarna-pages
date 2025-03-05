@@ -3,12 +3,16 @@
     <button :class="buttonClass" @click="openInfo" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
       <img :src="currentSrc" alt="Info button" />
     </button>
-    <div v-if="showInfo" :class="modalClass">
-      <div class="modal-content">
-        <span class="close" @click="openInfo">&times;</span>
-        <p>{{ infoContent }}</p>
-      </div>
-    </div>
+    <teleport to="body">
+      <transition name="modal">
+        <div v-if="showInfo" :class="modalClass">
+          <div class="modal-content">
+            <span class="close" @click="openInfo">&times;</span>
+            <p v-html="infoContent"></p>
+          </div>
+        </div>
+      </transition>
+    </teleport>
   </div>
 </template>
 
@@ -48,6 +52,16 @@ const modalClass = computed(() => `modal modal-${props.color}`);
 </script>
 
 <style scoped>
+.modal-enter-active, .modal-leave-active {
+  transition: opacity 0.5s ease;
+}
+.modal-enter-from, .modal-leave-to {
+  opacity: 0;
+}
+.modal-enter-to, .modal-leave-from {
+  opacity: 1;
+}
+
 .info-button {
   display: inline-block;
   width: 30px;
