@@ -1,25 +1,35 @@
 <template>
   <div class="kontakt-container">
     <h2>Kontakt</h2>
-    <form @submit.prevent>
+    <form @submit.prevent="saveFormData">
       <label for="name">Ditt namn:</label>
-      <input id="name" name="name" type="text" placeholder="Namn">
+      <input id="name" v-model="formData.name" name="name" type="text" placeholder="Namn">
       <label for="email">Din e-post:</label>
-      <input id="email" name="email" type="email" placeholder="E-post">
+      <input id="email" v-model="formData.email" name="email" type="email" placeholder="E-post">
       <label for="message">Ditt meddelande:</label>
-      <textarea
-        id="message"
-        name="message"
-        placeholder="Skriv ditt meddelande här."
-        cols="50"
-        rows="5"
-      ></textarea>
+      <textarea id="message" v-model="formData.message" name="message" placeholder="Skriv ditt meddelande här."
+        cols="50" rows="5"></textarea>
       <button>Skicka!</button>
     </form>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+// ref-objekt för att hantera formulärdata
+const formData = ref({
+  name: '',
+  email: '',
+  message: ''
+});
+
+// Metod för att spara data i localStorage
+const saveFormData = () => {
+  localStorage.setItem('contactFormData', JSON.stringify(formData.value));
+  alert('Ditt meddelande har skickats, vi återkommer till dig så snart som möjligt!');
+};
+
+
 </script>
 
 <style scoped>
