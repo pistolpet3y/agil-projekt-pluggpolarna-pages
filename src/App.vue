@@ -18,7 +18,7 @@
           </li>
 
           <li @mouseover="playNavBarHoverAudio" @click="playNavBarClickAudio">
-            <router-link to="/konto" class="button">Info</router-link>
+            <router-link to="/info" class="button">Info</router-link>
             <div id="pink-mark"></div>
           </li>
 
