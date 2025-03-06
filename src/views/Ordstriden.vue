@@ -36,7 +36,7 @@
       <!-- Spelinnehåll -->
       <div id="input-container">
         <div v-if="!gameOver">
-          <p>Gissa ordet: <strong>{{ scrambledWord }}</strong></p>
+          <p>Klura ut ordet: <strong>{{ scrambledWord }}</strong></p>
           <input v-model="userAnswer" :class="inputClass" @keyup.enter="onEnterPress"
             placeholder="Skriv ditt svar här..." />
           <button v-if="!feedback" @click="surrenderRound">Ge upp</button>
