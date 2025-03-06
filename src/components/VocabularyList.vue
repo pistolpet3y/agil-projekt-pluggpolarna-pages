@@ -1,6 +1,6 @@
 <template>
   <div class="vocabulary-list">
-    <h3>Sparade ord</h3>
+    <h3>Sparade Ord</h3>
 
     <!-- Redigera glosor-knapp -->
     <button @click="editMode = !editMode" class="edit-button">
@@ -49,7 +49,7 @@ const deleteAudio = '/audio/quiz-skip-question.mp3';
 // Funktion för att spela upp ljud
 const playDeleteAudio = () => {
   const audio = new Audio(deleteAudio);
-  audio.play().catch(error => console.error('Audio play of playDeleteAudio error:', error)); // spelar ljudet och error-konsolloggar om fel. 
+  audio.play().catch(error => console.error('Audio play of playDeleteAudio error:', error)); // spelar ljudet och error-konsolloggar om fel.
 };
 
 // Funktion för att spara ord i localStorage
@@ -72,8 +72,11 @@ li {
   margin: 5px 0;
 }
 
+p {
+  text-align: center;
+}
+
 .edit-button {
-  margin: 0 5px;
   border: 3px solid #111;
   padding: 10px 20px;
   background-color: #f77f00;

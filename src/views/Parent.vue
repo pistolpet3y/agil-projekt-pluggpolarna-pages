@@ -52,7 +52,7 @@ const wordAddedAudio = '/audio/quiz-correct-answer.mp3';
 // Funktioner för att spela upp ljud
 const playHoverAudio = () => {
   const audio = new Audio(hoverAudio);
-  audio.play().catch(error => console.error('Audio play of playHoverAudio error:', error)); // spelar ljudet och error-konsolloggar om fel. 
+  audio.play().catch(error => console.error('Audio play of playHoverAudio error:', error)); // spelar ljudet och error-konsolloggar om fel.
 };
 const playWordAddedAudio = () => {
   const audio = new Audio(wordAddedAudio);
@@ -69,9 +69,16 @@ const playWordAddedAudio = () => {
 }
 
 input {
-  margin: 10px 5px;
+  width: 80%;
+  display: block;
+  margin: 20px auto;
+  border: 3px solid #111;
   padding: 10px;
-  font-size: 1rem;
+  font-family: "Arial", "Helvetica", "sans-serif";
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  background-color: #fff;
+  border-radius: 5px;
 }
 
 .add-word-button {
