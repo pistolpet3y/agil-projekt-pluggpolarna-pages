@@ -1,9 +1,11 @@
 <template>
   <div class="quiz-container">
-    <h2>Glosquiz</h2>
-    <InfoButton color="green"
-      :infoContent="`Välkommen till vårt Glosquiz där du får öva på att skriva engelska ord.<br><br>Varje rätt svar ger dig poäng och visar hur duktig du är på engelska!<br><br>Tänk efter, skriv in din översättning och ha kul medan du lär dig nya ord! Lycka till! 🙌`"
-      id="info" />
+    <div class="header-container">
+      <h2>Glosquiz</h2>
+      <InfoButton color="green"
+        :infoContent="`Välkommen till vårt Glosquiz där du får öva på att skriva engelska ord.<br><br>Varje rätt svar ger dig poäng och visar hur duktig du är på engelska!<br><br>Tänk efter, skriv in din översättning och ha kul medan du lär dig nya ord! Lycka till! 🙌`"
+        id="info" />
+    </div>
     <!-- Om quiz:et inte är avslutat visas innehållet -->
     <div v-if="!quizFinished">
       <!-- Renderar aktuell fråga, poäng och quizfrågan -->
@@ -46,7 +48,8 @@
     </div>
     <div>
       <router-link to="/parent">
-        <button class="parent-button" @click="playClickAudio" title="Lägg till egna och redigera dina egna glosor">Hantera glosor</button>
+        <button class="parent-button" @click="playClickAudio"
+          title="Lägg till egna och redigera dina egna glosor">Hantera glosor</button>
       </router-link>
     </div>
   </div>
@@ -317,6 +320,21 @@ const showResults = () => {
 </script>
 
 <style scoped>
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Centrerar innehållet horisontellt */
+  position: relative;
+  /* Behåller möjligheten att positionera innehåll */
+}
+
+#info {
+  margin-left: 10px;
+  /* Skapar mellanrum mellan rubrik och knapp */
+}
+
+
 .quiz-container {
   max-width: 100%;
   margin: 0 auto;
@@ -393,5 +411,32 @@ button {
 
 button:hover {
   background-color: #ff99cc;
+}
+
+@media only screen and (max-width: 480px) {
+  h2 {
+    font-size: 1.5rem;
+    margin-top: -15px !important;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.1rem !important;
+    margin-top: 4px !important;
+    margin-bottom: 10px !important;
+  }
+
+  input {
+    width: 75%;
+  }
+
+  button {
+    padding: 8px 13px;
+  }
+
+  #info {
+    transform: translateY(-60%);
+    display: inline-block;
+  }
 }
 </style>
