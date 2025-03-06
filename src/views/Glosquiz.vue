@@ -44,6 +44,11 @@
       <!-- Gå till Results.vue -->
       <button @click="showResults">Resultat</button>
     </div>
+    <div>
+      <router-link to="/parent">
+        <button class="parent-button" @click="playClickAudio" title="Lägg till egna och redigera dina egna glosor">Hantera glosor</button>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -74,6 +79,12 @@ const skipQuestionAudio = new Audio('/audio/quiz-skip-question.mp3');
 const nextQuestionAudio = new Audio('/audio/click.mp3')
 const startQuizAudio = new Audio('/audio/start-quiz.mp3');
 const showResultsAudio = new Audio('/audio/show-results.mp3');
+const clickAudio = '/audio/click.mp3'
+
+const playClickAudio = () => {
+  const audio = new Audio(clickAudio);
+  audio.play();
+};
 
 // Definierar en array med 100 glosor
 const vocabularyList = [
@@ -374,6 +385,10 @@ button {
   cursor: pointer;
   border-radius: 10px;
   transition: background-color 0.3s ease-in-out;
+}
+
+.parent-button {
+  margin-top: 10px;
 }
 
 button:hover {

@@ -4,7 +4,9 @@
     <div class="ordstriden-container">
       <div class="header-container">
         <h2>Ordstriden</h2>
-        <InfoButton color="orange" :infoContent="`I det här spelet hjälper du till att besegra det busiga trollet Lurifax.<br><br>Din uppgift är att pussla ihop bokstäver och klura ut ordet. Varje gång du lyckas, tappar trollet lite av sin kraft.<br><br>Så samla modet, använd din klurighet och hjälp oss att besegra Lurifax! Lycka till! 🙌`" id="info" />
+        <InfoButton color="orange"
+          :infoContent="`I det här spelet hjälper du till att besegra det busiga trollet Lurifax.<br><br>Din uppgift är att pussla ihop bokstäver och klura ut ordet. Varje gång du lyckas, tappar trollet lite av sin kraft.<br><br>Så samla modet, använd din klurighet och hjälp oss att besegra Lurifax! Lycka till! 🙌`"
+          id="info" />
         <div id="info-shadow"></div>
       </div>
 
@@ -452,9 +454,12 @@ button:hover {
   }
 
   h2 {
-    margin: 0 auto;
     text-align: center;
     text-align: center;
+    font-size: 1.5rem;
+    padding-top: 0px;
+    margin-top: -15px !important;
+    margin-bottom: 10px;
   }
 
   #info {
@@ -470,7 +475,7 @@ button:hover {
     height: 100%;
   }
 
-  #info-shadow {
+  /*#info-shadow {
     position: absolute;
     width: 18px;
     height: 6px;
@@ -481,7 +486,7 @@ button:hover {
     transform: translateX(-135%);
     filter: blur(2.5px);
     z-index: -1;
-  }
+  }*/
 
   .no-blur .blur-enter-active,
   .no-blur .blur-leave-active {
@@ -492,13 +497,6 @@ button:hover {
   .no-blur .blur-leave-to {
     filter: none !important;
     opacity: 1;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-    padding-top: 0px;
-    margin-top: -15px !important;
-    margin-bottom: 10px;
   }
 
   .hero-img {

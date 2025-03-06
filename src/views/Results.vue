@@ -47,7 +47,7 @@ onMounted(() => {
 // Funktion för att starta nytt quiz
 const startNewQuiz = () => {
   quizStore.startQuiz();
-  router.push('/quiz');
+  router.push('/glosquiz');
   startQuizAudio.play();
 };
 </script>

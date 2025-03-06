@@ -96,6 +96,5 @@ footer p {
   footer {
     bottom: 7px;
   }
-
 }
 </style>
