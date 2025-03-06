@@ -24,12 +24,13 @@
       <!-- Karaktärscontainer -->
       <div class="character-container">
         <div class="image-container hero-container">
-          <img src="/p-f2.png" alt="hjälte1" class="hero-img" />
-          <div class="shadow"></div>
+          <RandomImage category="ordstriden" class="ordstriden-hero" />
+          <div id="hero-shadow"></div>
         </div>
+
         <div class="image-container monster-container">
           <img src="/lurifax.png" alt="monster" class="monster-img" />
-          <div class="shadow"></div>
+          <div id="monster-shadow"></div>
         </div>
       </div>
 
@@ -66,6 +67,7 @@
 import confetti from 'canvas-confetti';
 import { ref, computed, watch } from 'vue';
 import InfoButton from '../components/InfoButton.vue';
+import RandomImage from '../components/RandomImage.vue';
 
 // Ljudfiler för olika knappar och händelser
 const correctAnswerAudio = new Audio('/audio/battle-correct-answer.mp3');
@@ -269,6 +271,13 @@ newRound();
 </script>
 
 <style scoped>
+/* 📌 Huvudcontainrar */
+.ordstriden-container {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .header-container {
   position: relative;
   display: flex;
@@ -277,56 +286,63 @@ newRound();
   width: 100%;
 }
 
-h2 {
-  margin: 0 auto;
-  text-align: center;
-  text-align: center;
-  margin-bottom: -10px;
+
+/* 📌 Karaktärscontainer */
+.ordstriden-hero {
+  width: 180px;
+  /* Standardstorlek */
+  height: auto;
+  position: absolute;
+  top: 0px;
 }
 
-#info {
+.image-container {
   position: absolute;
-  right: 30px;
-  transform: translateY(15%);
-  display: inline-block;
 }
 
-/* #info-shadow {
+
+/* Bilder */
+.hero-img {
+  width: 180px;
+  height: auto;
+}
+
+.monster-img {
+  width: 165px;
+  height: auto;
+  position: relative;
+  margin-left: 241px;
+  margin-top: -0px;
+}
+
+
+/*Skuggor till bilderna */
+#monster-shadow {
   position: absolute;
-  width: 30px;
-  height: 10px;
+  width: 100px;
+  height: 15px;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 50%;
-  bottom: 9px;
-  left: 94.5%;
-  transform: translateX(-130%);
-  filter: blur(4px);
+  bottom: -8px;
+  left: 102%;
+  transform: translateX(-140%);
+  filter: blur(10px);
   z-index: -1;
-} */
-
-.ordstriden-container {
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
 }
 
-p {
-  text-align: center;
-  font-size: 1.25rem;
+#hero-shadow {
+  position: absolute;
+  width: 100px;
+  height: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  bottom: -175px;
+  filter: blur(10px);
+  z-index: 10;
 }
 
-.styled {
-  font-family: 'Bangers', sans-serif;
-  font-size: 1.35em;
-  color: #f77f00;
-  text-shadow:
-    -1px -1px 0 #111,
-    1px -1px 0 #111,
-    -1px 1px 0 #111,
-    1px 1px 0 #111;
-  letter-spacing: 0.15em;
-}
 
+/* 📌 Spelarens hälsostatistik */
 .player-health-status {
   display: flex;
   justify-content: space-around;
@@ -348,46 +364,56 @@ p {
   line-height: 1.2;
 }
 
-.character-container {
-  position: relative;
-  width: 100%;
+
+/* 📌 Text */
+h2 {
+  margin: 0 auto;
+  text-align: center;
+  text-align: center;
+  margin-bottom: -10px;
 }
 
-.image-container {
+p {
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.styled {
+  font-family: 'Bangers', sans-serif;
+  font-size: 1.35em;
+  color: #f77f00;
+  text-shadow:
+    -1px -1px 0 #111,
+    1px -1px 0 #111,
+    -1px 1px 0 #111,
+    1px 1px 0 #111;
+  letter-spacing: 0.15em;
+}
+
+
+/* 📌 Infoknapp */
+#info {
   position: absolute;
+  right: 30px;
+  transform: translateY(15%);
+  display: inline-block;
 }
 
-.hero-img {
-  width: 180px;
-  height: auto;
-  position: relative;
-  margin-left: -40px;
-  margin-top: -50px;
-}
-
-.monster-img {
-  width: 165px;
-  height: auto;
-  position: relative;
-  margin-left: 241px;
-  margin-top: -0px;
-}
-
-
-.shadow {
+/* #info-shadow {
   position: absolute;
-  width: 100px;
-  height: 15px;
+  width: 30px;
+  height: 10px;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 50%;
-  bottom: -8px;
-  left: 102%;
-  transform: translateX(-140%);
-  filter: blur(10px);
+  bottom: 9px;
+  left: 94.5%;
+  transform: translateX(-130%);
+  filter: blur(4px);
   z-index: -1;
-}
+} */
 
 
+/* 📌 Inputfält */
 input {
   width: 80%;
   display: block;
@@ -405,6 +431,15 @@ input {
   padding-top: 160px;
 }
 
+.incorrect-input {
+  border: 3px solid #F5505D;
+  color: #F5505D;
+}
+
+input:focus {
+  outline: none;
+}
+
 .correct-input {
   border: 3px solid #7dffcb;
   box-shadow: 0 0 5px rgba(0, 0, 0, 1);
@@ -416,15 +451,8 @@ input {
     1px 1px 0 #111;
 }
 
-.incorrect-input {
-  border: 3px solid #F5505D;
-  color: #F5505D;
-}
 
-input:focus {
-  outline: none;
-}
-
+/* 📌 Knappar */
 button {
   margin: 0 5px;
   border: 3px solid #111;
@@ -443,6 +471,8 @@ button:hover {
   background-color: #ff99cc;
 }
 
+
+/* 📌 Media Queries */
 @media only screen and (max-width: 480px) {
 
   .header-container {
@@ -470,23 +500,20 @@ button:hover {
 
   }
 
+  /* 📌 Justera hjältebilden på mobil */
+  .ordstriden-hero {
+    display: block;
+    width: 110px;
+    height: auto;
+    position: absolute;
+    top: 5px !important;
+    left: 20px !important;
+  }
+
   #info img {
     width: 100%;
     height: 100%;
   }
-
-  /*#info-shadow {
-    position: absolute;
-    width: 18px;
-    height: 6px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-    bottom: 29px;
-    left: 85.4%;
-    transform: translateX(-135%);
-    filter: blur(2.5px);
-    z-index: -1;
-  }*/
 
   .no-blur .blur-enter-active,
   .no-blur .blur-leave-active {
@@ -497,12 +524,6 @@ button:hover {
   .no-blur .blur-leave-to {
     filter: none !important;
     opacity: 1;
-  }
-
-  .hero-img {
-    width: 110px;
-    margin-left: 20px;
-    margin-top: -30px;
   }
 
   .monster-img {
@@ -522,22 +543,17 @@ button:hover {
     width: 30%;
   }
 
-  .character-container {
-    width: 100%;
-    margin-top: -20px;
-    margin-bottom: -33px !important;
+  #monster-shadow {
+    left: 104%;
+    width: 70px;
+    height: 12px;
   }
 
-  .image-container {
-    position: absolute;
-  }
-
-  .shadow {
-    width: 50px;
-    height: 10px;
-    bottom: -5px;
-    left: 105%;
-    transform: translateX(-185%);
+  #hero-shadow {
+    width: 70px;
+    height: 12px;
+    bottom: -145px;
+    left: 40px;
   }
 
   input {
@@ -552,5 +568,18 @@ button:hover {
     font-size: 1.1rem !important;
     margin-top: 0 !important;
   }
+
+  /*#info-shadow {
+    position: absolute;
+    width: 18px;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    bottom: 29px;
+    left: 85.4%;
+    transform: translateX(-135%);
+    filter: blur(2.5px);
+    z-index: -1;
+  }*/
 }
 </style>
