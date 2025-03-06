@@ -52,11 +52,11 @@ const wordAddedAudio = '/audio/quiz-correct-answer.mp3';
 // Funktioner för att spela upp ljud
 const playHoverAudio = () => {
   const audio = new Audio(hoverAudio);
-  audio.play();
+  audio.play().catch(error => console.error('Audio play of playHoverAudio error:', error)); // spelar ljudet och error-konsolloggar om fel. 
 };
 const playWordAddedAudio = () => {
   const audio = new Audio(wordAddedAudio);
-  audio.play();
+  audio.play().catch(error => console.error('Audio play of playWordAddedAdio error:', error));
 };
 </script>
 

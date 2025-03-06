@@ -40,6 +40,16 @@ const editMode = ref(false); // Variabel för att hålla reda på om användaren
 const removeWord = (index) => {
   props.words.splice(index, 1); // Tar bort ordet vid det angivna indexet
   saveWords(); // Uppdatera localStorage med den nya listan
+  playDeleteAudio(); //Spelar upp ljud
+};
+
+// Ljudfil för knapp
+const deleteAudio = '/audio/quiz-skip-question.mp3';
+
+// Funktion för att spela upp ljud
+const playDeleteAudio = () => {
+  const audio = new Audio(deleteAudio);
+  audio.play().catch(error => console.error('Audio play of playDeleteAudio error:', error)); // spelar ljudet och error-konsolloggar om fel. 
 };
 
 // Funktion för att spara ord i localStorage
