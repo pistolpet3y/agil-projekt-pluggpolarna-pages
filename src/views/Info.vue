@@ -2,7 +2,7 @@
   <div>
     <div class="button-container">
       <router-link to='/about'>
-        <button class="button-orange" @mouseover="playHoverAudio" @click="playStartBattleAudio">Om oss</button>
+        <button class="button-green" @mouseover="playHoverAudio" @click="playStartBattleAudio">Om oss</button>
       </router-link>
       <router-link to='/contact'>
         <button class="button-blue" @mouseover="playHoverAudio" @click="playStartMathAudio">Kontakt</button>

@@ -1,10 +1,19 @@
 <template>
   <div class="vocabulary-list">
     <h3>Sparade ord</h3>
+
+    <!-- Redigera glosor-knapp -->
+    <button @click="editMode = !editMode" class="edit-button">
+      {{ editMode ? 'Sluta redigera' : 'Redigera glosor' }}
+    </button>
+
     <div v-if="words.length > 0">
       <ul>
         <li v-for="(word, index) in words" :key="index">
           {{ word.svenska }} - {{ word.engelska }}
+
+          <!-- Visa radera-knapp om editMode är aktiverad -->
+          <button class="delete-button" v-if="editMode" @click="removeWord(index)">Radera</button>
         </li>
       </ul>
     </div>
@@ -15,23 +24,38 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 
-const words = ref([]);
-
-// Funktion för att hämta sparade ord från localStorage
-const loadWords = () => {
-  const saved = localStorage.getItem('vocabularyList');
-  if (saved) {
-    words.value = JSON.parse(saved);
+// Ta emot 'words' som en prop
+const props = defineProps({
+  words: {
+    type: Array,
+    required: true
   }
-};
-
-// Hämta sparade ord när komponenten laddas
-onMounted(() => {
-  loadWords();
 });
 
+const editMode = ref(false); // Variabel för att hålla reda på om användaren är i redigeringsläge
+
+// Funktion för att ta bort ett ord från listan
+const removeWord = (index) => {
+  props.words.splice(index, 1); // Tar bort ordet vid det angivna indexet
+  saveWords(); // Uppdatera localStorage med den nya listan
+  playDeleteAudio(); //Spelar upp ljud
+};
+
+// Ljudfil för knapp
+const deleteAudio = '/audio/quiz-skip-question.mp3';
+
+// Funktion för att spela upp ljud
+const playDeleteAudio = () => {
+  const audio = new Audio(deleteAudio);
+  audio.play().catch(error => console.error('Audio play of playDeleteAudio error:', error)); // spelar ljudet och error-konsolloggar om fel. 
+};
+
+// Funktion för att spara ord i localStorage
+const saveWords = () => {
+  localStorage.setItem('vocabularyList', JSON.stringify(props.words));
+};
 </script>
 
 <style scoped>
@@ -46,5 +70,36 @@ ul {
 
 li {
   margin: 5px 0;
+}
+
+.edit-button {
+  margin: 0 5px;
+  border: 3px solid #111;
+  padding: 10px 20px;
+  background-color: #f77f00;
+  color: #111;
+  font-size: 1em;
+  font-family: 'Bangers', sans-serif;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.edit-button:hover {
+  background-color: #ff99cc;
+}
+
+.delete-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
 }
 </style>

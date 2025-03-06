@@ -1,7 +1,11 @@
 <template>
   <div class="quiz-container">
-    <h2>Glosquiz</h2>
-    <InfoButton color="green" :infoContent="`Välkommen till vårt Glosquiz där du får öva på att skriva engelska ord.<br><br>Varje rätt svar ger dig poäng och visar hur duktig du är på engelska!<br><br>Tänk efter, skriv in din översättning och ha kul medan du lär dig nya ord! Lycka till! 🙌`" id="info" />
+    <div class="header-container">
+      <h2>Glosquiz</h2>
+      <InfoButton color="green"
+        :infoContent="`Välkommen till vårt Glosquiz där du får öva på att skriva engelska ord.<br><br>Varje rätt svar ger dig poäng och visar hur duktig du är på engelska!<br><br>Tänk efter, skriv in din översättning och ha kul medan du lär dig nya ord! Lycka till! 🙌`"
+        id="info" />
+    </div>
     <!-- Om quiz:et inte är avslutat visas innehållet -->
     <div v-if="!quizFinished">
       <!-- Renderar aktuell fråga, poäng och quizfrågan -->
@@ -12,7 +16,8 @@
         <strong>{{ questions[currentIndex].svenska }}</strong>
       </p>
       <!-- Inmatningsfält för svar, binder svaret till userAnswer, @keyup.enter anropar funktionen onEnterPress -->
-      <input v-model="userAnswer" :class="inputClass" type="text" placeholder="Skriv översättningen..." @keyup.enter="onEnterPress" />
+      <input v-model="userAnswer" :class="inputClass" type="text" placeholder="Skriv översättningen..."
+        @keyup.enter="onEnterPress" />
       <!-- Visar feedback (rätt eller fel) om den finns -->
       <p v-if="feedback" v-html="feedback"></p>
       <!-- Om feedback finns och det inte är sista frågan visas knappen för nästa fråga -->
@@ -34,15 +39,17 @@
     <div v-else>
       <h3>Ditt Resultat</h3>
       <!-- Visar antalet rätt, knappar för att starta om och som leder till en mer detaljerad resultatvy -->
-      <p v-if="score === questions.length"><strong>{{ score }}</strong> av <strong>{{ questions.length }}</strong> rätt!<br>Du är en äkta glosexpert! 🧠</p>
+      <p v-if="score === questions.length"><strong>{{ score }}</strong> av <strong>{{ questions.length }}</strong>
+        rätt!<br>Du är en äkta glosexpert! 🧠</p>
       <p v-else><strong>{{ score }}</strong> av <strong>{{ questions.length }}</strong> rätt!</p>
       <button @click="restartQuiz">Starta om</button>
-      <!-- Gå till Results.vue, tillagd av Julia -->
+      <!-- Gå till Results.vue -->
       <button @click="showResults">Resultat</button>
     </div>
     <div>
       <router-link to="/parent">
-        <button class="parent-button" @click="playClickAudio" title="Lägg till egna och redigera dina egna glosor">Hantera glosor</button>
+        <button class="parent-button" @click="playClickAudio"
+          title="Lägg till egna och redigera dina egna glosor">Hantera glosor</button>
       </router-link>
     </div>
   </div>
@@ -53,20 +60,20 @@
 
 // Importerar ref från Vue för att skapa reaktiva variabler
 import { ref, computed } from 'vue';
-// Importera useRouter, tillagd av Julia 24 feb
+// Importera useRouter
 import { useRouter } from 'vue-router';
-// Importera quizStore, tillagd av Julia 24 feb
+// Importera quizStore
 import { useQuizStore } from '../stores/quizStore';
 
 import InfoButton from '../components/InfoButton.vue';
 
 
-// Använd router för att navigera till resultat-sidan, tillagd av Julia 24 feb
+// Använd router för att navigera till resultat-sida
 const router = useRouter();
 const quizStore = useQuizStore();
 
-const correctAnswers = ref([]);  // tillagd av Julia 24 feb
-const errorWords = ref([]); // Tillagd av Julia 27 feb
+const correctAnswers = ref([]);
+const errorWords = ref([]);
 
 // Ljudfiler för olika knappar och händelser
 const correctAnswerAudio = new Audio('/audio/quiz-correct-answer.mp3');
@@ -245,7 +252,7 @@ const checkAnswer = () => {
   } else {
     feedback.value = `❌ Fel! Rätt svar var: <strong>${questions.value[currentIndex.value].engelska}</strong>`;
     incorrectAnswerAudio.play();
-    // Tillagd av Julia 27 feb: Spara felaktiga ord
+    // Sparar felaktiga ord
     errorWords.value.push(currentEntry.svenska);
   }
 };
@@ -306,13 +313,28 @@ const restartQuiz = () => {
 
 // Leder till en mer detaljerad resultatvy
 const showResults = () => {
-  quizStore.setQuizResults(score.value, errorWords.value);  // Uppdaterar store med resultaten, ändrad av Julia 24 feb
-  router.push('/results'); // Navigera till results-sidan, ändrad av Julia 24 feb
+  quizStore.setQuizResults(score.value, errorWords.value);  // Uppdaterar store med resultaten
+  router.push('/results'); // Navigera till results-sidan
   showResultsAudio.play();
 };
 </script>
 
 <style scoped>
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Centrerar innehållet horisontellt */
+  position: relative;
+  /* Behåller möjligheten att positionera innehåll */
+}
+
+#info {
+  margin-left: 10px;
+  /* Skapar mellanrum mellan rubrik och knapp */
+}
+
+
 .quiz-container {
   max-width: 100%;
   margin: 0 auto;
@@ -389,5 +411,32 @@ button {
 
 button:hover {
   background-color: #ff99cc;
+}
+
+@media only screen and (max-width: 480px) {
+  h2 {
+    font-size: 1.5rem;
+    margin-top: -15px !important;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.1rem !important;
+    margin-top: 4px !important;
+    margin-bottom: 10px !important;
+  }
+
+  input {
+    width: 75%;
+  }
+
+  button {
+    padding: 8px 13px;
+  }
+
+  #info {
+    transform: translateY(-60%);
+    display: inline-block;
+  }
 }
 </style>
