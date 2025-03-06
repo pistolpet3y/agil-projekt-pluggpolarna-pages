@@ -196,7 +196,6 @@ p {
   background-color: #ff99cc;
 }
 
-
 .options button.selected.incorrect {
   background-color: #F5505D;
 }

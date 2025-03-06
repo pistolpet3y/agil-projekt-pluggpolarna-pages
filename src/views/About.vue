@@ -1,8 +1,11 @@
 <template>
   <div>
     <h2>Om oss</h2>
-    <p>Vi är tre utvecklare som skapat denna sidan som ett skolarbete. Kontakta oss på xxx om det är något ni undrar
-      eller har feedback på hur Pluggpolarna ska fungera ännu bättre!</p>
+    <p>Pluggpolarna är en lekfull och barnvänlig läxhjälpsplattform som gör inlärning roligare och mer engagerande för
+      skolbarn. Till skillnad från traditionella läroplattformar, fokuserar vi på att kombinera kunskap och lek, vilket
+      gör att barn lär sig effektivare och med glädje. Med innehåll på svenska som är anpassat efter barns behov
+      erbjuder vi ett stöd som hjälper föräldrar och skolor att förbättra barns inlärning och skolprestationer – allt i
+      en trygg och inspirerande digital miljö. </p>
   </div>
 </template>
 
