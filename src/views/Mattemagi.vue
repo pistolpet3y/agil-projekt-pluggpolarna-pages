@@ -87,6 +87,7 @@ function checkAnswer(selected) {
 
   selectedOption.value = selected;
 
+  // Ge feedback beroende på om svaret är rätt eller fel
   if (selected === correctAnswer.value) {
     feedback.value = '✅ Rätt! Bra jobbat! :)';
     score.value++;
@@ -94,11 +95,25 @@ function checkAnswer(selected) {
   } else {
     feedback.value = `❌ Fel! Rätt svar var: <strong>${correctAnswer.value}</strong>`;
     incorrectAnswerAudio.play();
+    // Hitta den rätta knappen
+    const correctButton = Array.from(document.querySelectorAll('.options button')).find(button =>
+      button.textContent == correctAnswer.value.toString()
+    );
+    // Lägg till klassen 'blink' efter en halv sekund(500 ms)
+    if (correctButton) {
+      setTimeout(() => {
+        correctButton.classList.add('blink');
+      }, 500);
+    }
   }
 }
 
 // Nästa fråga eller avsluta spelet
 function nextQuestion() {
+  const buttons = document.querySelectorAll('.options button');
+  buttons.forEach(button => {
+    button.classList.remove('correct', 'incorrect', 'blink');  // Ta bort alla tillagda klasser från knapparna
+  });
   if (questionCount.value < totalQuestions.value - 1) {
     questionCount.value++;
     newQuestion();
@@ -202,6 +217,29 @@ p {
 
 .options button.selected.correct {
   background-color: #7dffcb;
+}
+
+/* Visar grönt på rätta svaret om man gjort fel*/
+.options button.correct {
+  background-color: #7dffcb;
+}
+
+@keyframes blink {
+  0% {
+    background-color: #7dffcb;
+  }
+
+  50% {
+    background-color: #4cb5f5;
+  }
+
+  100% {
+    background-color: #7dffcb;
+  }
+}
+
+.options button.blink {
+  animation: blink 2s infinite;
 }
 
 button {
