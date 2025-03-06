@@ -11,8 +11,10 @@
       <p class="styled">Poäng: {{ score }}</p>
       <p>Beräkna: <strong>{{ question.a }} x {{ question.b }}</strong></p>
       <div class="options">
-        <button v-for="(option, index) in options" :key="index" :class="{ selected: selectedOption === option }"
-          :disabled="selectedOption !== null" @click="checkAnswer(option)">
+        <button v-for="(option, index) in options" :key="index" :class="{
+          selected: selectedOption === option, correct: selectedOption === option && selectedOption === correctAnswer,
+          incorrect: selectedOption === option && selectedOption !== correctAnswer
+        }" :disabled="selectedOption !== null" @click="checkAnswer(option)">
           {{ option }}
         </button>
       </div>
@@ -194,8 +196,13 @@ p {
   background-color: #ff99cc;
 }
 
-.options button.selected {
-  background-color: #ff99cc;
+
+.options button.selected.incorrect {
+  background-color: #F5505D;
+}
+
+.options button.selected.correct {
+  background-color: #7dffcb;
 }
 
 button {
