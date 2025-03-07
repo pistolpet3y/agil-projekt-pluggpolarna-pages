@@ -23,15 +23,11 @@ const props = defineProps({
   infoContent: {
     type: String,
     default: ''
-  },
-  color: {
-    type: String,
-    default: 'green'
   }
 });
 
 const showInfo = ref(false);
-const defaultSrc = `/info/info-${props.color}.png`;
+const defaultSrc = `/info/info-black.png`;
 const hoverSrc = `/info/info-pink.png`;
 const currentSrc = ref(defaultSrc);
 
@@ -47,8 +43,8 @@ const onMouseLeave = () => {
   currentSrc.value = defaultSrc;
 };
 
-const buttonClass = computed(() => `info-button info-${props.color}`);
-const modalClass = computed(() => `modal modal-${props.color}`);
+const buttonClass = computed(() => 'info-button');
+const modalClass = computed(() => 'modal');
 </script>
 
 <style scoped>
@@ -68,12 +64,11 @@ const modalClass = computed(() => `modal modal-${props.color}`);
   height: 30px;
   padding: 0;
   border: none;
-  background: none;
   border-radius: 50%;
   cursor: pointer;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 }
 
 .info-button img {

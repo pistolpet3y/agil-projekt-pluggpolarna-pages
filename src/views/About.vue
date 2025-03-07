@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Om oss</h2>
+    <h2>Om Oss</h2>
     <p>Pluggpolarna är en lekfull och barnvänlig läxhjälpsplattform som gör inlärning roligare och mer engagerande för
       skolbarn. Vi fokuserar på att kombinera kunskap och lek, vilket
       gör att barn lär sig effektivare och med glädje. </p>
