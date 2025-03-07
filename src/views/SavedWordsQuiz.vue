@@ -187,6 +187,7 @@ const nextQuestion = () => {
     // Om det är sista frågan, avsluta quiz:et
   } else {
     quizFinished.value = true;
+    finishQuiz();
   }
 };
 
@@ -201,6 +202,7 @@ const skipQuestion = () => {
     skipQuestionAudio.play();
   } else {
     quizFinished.value = true;
+    finishQuiz();
     skipQuestionAudio.play();
   }
 };
@@ -213,10 +215,7 @@ const finishQuiz = () => {
   showResultsAudio.play();
 };
 
-// Leder till en mer detaljerad resultatvy
-const showResults = () => {
 
-};
 </script>
 
 <style scoped>
