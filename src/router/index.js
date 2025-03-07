@@ -12,6 +12,9 @@ import Parent from '../views/Parent.vue';
 import Results from '../views/Results.vue';
 import About from '../views/About.vue';
 import Contact from '../views/Contact.vue';
+import ChooseQuiz from '../views/ChooseQuiz.vue';
+import SavedWordsQuiz from '../views/SavedWordsQuiz.vue';
+
 
 // Definierar en array med rutter
 const routes = [
@@ -25,6 +28,8 @@ const routes = [
   { path: '/results', component: Results },
   { path: '/about', component: About },
   { path: '/contact', component: Contact },
+  { path: '/choosequiz', component: ChooseQuiz },
+  { path: '/savedwordsquiz', component: SavedWordsQuiz },
 ];
 
 // Skapar en router-instans

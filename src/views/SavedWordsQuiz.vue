@@ -3,7 +3,7 @@
     <div class="header-container">
       <h2>Glosquiz</h2>
       <InfoButton color="green"
-        :infoContent="`Välkommen till vårt Glosquiz där du får öva på att skriva engelska ord.<br><br>Varje rätt svar ger dig poäng och visar hur duktig du är på engelska!<br><br>Tänk efter, skriv in din översättning och ha kul medan du lär dig nya ord! Lycka till! 🙌`"
+        :infoContent="`Välkommen till ditt egna Glosquiz där du får öva på de ord du lagt in.<br><br>Varje rätt svar ger dig poäng och visar hur duktig du är på engelska!<br><br>Tänk efter, skriv in din översättning och ha kul medan du lär dig nya ord! Lycka till! 🙌`"
         id="info" />
     </div>
     <!-- Om quiz:et inte är avslutat visas innehållet -->
@@ -11,7 +11,7 @@
       <!-- Renderar aktuell fråga, poäng och quizfrågan -->
       <p class="styled">Fråga {{ currentIndex + 1 }} av {{ questions.length }}</p>
       <p class="styled">Poäng: <strong>{{ score }}</strong></p>
-      <p>
+      <p v-if="currentQuestion">
         Vad är det engelska ordet för:
         <strong>{{ questions[currentIndex].svenska }}</strong>
       </p>
@@ -46,36 +46,38 @@
       <!-- Gå till Results.vue -->
       <button @click="showResults">Resultat</button>
     </div>
-    <div>
-      <router-link to="/parent">
-        <button class="parent-button" @click="playClickAudio"
-          title="Lägg till egna och redigera dina egna glosor">Hantera glosor</button>
-      </router-link>
-    </div>
   </div>
 </template>
 
 <script setup>
-// Composition API
 
-// Importerar ref från Vue för att skapa reaktiva variabler
-import { ref, computed } from 'vue';
-// Importera useRouter
+// Importer
+import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
-// Importera quizStore
+// Importera stores från pinia 
 import { useQuizStore } from '../stores/quizStore';
-
+import { useWordsStore } from '../stores/wordsStore';
+// Importera info-knapp
 import InfoButton from '../components/InfoButton.vue';
 
-
-// Använd router för att navigera till resultat-sida
+// Använd router 
 const router = useRouter();
-
-// Använda pinia store
+// Använd pinia stores
 const quizStore = useQuizStore();
+const wordsStore = useWordsStore();
 
-const correctAnswers = ref([]); // Denna används inte tror jag, ta bort? 
+// Antal frågor
+const totalQuestions = computed(() => vocabularyList.value.length);
+
+// Skapar reaktiva variabler med ref
+const currentIndex = ref(0);
+const questions = ref([]);
+const userAnswer = ref("");
+const feedback = ref("");
+const score = ref(0);
+const quizFinished = ref(false);
 const errorWords = ref([]);
+const vocabularyList = ref([]);
 
 // Ljudfiler för olika knappar och händelser
 const correctAnswerAudio = new Audio('/audio/quiz-correct-answer.mp3');
@@ -86,138 +88,24 @@ const startQuizAudio = new Audio('/audio/start-quiz.mp3');
 const showResultsAudio = new Audio('/audio/show-results.mp3');
 const clickAudio = '/audio/click.mp3'
 
+// Funktion som spelar upp ljud
 const playClickAudio = () => {
   const audio = new Audio(clickAudio);
   audio.play();
 };
 
-// Definierar en array med 100 glosor
-const vocabularyList = [
-  // Vanliga substantiv
-  { svenska: 'Boll', engelska: 'Ball' },
-  { svenska: 'Katt', engelska: 'Cat' },
-  { svenska: 'Hund', engelska: 'Dog' },
-  { svenska: 'Bok', engelska: 'Book' },
-  { svenska: 'Penna', engelska: 'Pen' },
-  { svenska: 'Skola', engelska: 'School' },
-  { svenska: 'Hus', engelska: 'House' },
-  { svenska: 'Bil', engelska: 'Car' },
-  { svenska: 'Cykel', engelska: ['Bike', 'Bicycle'] },
-  { svenska: 'Äpple', engelska: 'Apple' },
-  { svenska: 'Bord', engelska: 'Table' },
-  { svenska: 'Stol', engelska: 'Chair' },
-  { svenska: 'Dator', engelska: 'Computer' },
-  { svenska: 'Fågel', engelska: 'Bird' },
-  { svenska: 'Fisk', engelska: 'Fish' },
-  { svenska: 'Träd', engelska: 'Tree' },
-  { svenska: 'Blomma', engelska: 'Flower' },
-  { svenska: 'Gata', engelska: 'Street' },
-  { svenska: 'Väska', engelska: 'Bag' },
-  { svenska: 'Klocka', engelska: 'Clock' },
-  // Vanliga verb
-  { svenska: 'Springa', engelska: 'Run' },
-  { svenska: 'Hoppa', engelska: 'Jump' },
-  { svenska: 'Äta', engelska: 'Eat' },
-  { svenska: 'Dricka', engelska: 'Drink' },
-  { svenska: 'Läsa', engelska: 'Read' },
-  { svenska: 'Skriva', engelska: 'Write' },
-  { svenska: 'Sova', engelska: 'Sleep' },
-  { svenska: 'Vakna', engelska: 'Wake up' },
-  { svenska: 'Simma', engelska: 'Swim' },
-  { svenska: 'Sjunga', engelska: 'Sing' },
-  { svenska: 'Dansa', engelska: 'Dance' },
-  { svenska: 'Gå', engelska: 'Walk' },
-  { svenska: 'Ropa', engelska: ['Shout', 'Yell'] },
-  { svenska: 'Sitta', engelska: 'Sit' },
-  { svenska: 'Stå', engelska: 'Stand' },
-  { svenska: 'Leka', engelska: 'Play' },
-  { svenska: 'Räkna', engelska: 'Count' },
-  { svenska: 'Rita', engelska: 'Draw' },
-  { svenska: 'Lyssna', engelska: 'Listen' },
-  { svenska: 'Titta', engelska: 'Look' },
-  // Vanliga adjektiv
-  { svenska: 'Glad', engelska: ['Happy', 'Glad'] },
-  { svenska: 'Ledsen', engelska: 'Sad' },
-  { svenska: 'Stor', engelska: 'Big' },
-  { svenska: 'Liten', engelska: ['Small', 'Little'] },
-  { svenska: 'Snabb', engelska: 'Fast' },
-  { svenska: 'Långsam', engelska: 'Slow' },
-  { svenska: 'Varm', engelska: ['Warm', 'Hot'] },
-  { svenska: 'Kall', engelska: 'Cold' },
-  { svenska: 'Tung', engelska: 'Heavy' },
-  { svenska: 'Lätt', engelska: ['Light', 'Easy'] },
-  { svenska: 'Fin', engelska: 'Pretty' },
-  { svenska: 'Ful', engelska: 'Ugly' },
-  { svenska: 'Snäll', engelska: 'Kind' },
-  { svenska: 'Arg', engelska: 'Angry' },
-  { svenska: 'Trött', engelska: 'Tired' },
-  { svenska: 'Stark', engelska: 'Strong' },
-  { svenska: 'Svag', engelska: 'Weak' },
-  { svenska: 'Ren', engelska: 'Clean' },
-  { svenska: 'Smutsig', engelska: 'Dirty' },
-  { svenska: 'Ny', engelska: 'New' },
-  // Färger
-  { svenska: 'Röd', engelska: 'Red' },
-  { svenska: 'Blå', engelska: 'Blue' },
-  { svenska: 'Grön', engelska: 'Green' },
-  { svenska: 'Gul', engelska: 'Yellow' },
-  { svenska: 'Svart', engelska: 'Black' },
-  { svenska: 'Vit', engelska: 'White' },
-  { svenska: 'Brun', engelska: 'Brown' },
-  { svenska: 'Grå', engelska: 'Gray' },
-  { svenska: 'Rosa', engelska: 'Pink' },
-  { svenska: 'Lila', engelska: 'Purple' },
-  // Prepositioner
-  { svenska: 'På', engelska: 'On' },
-  { svenska: 'Under', engelska: 'Under' },
-  { svenska: 'I', engelska: 'In' },
-  { svenska: 'Vid', engelska: 'By' },
-  { svenska: 'Mellan', engelska: 'Between' },
-  { svenska: 'Framför', engelska: 'In front of' },
-  { svenska: 'Bakom', engelska: 'Behind' },
-  { svenska: 'Bredvid', engelska: 'Next to' },
-  { svenska: 'Över', engelska: 'Over' },
-  { svenska: 'Genom', engelska: 'Through' },
-  // Pronomen och småord
-  { svenska: 'Jag', engelska: 'I' },
-  { svenska: 'Du', engelska: 'You' },
-  { svenska: 'Han', engelska: 'He' },
-  { svenska: 'Hon', engelska: 'She' },
-  { svenska: 'Vi', engelska: 'We' },
-  { svenska: 'De', engelska: 'They' },
-  { svenska: 'Här', engelska: 'Here' },
-  { svenska: 'Där', engelska: 'There' },
-  { svenska: 'När', engelska: 'When' },
-  { svenska: 'Varför', engelska: 'Why' },
-  // Frågeord och tidsuttryck
-  { svenska: 'Vad', engelska: 'What' },
-  { svenska: 'Vem', engelska: 'Who' },
-  { svenska: 'Hur', engelska: 'How' },
-  { svenska: 'Nu', engelska: 'Now' },
-  { svenska: 'Sen', engelska: 'Later' },
-  { svenska: 'Idag', engelska: 'Today' },
-  { svenska: 'Imorgon', engelska: 'Tomorrow' },
-  { svenska: 'Igår', engelska: 'Yesterday' },
-  { svenska: 'Alltid', engelska: 'Always' },
-  { svenska: 'Aldrig', engelska: 'Never' }
-];
-
-const totalQuestions = 10;
-// Skapar reaktiva variabler med ref
-const currentIndex = ref(0);
-const questions = ref([]);
-const userAnswer = ref("");
-const feedback = ref("");
-const score = ref(0);
-const quizFinished = ref(false);
+// Kontroll för att den ska returnera null om inga ord finns tillagt
+const currentQuestion = computed(() => {
+  return questions.value[currentIndex.value] || null;
+})
 
 // Funktion som blandar en array slumpmässigt
 const shuffle = (array) => array.sort(() => Math.random() - 0.5);
 
 // Funktion för att starta (eller starta om) quiz:et
 const startQuiz = () => {
-  questions.value = shuffle([...vocabularyList]).slice(0, totalQuestions); // Väljer ut slumpmässiga frågor från gloslistan
-  // Ställer om alla värden för quiz:et
+  if (vocabularyList.value.length === 0) return; // Säkerställ att det finns glosor
+  questions.value = shuffle([...vocabularyList.value]).slice(0, totalQuestions.value);
   currentIndex.value = 0;
   userAnswer.value = "";
   feedback.value = "";
@@ -226,8 +114,21 @@ const startQuiz = () => {
   errorWords.value = [];
 };
 
-// Anropar funktionen för att starta quiz:et så fort sidan laddas
-startQuiz();
+// Lägg till en watcher för att vänta på att glosorna har laddats
+watch(
+  () => wordsStore.words,
+  (newWords) => {
+    if (Array.isArray(newWords) && newWords.length > 0) {
+      vocabularyList.value = newWords;
+      startQuiz();  // Startar quizet 
+    }
+  },
+  { immediate: true }
+);
+
+onMounted(() => {
+  wordsStore.loadWords();  // Ladda glosorna när komponenten monteras
+});
 
 // Funktion som kontrollerar användarens svar och ger rätt feedback
 const checkAnswer = () => {
@@ -304,20 +205,17 @@ const skipQuestion = () => {
   }
 };
 
+// Avsluta quizet
 const finishQuiz = () => {
   quizFinished.value = true;
-};
-
-const restartQuiz = () => {
-  startQuiz();
-  startQuizAudio.play();
+  quizStore.setQuizResults(score.value, errorWords.value);  // Uppdaterar store med resultaten
+  router.push('/results'); // Navigera till results-sidan
+  showResultsAudio.play();
 };
 
 // Leder till en mer detaljerad resultatvy
 const showResults = () => {
-  quizStore.setQuizResults(score.value, errorWords.value);  // Uppdaterar store med resultaten
-  router.push('/results'); // Navigera till results-sidan
-  showResultsAudio.play();
+
 };
 </script>
 

@@ -7,9 +7,9 @@
       {{ editMode ? 'Sluta redigera' : 'Redigera glosor' }}
     </button>
 
-    <div v-if="words.length > 0">
+    <div v-if="wordsStore.words.length > 0">
       <ul>
-        <li v-for="(word, index) in words" :key="index">
+        <li v-for="(word, index) in wordsStore.words" :key="index">
           {{ word.svenska }} - {{ word.engelska }}
 
           <!-- Visa radera-knapp om editMode är aktiverad -->
@@ -24,7 +24,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useWordsStore } from '../stores/wordsStore';
+
+// Hämta Pinia store
+const wordsStore = useWordsStore();
 
 // Ta emot 'words' som en prop
 const props = defineProps({
@@ -34,17 +38,32 @@ const props = defineProps({
   }
 });
 
-const editMode = ref(false); // Variabel för att hålla reda på om användaren är i redigeringsläge
 
+const words = ref([]);
+const editMode = ref(false); // Variabel för att hålla reda på om användaren är i redigeringsläge
+const deleteAudio = '/audio/quiz-skip-question.mp3'; // Ljudfil för knapp
+
+//ladda ord från local storage när komponenten monteras, obs ändring: 
+const loadWords = () => {
+  const storedWords = localStorage.getItem('vocabularyList');
+  words.value = storedWords ? JSON.parse(storedWords) : [];
+};
+
+
+/*
 // Funktion för att ta bort ett ord från listan
 const removeWord = (index) => {
   props.words.splice(index, 1); // Tar bort ordet vid det angivna indexet
   saveWords(); // Uppdatera localStorage med den nya listan
   playDeleteAudio(); //Spelar upp ljud
-};
+};*/
 
-// Ljudfil för knapp
-const deleteAudio = '/audio/quiz-skip-question.mp3';
+// Funktion för att ta bort ett ord från listan
+const removeWord = (index) => {
+
+  wordsStore.removeWord(index); // Uppdaterar Pinia och LocalStorage
+  playDeleteAudio(); //Spelar upp ljud
+};
 
 // Funktion för att spela upp ljud
 const playDeleteAudio = () => {
@@ -52,10 +71,10 @@ const playDeleteAudio = () => {
   audio.play().catch(error => console.error('Audio play of playDeleteAudio error:', error)); // spelar ljudet och error-konsolloggar om fel.
 };
 
-// Funktion för att spara ord i localStorage
-const saveWords = () => {
-  localStorage.setItem('vocabularyList', JSON.stringify(props.words));
-};
+// Ladda ord från Pinia när komponenten monteras
+onMounted(() => {
+  wordsStore.loadWords();
+});
 </script>
 
 <style scoped>

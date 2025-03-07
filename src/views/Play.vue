@@ -1,7 +1,7 @@
 <template>
   <div class="button-container">
     <div class="button-wrapper">
-      <router-link to="/glosquiz">
+      <router-link to="/choosequiz">
         <button class="glosquiz" @mouseover="playHoverAudio" @click="playStartQuizAudio">Glosquiz!</button>
       </router-link>
       <p class="green">Träna dina glosor på ett roligt sätt!</p>

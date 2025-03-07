@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
 
-// state håller de tillståndsvariabler vi behöver. Actions är funktioner för att uppdatera tillståndet (i setQuizResults).
+// state håller de tillståndsvariabler vi behöver. Actions är funktioner för att uppdatera.
 
 export const useQuizStore = defineStore('quiz', {
   state: () => ({

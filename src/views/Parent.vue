@@ -7,56 +7,61 @@
     <input v-model="newWord.engelska" placeholder="Engelskt ord" />
     <button class="add-word-button" @click="addWord" @mouseover="playHoverAudio">Lägg till ord</button>
 
-    <!-- Här används VocabularyList-komponenten som skickar med ordlistan -->
-    <VocabularyList :words="savedWords" />
+    <!-- VocabularyList använder Pinia-store -->
+    <VocabularyList :words="wordsStore.words" />
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useWordsStore } from '../stores/wordsStore';
 import VocabularyList from '../components/VocabularyList.vue';
 
-// Reaktiv variabel för ordlistan
-const savedWords = ref(JSON.parse(localStorage.getItem('vocabularyList')) || []);
+// Hämta Pinia-store
+const wordsStore = useWordsStore();
+
+// Nytt ord som användaren skriver in
 const newWord = ref({
   svenska: '',
   engelska: ''
 });
 
-// Funktion för att lägga till nya ord (i lower case)
+// Funktion för att lägga till ett nytt ord
 const addWord = () => {
   if (newWord.value.svenska && newWord.value.engelska) {
-    playWordAddedAudio();  // Spela upp ljudet när ordet har lagts till
-
-    // Lägg till ordet i den reaktiva variabeln
-    savedWords.value.push({
+    wordsStore.addWord({
       svenska: newWord.value.svenska.toLowerCase(),
       engelska: newWord.value.engelska.toLowerCase()
     });
 
-    // Spara den uppdaterade listan i localStorage
-    localStorage.setItem('vocabularyList', JSON.stringify(savedWords.value));
-
     // Töm inputfälten
     newWord.value.svenska = '';
     newWord.value.engelska = '';
+
+    // Spela upp ljudet
+    playWordAddedAudio();
   } else {
     alert('Fyll i både svenska och engelska ord');
   }
 };
 
-// Ljudfil för knapp
+// Ladda ord från localStorage när sidan laddas
+onMounted(() => {
+  wordsStore.loadWords();
+});
+
+// Ljud för knappar
 const hoverAudio = '/audio/click.mp3';
 const wordAddedAudio = '/audio/quiz-correct-answer.mp3';
 
-// Funktioner för att spela upp ljud
+// Spela upp ljud
 const playHoverAudio = () => {
   const audio = new Audio(hoverAudio);
-  audio.play().catch(error => console.error('Audio play of playHoverAudio error:', error)); // spelar ljudet och error-konsolloggar om fel.
+  audio.play().catch(error => console.error('Audio play error:', error));
 };
 const playWordAddedAudio = () => {
   const audio = new Audio(wordAddedAudio);
-  audio.play().catch(error => console.error('Audio play of playWordAddedAdio error:', error));
+  audio.play().catch(error => console.error('Audio play error:', error));
 };
 </script>
 
