@@ -1,23 +1,3 @@
-<template>
-  <div class="ordstriden-container">
-    <h2>Ditt Resultat</h2>
-    <Chart :correctAnswers="correctAnswers" :errorWords="errorWords" />
-    <p v-if="correctAnswers === 10">Du hade alla rätt! Enastående, vilken stjärna! ✨</p>
-    <p v-else-if="correctAnswers >= 7">
-      <span class="styled">Du har {{ correctAnswers }} rätt!</span><br>Bra jobbat! 👏<br>Du behöver jobba vidare på
-      följande ord:
-    </p>
-    <p v-else>
-      <span class="styled">Du hade {{ correctAnswers }} rätt.</span><br>Fortsätt kämpa! 💪<br>Du behöver jobba vidare på
-      följande ord:
-    </p>
-    <ul v-if="errorWords.length">
-      <li v-for="(word, index) in errorWords" :key="index">{{ word }}</li>
-    </ul>
-    <button class="start-new-quiz-button" @click="startNewQuiz">Spela igen!</button>
-  </div>
-</template>
-
 <script setup>
 import { ref, onMounted } from 'vue';
 import Chart from '../components/Chart.vue';
@@ -127,3 +107,23 @@ button:hover {
   background-color: #ff99cc;
 }
 </style>
+
+<template>
+  <div class="ordstriden-container">
+    <h2>Ditt Resultat</h2>
+    <Chart :correctAnswers="correctAnswers" :errorWords="errorWords" />
+    <p v-if="correctAnswers === 10">Du hade alla rätt! Enastående, vilken stjärna! ✨</p>
+    <p v-else-if="correctAnswers >= 7">
+      <span class="styled">Du har {{ correctAnswers }} rätt!</span><br>Bra jobbat! 👏<br>Du behöver jobba vidare på
+      följande ord:
+    </p>
+    <p v-else>
+      <span class="styled">Du hade {{ correctAnswers }} rätt.</span><br>Fortsätt kämpa! 💪<br>Du behöver jobba vidare på
+      följande ord:
+    </p>
+    <ul v-if="errorWords.length">
+      <li v-for="(word, index) in errorWords" :key="index">{{ word }}</li>
+    </ul>
+    <button class="start-new-quiz-button" @click="startNewQuiz">Spela igen!</button>
+  </div>
+</template>

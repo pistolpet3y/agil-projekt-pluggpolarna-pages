@@ -14,6 +14,7 @@ import About from '../views/About.vue';
 import Contact from '../views/Contact.vue';
 import ChooseQuiz from '../views/ChooseQuiz.vue';
 import SavedWordsQuiz from '../views/SavedWordsQuiz.vue';
+import ResultsSavedWordsQuiz from '../views/ResultsSavedWordsQuiz.vue';
 
 
 // Definierar en array med rutter
@@ -30,6 +31,7 @@ const routes = [
   { path: '/contact', component: Contact },
   { path: '/choosequiz', component: ChooseQuiz },
   { path: '/savedwordsquiz', component: SavedWordsQuiz },
+  { path: '/resultssavedwordsquiz', component: ResultsSavedWordsQuiz },
 ];
 
 // Skapar en router-instans

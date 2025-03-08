@@ -29,22 +29,11 @@
         Avsluta
       </button>
       <!-- Om feedback inte finns visas knappen för att hoppa över frågan -->
-      <button v-if="feedback === ''" @click="skipQuestion">Hoppa över</button>
+      <button v-if="feedback === '' && currentIndex < questions.length - 1" @click="skipQuestion">Hoppa över</button>
       <!-- Knapp för att kontrollera svaret/gå vidare, syns bara om feedback är tom -->
       <button @click="checkAnswer" v-show="feedback === ''">
         Ok!
       </button>
-    </div>
-    <!-- Om quiz:et är avslutat visas resultatet -->
-    <div v-else>
-      <h3>Ditt Resultat</h3>
-      <!-- Visar antalet rätt, knappar för att starta om och som leder till en mer detaljerad resultatvy -->
-      <p v-if="score === questions.length"><strong>{{ score }}</strong> av <strong>{{ questions.length }}</strong>
-        rätt!<br>Du är en äkta glosexpert! 🧠</p>
-      <p v-else><strong>{{ score }}</strong> av <strong>{{ questions.length }}</strong> rätt!</p>
-      <button @click="restartQuiz">Starta om</button>
-      <!-- Gå till Results.vue -->
-      <button @click="showResults">Resultat</button>
     </div>
   </div>
 </template>
@@ -104,6 +93,7 @@ const shuffle = (array) => array.sort(() => Math.random() - 0.5);
 
 // Funktion för att starta (eller starta om) quiz:et
 const startQuiz = () => {
+  errorWords.value = []; // Rensa tidigare felaktiga ord
   if (vocabularyList.value.length === 0) return; // Säkerställ att det finns glosor
   questions.value = shuffle([...vocabularyList.value]).slice(0, totalQuestions.value);
   currentIndex.value = 0;
@@ -111,7 +101,6 @@ const startQuiz = () => {
   feedback.value = "";
   score.value = 0;
   quizFinished.value = false;
-  errorWords.value = [];
 };
 
 // Lägg till en watcher för att vänta på att glosorna har laddats
@@ -135,9 +124,7 @@ const checkAnswer = () => {
   // Användarens svar, trimmar bort onödiga mellanslag och gör om till små bokstäver
   const userInput = userAnswer.value.trim().toLowerCase();
   const currentEntry = questions.value[currentIndex.value];
-
   let isCorrect = false;
-
   // Om det engelska ordet är en array, kolla om användarens svar finns i arrayen
   if (Array.isArray(currentEntry.engelska)) {
     isCorrect = currentEntry.engelska
@@ -146,7 +133,6 @@ const checkAnswer = () => {
   } else {
     isCorrect = userInput === currentEntry.engelska.toLowerCase();
   }
-
   // Uppdatera poäng och feedback beroende på om svaret är rätt eller fel
   if (isCorrect) {
     feedback.value = "✅ Rätt! Bra jobbat! :)";
@@ -187,14 +173,12 @@ const nextQuestion = () => {
     // Om det är sista frågan, avsluta quiz:et
   } else {
     quizFinished.value = true;
-    finishQuiz();
   }
 };
 
 // Funktion för att hoppa över frågan
 const skipQuestion = () => {
   errorWords.value.push(questions.value[currentIndex.value].svenska);
-
   if (currentIndex.value < questions.value.length - 1) {
     currentIndex.value++;
     userAnswer.value = "";
@@ -202,7 +186,6 @@ const skipQuestion = () => {
     skipQuestionAudio.play();
   } else {
     quizFinished.value = true;
-    finishQuiz();
     skipQuestionAudio.play();
   }
 };
@@ -210,12 +193,23 @@ const skipQuestion = () => {
 // Avsluta quizet
 const finishQuiz = () => {
   quizFinished.value = true;
-  quizStore.setQuizResults(score.value, errorWords.value);  // Uppdaterar store med resultaten
-  router.push('/results'); // Navigera till results-sidan
-  showResultsAudio.play();
+  showResults();
 };
 
+/*
+// Starta om quizet
+const restartQuiz = () => {
+  startQuiz();
+  startQuizAudio.play();
+};
+*/
 
+// Leder till en mer detaljerad resultatvy
+const showResults = () => {
+  quizStore.setQuizResults(score.value, errorWords.value);  // Uppdaterar store med resultaten
+  router.push('/resultssavedwordsquiz'); // Navigera till results-sidan
+  showResultsAudio.play();
+};
 </script>
 
 <style scoped>

@@ -46,12 +46,6 @@
       <!-- Gå till Results.vue -->
       <button @click="showResults">Resultat</button>
     </div>
-    <div>
-      <router-link to="/parent">
-        <button class="parent-button" @click="playClickAudio"
-          title="Lägg till egna och redigera dina egna glosor">Hantera glosor</button>
-      </router-link>
-    </div>
   </div>
 </template>
 
