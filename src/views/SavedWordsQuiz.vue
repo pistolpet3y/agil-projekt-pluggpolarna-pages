@@ -13,7 +13,7 @@
 
     <!-- Button för att gå tillbaka till Parent.vue -->
     <router-link to="/parent">
-      <button class="parent-button">Redigera glosor</button>
+      <button v-if="vocabularyList.length === 0" class="parent-button">Redigera glosor</button>
     </router-link>
     <!-- Om quiz:et inte är avslutat visas innehållet -->
     <div v-if="!quizFinished">
