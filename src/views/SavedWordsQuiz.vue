@@ -6,6 +6,15 @@
         :infoContent="`Välkommen till ditt egna Glosquiz där du får öva på de ord du lagt in.<br><br>Varje rätt svar ger dig poäng och visar hur duktig du är på engelska!<br><br>Tänk efter, skriv in din översättning och ha kul medan du lär dig nya ord! Lycka till! 🙌`"
         id="info" />
     </div>
+    <!-- Meddelande som visas om inga ord finns i quizet -->
+    <p v-if="vocabularyList.length === 0">
+      Du har inga ord i din lista än! Lägg till ord först!
+    </p>
+
+    <!-- Button för att gå tillbaka till Parent.vue -->
+    <router-link to="/parent">
+      <button class="parent-button">Redigera glosor</button>
+    </router-link>
     <!-- Om quiz:et inte är avslutat visas innehållet -->
     <div v-if="!quizFinished">
       <!-- Renderar aktuell fråga, poäng och quizfrågan -->
@@ -299,7 +308,8 @@ button {
 }
 
 .parent-button {
-  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #f77f00;
 }
 
 button:hover {
