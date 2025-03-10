@@ -42,8 +42,8 @@
 import Footer from './components/Footer.vue';
 import Header from './components/Header.vue';
 
-const navBarHoverAudio = new Audio('/audio/nav-bar-hover.mp3');
-const navBarClickAudio = new Audio('/audio/nav-bar-click.mp3');
+const navBarHoverAudio = new Audio('./audio/nav-bar-hover.mp3');
+const navBarClickAudio = new Audio('./audio/nav-bar-click.mp3');
 
 function playNavBarHoverAudio() {
   navBarHoverAudio.play();
@@ -69,14 +69,14 @@ svg {
 
 @font-face {
   font-family: 'Baloo';
-  src: url('/fonts/Baloo.ttf') format('truetype');
+  src: url('./fonts/Baloo.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Bangers';
-  src: url('/fonts/Bangers.ttf') format('truetype');
+  src: url('./fonts/Bangers.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -84,7 +84,7 @@ svg {
 
 @font-face {
   font-family: 'Kidprint';
-  src: url('/fonts/Kidprint.otf') format('opentype');
+  src: url('./fonts/Kidprint.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
 }
@@ -220,17 +220,17 @@ p {
 
 .navigation-list li:hover #blue-mark {
   display: block;
-  background-image: url('/blue-line.png');
+  background-image: url('./blue-line.png');
 }
 
 .navigation-list li:hover #orange-mark {
   display: block;
-  background-image: url('/orange-line.png');
+  background-image: url('./orange-line.png');
 }
 
 .navigation-list li:hover #pink-mark {
   display: block;
-  background-image: url('/pink-line.png');
+  background-image: url('./pink-line.png');
 }
 
 ul li:nth-child(1) {
