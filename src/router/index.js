@@ -1,5 +1,5 @@
 // Importerar funktioner från Vue Router
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 // Importerar komponenter (vyer) som ska användas som sidor i routningen
 import Home from '../views/Home.vue';
@@ -36,7 +36,7 @@ const routes = [
 
 // Skapar en router-instans
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes, // Tilldelar sidans rutter till vår router
   scrollBehavior() {
     return { top: 0 }; // Scrollar upp till toppen av sidan vid sidbyte
