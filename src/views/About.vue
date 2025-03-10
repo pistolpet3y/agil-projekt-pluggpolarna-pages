@@ -12,15 +12,15 @@
   <div class="its-us">
     <div class="character">
       <p>Francis</p>
-      <img src="/francis.png" alt="Francis">
+      <img src="./francis.png" alt="Francis">
     </div>
     <div class="character">
       <p>Julia</p>
-      <img src="/julia.png" alt="Julia">
+      <img src="./julia.png" alt="Julia">
     </div>
     <div class="character">
       <p>Alex</p>
-      <img src="/alex.png" alt="Alex">
+      <img src="./alex.png" alt="Alex">
     </div>
   </div>
 

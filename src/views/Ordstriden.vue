@@ -29,7 +29,7 @@
         </div>
 
         <div class="image-container monster-container">
-          <img src="/lurifax.png" alt="monster" class="monster-img" />
+          <img src="./lurifax.png" alt="monster" class="monster-img" />
           <div id="monster-shadow"></div>
         </div>
       </div>

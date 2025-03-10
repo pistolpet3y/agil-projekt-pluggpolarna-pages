@@ -53,7 +53,7 @@ const playStartBattleAudio = () => {
 <style scoped>
 @font-face {
   font-family: 'Kidprint';
-  src: url('/fonts/Kidprint.OTF') format('opentype');
+  src: url('.fonts/Kidprint.OTF') format('opentype');
   font-weight: bold;
   font-style: normal;
 }

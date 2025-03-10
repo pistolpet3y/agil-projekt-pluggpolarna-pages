@@ -1,8 +1,8 @@
 <template>
   <div class="social-icons">
-    <img src="/socials/social_fb.png" alt="facebook">
-    <img src="/socials/social_ig.png" alt="instagram">
-    <img src="/socials/social_x.png" alt="x">
+    <img src="./socials/social_fb.png" alt="facebook">
+    <img src="./socials/social_ig.png" alt="instagram">
+    <img src="./socials/social_x.png" alt="x">
   </div>
   <Basketball />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -52,7 +52,7 @@ export default {
 }
 
 footer {
-  background-image: url('/footer.png');
+  background-image: url('.footer.png');
   background-repeat: no-repeat;
   font-family: 'Kidprint';
   max-width: 375px;

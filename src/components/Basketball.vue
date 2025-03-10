@@ -1,6 +1,6 @@
 <template>
-  <img v-if="isVisible" ref="basketball" src="/ball.png" alt="Basketboll" id="basketball" />
-  <img v-if="isVisible" ref="dino" src="/dino.png" alt="Dino" id="dino" @click="handleClick" />
+  <img v-if="isVisible" ref="basketball" src="./ball.png" alt="Basketboll" id="basketball" />
+  <img v-if="isVisible" ref="dino" src="./dino.png" alt="Dino" id="dino" @click="handleClick" />
 </template>
 
 <script setup>

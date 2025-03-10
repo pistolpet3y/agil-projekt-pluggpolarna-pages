@@ -27,7 +27,7 @@
       </text>
     </svg>
     <div id="cloud">
-      <img src="/clouds.png" alt="clouds">
+      <img src="./clouds.png" alt="clouds">
     </div>
     <div id="tagLine">
       <p>
