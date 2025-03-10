@@ -124,4 +124,10 @@ p {
 .delete-button:hover {
   background-color: #d32f2f;
 }
+
+@media only screen and (max-width: 480px) {
+  .edit-button {
+    padding: 8px 13px;
+  }
+}
 </style>

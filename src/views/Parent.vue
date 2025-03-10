@@ -103,4 +103,27 @@ input {
 .add-word-button:hover {
   background-color: #ff99cc;
 }
+
+@media only screen and (max-width: 480px) {
+  h2 {
+    text-align: center;
+    text-align: center;
+    font-size: 1.5rem;
+    padding-top: 0px;
+    margin-top: -15px !important;
+    margin-bottom: 10px;
+  }
+
+  input {
+    width: 75%;
+  }
+
+  .add-word-button {
+    padding: 8px 13px;
+  }
+
+  .parents-container {
+    padding: 15px;
+  }
+}
 </style>
